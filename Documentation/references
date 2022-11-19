@@ -1,0 +1,13 @@
+Dependencies:
+
+1. npm i sass --save-dev
+2.
+
+
+
+1. For userAuth if Firebase 9.0+ is being used, while importing the {initializeApp}, do import it from 'firebase/app',
+and not just 'firebase'. Otherwise this will throw error the way it was throwing for the course staff demoing
+the user authentication. Reference:
+https://www.youtube.com/watch?v=vDT7EnUpEoo
+
+
