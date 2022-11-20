@@ -1,5 +1,5 @@
+import React from 'react';
 import { useState, ChangeEvent } from "react";
-import { Link } from "react-router-dom"
 
 function LogInView() {
     const [email, setEmail] = useState<string>("");
@@ -21,20 +21,28 @@ function LogInView() {
     }
 
     return (
-        <div>
-            <div id="login-in-box">
-                <div id="default-log-in">
-                    <form onSubmit={tryLogIn}>
-                        <input type="text" name="email" onChange={handleInputChange} value={email}/>
-                        <input type="text" name="password" onChange={handleInputChange} value={password}/>
-                        <input type="submit"/>
-                    </form>
-                </div>
-                <div id="provider-log-in">
 
+        <React.Fragment>
+
+            <section className="section-01-log-in">
+                <div id="login-in-box">
+                    <div id="default-log-in">
+                        <form onSubmit={tryLogIn}>
+                            <input type="text" name="email" onChange={handleInputChange} value={email}/>
+                            <input type="text" name="password" onChange={handleInputChange} value={password}/>
+                            <input type="submit"/>
+                        </form>
+                    </div>
+                    <div id="provider-log-in">
+
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
+
+        </React.Fragment>
+
+
+
     );
 }
 
