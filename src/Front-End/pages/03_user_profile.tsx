@@ -13,21 +13,15 @@ const UserProfile = () => {
             <section className="section-03-user-profile">
                 <div className="user-profile-content">
                     <div className="user-details">
-
-                <div className="user-image">
-
-                </div>
-
-                <div className="user-details">
-
-                </div>
-
-            </div>
+                        <div className="user-image">
+                        </div>
+                        <div className="user-details">
+                        </div>
+                    </div>
                     <div className="edit">
 
                     </div>
-
-        </div>
+                </div>
             </section>
         </React.Fragment>
 
