@@ -1,25 +1,37 @@
 import React from 'react';
 import logo from './Front-End/assets/logo.svg';
 import './Front-End/scss/App.scss';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link
+} from "react-router-dom";
+import LogInView from "./Front-End/logInView";
+import SignUpView from "./Front-End/signUpView";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <div id="nav-bar">
+          <h1>New Experiences</h1>
+          {/* Check if user is logged in, if not show this nav bar. */}
+          <div id="links">
+            <Link to="/log-in">Log In</Link>
+            <Link to="/sign-up">Sign Up</Link>
+          </div>
+          {/* If logged in, show nav bar with: Dashboard, Analytics, Friends, and Profile (avatar + dropdown choices) */}
+        </div>
+
+        <div id="div-routes">
+          <Routes>
+            <Route path={"/log-in"} element={<LogInView></LogInView>}></Route>
+            <Route path={"/sign-up"} element={<SignUpView></SignUpView>}></Route>
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
