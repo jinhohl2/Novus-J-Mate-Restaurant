@@ -7,8 +7,8 @@ import {
   Routes,
   Link
 } from "react-router-dom";
-import LogInView from "./Front-End/pages/logInView";
-import SignUpView from "./Front-End/pages/signUpView";
+import LogInView from "./Front-End/pages/01_logInView";
+import SignUpView from "./Front-End/pages/02_signUpView";
 
 function App() {
   return (
