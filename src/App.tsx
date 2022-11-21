@@ -4,8 +4,7 @@ import '../src/Front-End/scss/App.scss';
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
-  Link
+  Routes
 } from "react-router-dom";
 
 import NavBar from "./Front-End/pages/00_nav_bar";
@@ -20,8 +19,11 @@ import FindFriends from "./Front-End/pages/08_find_friends";
 import ProfileOfFriends from "./Front-End/pages/09_profile_of_friends";
 import Analytics from "./Front-End/pages/10_analytics";
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a4f05b9f6a8827a79e485e5c8cc925f0c831adb9
 function App() {
   return (
       <React.Fragment>
@@ -43,9 +45,6 @@ function App() {
               </Routes>
           </Router>
       </React.Fragment>
-
-
-
   );
 }
 

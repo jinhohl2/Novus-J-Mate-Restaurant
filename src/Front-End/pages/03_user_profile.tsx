@@ -1,7 +1,5 @@
 import React from 'react';
 import '../scss/App.scss';
-import {ReactComponent} from "*.svg";
-
 
 const UserProfile = () => {
 
