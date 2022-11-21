@@ -2,7 +2,7 @@ Dependencies:
 
 1. npm i sass --save-dev
 2. npm i react-router-dom
-
+3. npm i firebase
 
 
 1. For userAuth if Firebase 9.0+ is being used, while importing the {initializeApp}, do import it from 'firebase/app',
