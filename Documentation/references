@@ -2,20 +2,22 @@ Dependencies:
 
 1. npm i sass --save-dev
 2. npm i react-router-dom
-<<<<<<< HEAD
 3. npm i firebase
-=======
 3. npm i --save @fortawesome/fontawesome-svg-core
 3. npm i --save @fortawesome/free-solid-svg-icons
 4. npm i --save @fortawesome/react-fontawesome@latest
 5. npm i --save @fortawesome/free-brands-svg-icons
 
->>>>>>> a4f05b9f6a8827a79e485e5c8cc925f0c831adb9
-
+-------------------
+Guides:
 
 1. For userAuth if Firebase 9.0+ is being used, while importing the {initializeApp}, do import it from 'firebase/app',
 and not just 'firebase'. Otherwise this will throw error the way it was throwing for the course staff demoing
 the user authentication. Reference:
 https://www.youtube.com/watch?v=vDT7EnUpEoo
 
+---------------
+Resolving error:
 
+1. Resolving merge conflicts (comment 19):
+https://stackoverflow.com/questions/58325295/merge-conflict-marker-encountered
