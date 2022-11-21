@@ -2,6 +2,10 @@ Dependencies:
 
 1. npm i sass --save-dev
 2. npm i react-router-dom
+3. npm i --save @fortawesome/fontawesome-svg-core
+3. npm i --save @fortawesome/free-solid-svg-icons
+4. npm i --save @fortawesome/react-fontawesome@latest
+5. npm i --save @fortawesome/free-brands-svg-icons
 
 
 
