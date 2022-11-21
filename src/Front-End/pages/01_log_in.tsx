@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 
 function LogInView() {
     const [email, setEmail] = useState<string>("");

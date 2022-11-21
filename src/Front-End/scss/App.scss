@@ -7,12 +7,20 @@ Team member's notes goes over here:
 
 
 
-
+$main_back_color: #faf6f2;
+$main_border_radius: 5px;
+$main_border_width: 1px;
+$main_button_color: rgba(255, 201, 115, 0.938);
+$microsoft_green: #7FBA00;
+$google_red: #de5246;
+$facbook_blue: #4267B2;
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 130;
 }
 
 body {
@@ -28,7 +36,6 @@ body {
 
     position: fixed;
     overflow: hidden;
-
 
     top: 0;
     background-color: #F8C165;
@@ -49,42 +56,176 @@ body {
           display: inline-block;  /* To display the li items next to each other */
           padding: 1vh;
         }
-
-
       }
-
     }
+  }
 
-    }
+  button {
+    border-color: black;
+    border-width: $main_border_width;
+    border-radius: $main_border_radius;
+  }
+
+  button:hover {
+    filter: brightness(110%);
+  }
+
+  input {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .line-break {
+    border: 10x solid black;
+  }
 
   section.section-01-log-in {
       display: flex; /* As there will be cards inside */
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #90EE90FF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
-
     }
 
   section.section-02-sign-up {
       display: flex; /* As there will be cards inside */
+      flex-direction: column;
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
-
+      align-items: center;
 
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
+      h1 {
+        margin-bottom: 0.5em;
+      }
 
+      h5 {
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
 
+      #sign-up-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+
+        height: 60vh;
+        width: 40vw;
+        border-style: solid;
+        border-width: thin;
+        border-color: black;
+        border-radius: 5px;
+
+        #default-sign-up {
+          form {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            input {
+              margin-top: 0.7em;
+              margin-bottom: 0.7em;
+              margin-left: 0.7em;
+              margin-right: 0.7em;
+              height: 2.5em;
+              width: 23em;
+            }
+
+            input:nth-child(2) {
+              margin-bottom: 0.1em;
+            }
+
+            h6 {
+              font-size: 0.6em;
+            }
+
+            #sign-up-submit {
+              border-color: black;
+              border-width: $main_border_width;
+              border-radius: $main_border_radius;
+              background-color: $main_button_color;
+            }
+
+            #sign-up-submit:hover {
+              filter: brightness(110%);
+            }
+          }
+        }
+
+        #provider-sign-up {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+
+          height: 2.5em;
+          width: 100%;
+
+          button {
+            margin-top: 0.7em;
+            margin-bottom: 0.7em;
+            margin-left: 0.3em;
+            margin-right: 0.3em;
+            height: 2.5em;
+            width: 11em;
+          }
+
+          #microsoft-sign-up {
+            background-color: $microsoft_green;
+          }
+
+          #google-sign-up {
+            background-color: $google_red;
+          }
+
+          #facebook-sign-up {
+            background-color: $facbook_blue;
+          }
+        }
+
+        margin-bottom: 2em;
+      }
+
+      .line-break {
+        width: 50%;
+        text-align: center;
+        border-bottom: 1px solid grey;
+        line-height: 0.1em;
+
+        span {
+          background: $main_back_color;
+          padding-left: 2em;
+          padding-right: 2em;
+        }
+      }
+
+      #switch-to-log-in {
+        margin-top: 2em;
+        height: 2.5em;
+        width: 23em;
+        background-color: $main_button_color;
+      }
     }
 
   section.section-03-user-profile {
@@ -92,11 +233,10 @@ body {
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
 
@@ -108,11 +248,10 @@ body {
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
 
@@ -124,11 +263,10 @@ body {
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
 
@@ -140,11 +278,10 @@ body {
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
 
@@ -156,11 +293,10 @@ body {
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
 
@@ -172,11 +308,10 @@ body {
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
 
@@ -188,11 +323,10 @@ body {
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
 
@@ -204,11 +338,10 @@ body {
       justify-content: center;
       flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
-
       position: absolute;
       height: 92vh;
       width: 100%;
-      background-color: #0000FFFF;
+      background-color: $main_back_color;
       transform: translateY(8vh);
 
 
