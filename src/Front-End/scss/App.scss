@@ -1,0 +1,219 @@
+/*
+Team member's notes goes over here:
+
+
+
+*/
+
+
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* Defining properties that will be common to the all the elements of the body */
+  padding: 0;
+  margin: 0;
+
+  /* Defining Navigation Bar here */
+  nav {
+    height: 8vh;
+    width: 100%;
+    z-index: 99; /* Setting the highest z-index to keep it on top of all the elements who also have postition:absolute */
+
+    position: fixed;
+    overflow: hidden;
+
+
+    top: 0;
+    background-color: #F8C165;
+    transition: 0.5s;
+
+    div.div-nav-menu-items {
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: right;
+
+      ul {
+        list-style: none; /* To remove the bullets in front of the nav menu items */
+        position:absolute;
+
+        li{
+          display: inline-block;  /* To display the li items next to each other */
+          padding: 1vh;
+        }
+
+
+      }
+
+    }
+
+    }
+
+  section.section-01-log-in {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #90EE90FF;
+      transform: translateY(8vh);
+
+    }
+
+  section.section-02-sign-up {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+  section.section-03-user-profile {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+  section.section-04-dashboard {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+  section.section-05-main-search-criterias {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+  section.section-06-restaurant-results {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+  section.section-07-restaurant-details {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+  section.section-08-find-friends {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+  section.section-09-profile-of-friends {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+  section.section-10-analytics {
+      display: flex; /* As there will be cards inside */
+      justify-content: center;
+      flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+
+
+      position: absolute;
+      height: 92vh;
+      width: 100%;
+      background-color: #0000FFFF;
+      transform: translateY(8vh);
+
+
+
+    }
+
+}
+
