@@ -19,6 +19,8 @@ import FindFriends from "./Front-End/pages/08_find_friends";
 import ProfileOfFriends from "./Front-End/pages/09_profile_of_friends";
 import Analytics from "./Front-End/pages/10_analytics";
 
+
+
 function App() {
   return (
       <React.Fragment>
