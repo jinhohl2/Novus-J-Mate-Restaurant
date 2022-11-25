@@ -2,9 +2,15 @@ import React from 'react';
 
 const Analytics = () => {
     return (
-        <section className="section-10-analytics">
 
-        </section>
+        <React.Fragment>
+
+            <section className="section-10-analytics">
+
+            </section>
+
+        </React.Fragment>
+
     );
 };
 
