@@ -376,6 +376,7 @@ body {
         display: flex;
         /* As there will be cards inside */
         justify-content: center;
+        flex-direction: column;
         flex-wrap: wrap;
         /* Very important for designing the content which doesn't fits */
 
@@ -385,8 +386,31 @@ body {
         background-color: $main_back_color;
         transform: translateY(8vh);
 
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
+        #daily-choice {
+            flex: 1;
+            flex-direction: row;
+        }
 
+        #todays-results {
+            flex: 1;
+        }
+
+        button {
+            margin: 0 1em;
+            padding: 1em 1em;
+        }
+
+        // TODO: control which div is hidden
+        .hidden {
+            display: none;
+        }
     }
 
     section.section-05-main-search-criterias {
