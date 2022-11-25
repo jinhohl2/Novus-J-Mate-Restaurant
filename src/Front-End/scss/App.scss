@@ -510,7 +510,6 @@ body {
         padding-top: 2em;
 
         .tab-content {
-          margin-top: 2em;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -521,9 +520,11 @@ body {
           }
           #line-div {
             max-height: 70vh;
+            width: 70vw;
           }
           #bar-div {
             max-height: 70vh;
+            width: 70vw;
           }
           p {
             margin-top: 2em;
@@ -544,7 +545,6 @@ body {
           margin-left: 1em;
           margin-right: 1em;
           border: none;
-          z-index: -1;
           width: 20vw;
         }
 
