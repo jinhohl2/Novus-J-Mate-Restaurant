@@ -404,6 +404,7 @@ body {
         button {
             margin: 0 1em;
             padding: 1em 1em;
+            width: 30vw;
         }
 
         // TODO: control which div is hidden
@@ -425,7 +426,7 @@ body {
         background-color: $main_back_color;
         transform: translateY(8vh);
 
-        #distance-to-location-container {
+        section.section-04-distance-to-location-repeating-components {
             display: flex;
             justify-content: center;
             flex-direction: column;
@@ -438,14 +439,39 @@ body {
             border-color: black;
             border-radius: $main_border_radius;
             width: 80vw;
-            padding-top: 5em;
-            padding-bottom: 5em;
+            padding-top: 3em;
+            padding-bottom: 3em;
             padding-left: 3em;
             padding-right: 3em;
 
-            input {
-                width: 70%;
-                padding: 0;
+            #distance-to-location-container {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-items: center;
+                width: 100%;
+
+                input {
+                    width: 80%;
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+
+            #ticks {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 80%;
+                padding-left: 0.1em;
+                padding-right: 0.1em;
+
+                option {
+                    padding: 0;
+                    color: black;
+                }
             }
         }
 
@@ -520,7 +546,7 @@ body {
 
     section.section-05-cuisine-box {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;

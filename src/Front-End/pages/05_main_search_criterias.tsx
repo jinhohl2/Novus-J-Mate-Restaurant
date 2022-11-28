@@ -50,7 +50,7 @@ const MainSearchCriterias = () => {
                         <Tab className="criteria-tab" eventKey="dish" title="Dish">
                             <div className="search-criteria-tab-content">
                                 <div id="search-bar-dish-name-container">
-                                    <input id="search-bar-dish-name" type="text" onChange={UpdateSearchQuery} value={searchQuery} placeholder={"Search the name of your favorite dishes!"}/>
+                                    <input id="search-bar-dish-name" type="text" onChange={UpdateSearchQuery} value={searchQuery} placeholder={"Search the names of your favorite dishes!"}/>
                                 </div>
                             </div>
                         </Tab>
