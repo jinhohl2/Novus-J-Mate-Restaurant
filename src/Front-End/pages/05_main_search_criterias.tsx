@@ -8,6 +8,8 @@ import CuisineChoice from '../components/05_cuisine_box';
 
 const MainSearchCriterias = () => {
     const [tabKey, setTabKey] = useState<string>("cuisine");
+    const [selectedDishes, setSelectedDishes] = useState<string[]>([]);
+
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     const cuisines = ["Italian", "Indian", "Mexican", "Japanese", "Chinese", "Korean", "Nigerian", "American", "French", "U.K.", "Vietnamese", "Thai", "Other"];
@@ -15,10 +17,22 @@ const MainSearchCriterias = () => {
                       "../assets/korean-food.jpg", "../assets/nigerian-food.jpg", "../assets/american-food.jpg", "../assets/french-food.jpg", "../assets/uk-food.jpg",
                       "../assets/vietnamese-food.jpg", "../assets/thai-food.jpg", "../assets/other-food.jpg"];
 
+    function updateSelectedDish(e: React.MouseEvent<HTMLElement, MouseEvent>) {
+        const cuisine = String((e.target as Element).getAttribute('cuisine-group'));
+
+        // Set component as active on first click, and remove on second click to help modify state and change component appearance.
+        if (selectedDishes.includes(cuisine)) {
+            setSelectedDishes(selectedDishes.filter(curr_cuisine => curr_cuisine !== cuisine))
+        } else {
+            setSelectedDishes([...selectedDishes, cuisine]);
+            console.log([...selectedDishes, cuisine])
+        }
+    }
+
     function getCuisineBoxes() {
-        const cuisineBoxes = []
+        const cuisineBoxes = [];
         for (let i = 0; i < cuisines.length; i++) {
-            cuisineBoxes.push(<CuisineChoice img_src={img_srcs[i]} cuisine_type={cuisines[i]}></CuisineChoice>);
+            cuisineBoxes.push(<CuisineChoice img_src={img_srcs[i]} cuisine_type={cuisines[i]} selectedDishFunc={updateSelectedDish} key={cuisines[i] + " section"}></CuisineChoice>);
         }
 
         return cuisineBoxes;
