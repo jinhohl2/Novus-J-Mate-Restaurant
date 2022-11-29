@@ -82,6 +82,10 @@ body {
         color: inherit;
     }
 
+    a:hover {
+        color: rgb(185, 82, 2);
+    }
+
     .line-break {
         border: 10x solid black;
     }
@@ -515,6 +519,13 @@ body {
                 color: rgb(203, 135, 8);
                 border: none;
                 background: rgba(0, 0, 0, 0)
+            }
+
+            #cuisine-search-instructions {
+                width: 100%;
+                text-align: left;
+                padding-left: 7.5em;
+                padding-right: 7.5em;
             }
 
             #cusines-with-button {
