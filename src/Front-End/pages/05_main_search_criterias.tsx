@@ -51,6 +51,9 @@ const MainSearchCriterias = () => {
                 <div id="search-criteria-tabs-container">
                     <Tabs id="search-criteria-tabs" activeKey={tabKey} onSelect={(tabKey) => setTabKey(tabKey ? tabKey : "cuisine")}>
                         <Tab className="criteria-tab" eventKey="cuisine" title="Cuisine">
+                            <div id="cuisine-search-instructions">
+                                <p>Choose one or more cuisines you would like to explore then generate restaurants based on your choice. Or, click generate restaurants to find restaurants of any cuisine. </p>
+                            </div>
                             <div className="search-criteria-tab-content">
                                 <div id="cusines-with-button">
                                     <div id="cuisines-block">
