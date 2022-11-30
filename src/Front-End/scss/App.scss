@@ -87,7 +87,7 @@ body {
     }
 
     .line-break {
-        border: 10x solid black;
+        border: 10 solid black;
     }
 
     section.section-01-log-in {
@@ -260,7 +260,7 @@ body {
             border-style: solid;
             border-width: thin;
             border-color: black;
-            border-radius: 5px;
+            border-radius: $main_border_radius;
 
             #default-sign-up {
                 form {
@@ -418,9 +418,11 @@ body {
     }
 
     section.section-05-main-search-criterias {
-        display: flex; /* As there will be cards inside */
+        display: flex;
+        /* As there will be cards inside */
         justify-content: flex-start;
-        flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+        flex-wrap: wrap;
+        /* Very important for designing the content which doesn't fits */
         flex-direction: column;
         align-items: center;
 
@@ -581,12 +583,105 @@ body {
         justify-content: center;
         flex-wrap: wrap;
         /* Very important for designing the content which doesn't fits */
+        align-items: center;
+        flex-direction: column;
 
         position: absolute;
         height: 92vh;
         width: 100%;
         background-color: $main_back_color;
         transform: translateY(8vh);
+
+        h1 {
+            font-size: 7vh;
+        }
+
+        img {
+            height: 15em;
+        }
+
+        #restaurant-results-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            flex-direction: row;
+
+            height: auto;
+            width: 100vw;
+
+            div {
+                display: flex;
+                height: 50vh;
+                justify-content: center;
+                flex-wrap: wrap;
+                align-items: center;
+                flex-direction: row;
+
+                #visited-restaurant-recommendation-block {
+                    border-radius: $main_border_radius;
+                    border-color: black;
+                    border-style: solid;
+                    flex-direction: column;
+                    margin-right: 1em;
+                    padding-top: 1em;
+                    justify-content: center;
+                    padding-bottom: 1em;
+                    text-align: center;
+                    width: 20vw;
+                }
+
+                #not-visited-restaurant-recommendation-block {
+                    border-radius: $main_border_radius;
+                    border-color: black;
+                    border-style: solid;
+                    flex-direction: column;
+                    justify-content: center;
+                    padding-top: 1em;
+                    padding-bottom: 1em;
+                    text-align: center;
+                    width: 42.5vw;
+
+                    div {
+                        flex-direction: row;
+                        height: auto;
+                        width: 100%;
+                        justify-content: space-evenly;
+
+                        div {
+                            flex-direction: column;
+                            justify-content: space-evenly;
+                            width: 50%;
+                        }
+                    }
+                }
+
+                #only-not-visited-restaurant-recommendation-block {
+                    border-radius: $main_border_radius;
+                    border-color: black;
+                    border-style: solid;
+                    flex-direction: column;
+                    justify-content: center;
+                    padding-top: 1em;
+                    padding-bottom: 1em;
+                    text-align: center;
+                    width: 60vw;
+
+                    div {
+                        flex-direction: row;
+                        height: auto;
+                        width: 100%;
+                        justify-content: space-evenly;
+
+                        div {
+                            flex-direction: column;
+                            justify-content: space-evenly;
+                            width: 33.333333%;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     section.section-07-restaurant-details {
@@ -654,50 +749,53 @@ body {
         padding-top: 2em;
 
         .tab-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
 
-          #pie-div {
-            max-height: 70vh;
-          }
-          #line-div {
-            max-height: 70vh;
-            width: 70vw;
-          }
-          #bar-div {
-            max-height: 70vh;
-            width: 70vw;
-          }
-          p {
-            margin-top: 2em;
-          }
+            #pie-div {
+                max-height: 70vh;
+            }
+
+            #line-div {
+                max-height: 70vh;
+                width: 70vw;
+            }
+
+            #bar-div {
+                max-height: 70vh;
+                width: 70vw;
+            }
+
+            p {
+                margin-top: 2em;
+            }
         }
 
         .nav-tabs {
-          --bs-nav-tabs-link-active-border-color: #dee2e6 $main_back_color #dee2e6;
+            --bs-nav-tabs-link-active-border-color: #dee2e6 $main_back_color #dee2e6;
         }
 
         #analytics-tabs-tab-cusine-distribution,
         #analytics-tabs-tab-unique-restaurants,
         #analytics-tabs-tab-frequently-visited-restaurants {
-          text-align: center;
-          display: block;
-          color: black;
-          border-radius: $main_border_radius;
-          margin-left: 1em;
-          margin-right: 1em;
-          border: none;
-          width: 20vw;
+            text-align: center;
+            display: block;
+            color: black;
+            border-radius: $main_border_radius;
+            margin-left: 1em;
+            margin-right: 1em;
+            border: none;
+            width: 20vw;
         }
 
         #analytics-tabs-tab-cusine-distribution.active,
         #analytics-tabs-tab-unique-restaurants.active,
         #analytics-tabs-tab-frequently-visited-restaurants.active {
-          color: rgb(203, 135, 8);
-          border: none;
-          background: rgba(0, 0, 0, 0)
+            color: rgb(203, 135, 8);
+            border: none;
+            background: rgba(0, 0, 0, 0)
         }
     }
 }
