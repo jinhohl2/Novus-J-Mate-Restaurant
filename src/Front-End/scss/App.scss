@@ -685,19 +685,82 @@ body {
     }
 
     section.section-07-restaurant-details {
-        display: flex;
-        /* As there will be cards inside */
+        display: flex; /* As there will be cards inside */
         justify-content: center;
-        flex-wrap: wrap;
-        /* Very important for designing the content which doesn't fits */
+        flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
 
         position: absolute;
-        height: 92vh;
+        min-height: 92vh;
         width: 100%;
         background-color: $main_back_color;
         transform: translateY(8vh);
 
+        #restaurant-div {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: flex-start;
 
+            text-align: center;
+        }
+
+        #restaurant-details-div {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: flex-start;
+
+            margin-top: 2em;
+
+            .tab-content {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+
+                width: 100%;
+                margin-top: 2em;
+                margin-bottom: 2em;
+            }
+
+            #coupon {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                flex-direction: row;
+                align-items: center;
+
+                button {
+                    margin-right: 3em;
+                }
+            }
+        }
+
+        #restaurant-details-tabs-tab-ratingsReviewsKey,
+        #restaurant-details-tabs-tab-menuKey,
+        #restaurant-details-tabs-tab-notesReviewsKey,
+        #restaurant-details-tabs-tab-couponKey {
+            text-align: center;
+            display: block;
+            color: black;
+            border-radius: $main_border_radius;
+            margin-left: 1em;
+            margin-right: 1em;
+            border: none;
+            width: 15vw;
+        }
+
+        #restaurant-details-tabs-tab-ratingsReviewsKey.active,
+        #restaurant-details-tabs-tab-menuKey.active,
+        #restaurant-details-tabs-tab-notesReviewsKey.active,
+        #restaurant-details-tabs-tab-couponKey.active {
+            color: rgb(203, 135, 8);
+            border: none;
+            background: rgba(0, 0, 0, 0)
+        }
 
     }
 
