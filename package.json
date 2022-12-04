@@ -27,13 +27,18 @@
     "react-scripts": "5.0.1",
     "react-tabs": "^5.1.0",
     "typescript": "^4.9.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^5.4.18",
+    "nodemon": "^1.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api-dev": "nodemon --exec node ./src/Back-End/server.js"
   },
   "eslintConfig": {
     "extends": [
