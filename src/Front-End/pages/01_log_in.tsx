@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import auth from './firebase.js'
 import { FirebaseError } from 'firebase/app';
 import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider , FacebookAuthProvider } from 'firebase/auth'
+import axios, {AxiosResponse, AxiosError} from 'axios';
 
 function LogInView() {
     const [email, setEmail] = useState<string>("");
@@ -29,6 +30,13 @@ function LogInView() {
 
     function tryLogIn(event: React.SyntheticEvent): void {
         event.preventDefault();
+        axios("http://localhost:4001/api" + `/users?sort={"email": 1}`)
+        .then((res : AxiosResponse)=>{
+            console.log(res.data);
+        })
+        .catch((err: AxiosError)=>{
+            console.log(err);
+        })
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
                 alert('User signed in successfully!')
@@ -42,7 +50,7 @@ function LogInView() {
 
     function googleSignIn(event: React.SyntheticEvent): void {
         event.preventDefault();
-        console.log("here")
+        
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
         .then((result) => {

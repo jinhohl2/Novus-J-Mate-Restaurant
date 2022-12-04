@@ -15,10 +15,15 @@
     "@types/node": "^16.18.3",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "body-parser": "^1.17.2",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.0.1",
+    "concurrently": "^7.6.0",
+    "express": "^4.15.3",
     "firebase": "^9.14.0",
     "fortawesome": "^0.0.1-security",
+    "mongoose": "^5.4.18",
+    "nodemon": "^1.11.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-chartjs-2": "^5.0.1",
@@ -27,14 +32,10 @@
     "react-scripts": "5.0.1",
     "react-tabs": "^5.1.0",
     "typescript": "^4.9.3",
-    "web-vitals": "^2.1.4",
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
-    "mongoose": "^5.4.18",
-    "nodemon": "^1.11.0"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"nodemon --exec node ./src/Back-End/server.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -60,5 +61,6 @@
   },
   "devDependencies": {
     "sass": "^1.56.1"
-  }
+  },
+  "proxy": "http://localhost:4001"
 }
