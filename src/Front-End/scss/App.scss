@@ -110,7 +110,7 @@ body {
         }
 
         h5 {
-            margin-top: 1em;
+            margin-top: 0.5em;
             margin-bottom: 1em;
         }
 
@@ -121,12 +121,23 @@ body {
             flex-wrap: wrap;
             align-items: center;
 
-            height: 60vh;
-            width: 40vw;
+            min-height: 60vh;
+            min-width: 40vw;
             border-style: solid;
             border-width: thin;
             border-color: black;
             border-radius: 5px;
+            margin-top: 0.5em;
+            padding: 1.5em;
+
+            h1 {
+                margin: 0;
+            }
+
+            h5 {
+                margin: 0.5em;
+            }
+
 
             #default-log-in {
                 form {
@@ -143,8 +154,8 @@ body {
                         margin-bottom: 0.7em;
                         margin-left: 0.7em;
                         margin-right: 0.7em;
-                        height: 2.5em;
-                        width: 23em;
+                        min-height: 2.5em;
+                        min-width: 23em;
                     }
 
                     input:nth-child(2) {
@@ -175,7 +186,6 @@ body {
                 justify-content: center;
                 align-items: center;
 
-                height: 2.5em;
                 width: 100%;
 
                 button {
@@ -255,12 +265,21 @@ body {
             flex-wrap: wrap;
             align-items: center;
 
-            height: 60vh;
-            width: 40vw;
+            min-height: 60vh;
+            min-width: 40vw;
             border-style: solid;
             border-width: thin;
             border-color: black;
             border-radius: $main_border_radius;
+            padding: 1.5em;
+
+            h1 {
+                margin: 0;
+            }
+
+            h5 {
+                margin: 0.5em;
+            }
 
             #default-sign-up {
                 form {
@@ -277,8 +296,8 @@ body {
                         margin-bottom: 0.7em;
                         margin-left: 0.7em;
                         margin-right: 0.7em;
-                        height: 2.5em;
-                        width: 23em;
+                        min-height: 2.5em;
+                        min-width: 23em;
                     }
 
                     input:nth-child(2) {
@@ -287,6 +306,7 @@ body {
 
                     h6 {
                         font-size: 0.6em;
+                        margin: 0;
                     }
 
                     #sign-up-submit {
@@ -309,7 +329,6 @@ body {
                 justify-content: center;
                 align-items: center;
 
-                height: 2.5em;
                 width: 100%;
 
                 button {
@@ -317,8 +336,8 @@ body {
                     margin-bottom: 0.7em;
                     margin-left: 0.3em;
                     margin-right: 0.3em;
-                    height: 2.5em;
-                    width: 11em;
+                    min-height: 2.5em;
+                    min-width: 11em;
                 }
 
                 #microsoft-sign-up {
@@ -777,7 +796,7 @@ body {
             --bs-nav-tabs-link-active-border-color: #dee2e6 $main_back_color #dee2e6;
         }
 
-        #analytics-tabs-tab-cusine-distribution,
+        #analytics-tabs-tab-cuisine-distribution,
         #analytics-tabs-tab-unique-restaurants,
         #analytics-tabs-tab-frequently-visited-restaurants {
             text-align: center;
@@ -790,7 +809,7 @@ body {
             width: 20vw;
         }
 
-        #analytics-tabs-tab-cusine-distribution.active,
+        #analytics-tabs-tab-cuisine-distribution.active,
         #analytics-tabs-tab-unique-restaurants.active,
         #analytics-tabs-tab-frequently-visited-restaurants.active {
             color: rgb(203, 135, 8);
