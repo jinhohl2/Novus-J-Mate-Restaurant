@@ -1,6 +1,6 @@
 import React from 'react';
 import '../scss/App.scss';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faMicrosoft,
@@ -8,6 +8,9 @@ import {
     faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
+import auth from './firebase.js'
+import { FirebaseError } from 'firebase/app';
+import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider , FacebookAuthProvider } from 'firebase/auth'
 
 function LogInView() {
     const [email, setEmail] = useState<string>("");
@@ -25,7 +28,45 @@ function LogInView() {
     }
 
     function tryLogIn(event: React.SyntheticEvent): void {
-        console.log(`tried to log in with email: ${email} and password: ${password}.`);
+        event.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                alert('User signed in successfully!')
+                setEmail("");
+                setPassword("");
+            })
+            .catch((err: FirebaseError)=>{
+        
+            }) 
+    }
+
+    function googleSignIn(event: React.SyntheticEvent): void {
+        event.preventDefault();
+        
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            // The signed-in user info.
+            const user = result.user;
+        
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const accessToken = (credential)? credential.accessToken : null;
+        
+            // ...
+        })
+        .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+        
+            // ...
+          });
+
     }
 
     return (
@@ -52,7 +93,7 @@ function LogInView() {
                             <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
                         </button>
                         <button id="google-log-in">
-                            <FontAwesomeIcon icon={faGoogle} /> Google
+                            <FontAwesomeIcon icon={faGoogle} onClick = {googleSignIn}/> Google
                         </button>
                         <button id="facebook-log-in">
                             <FontAwesomeIcon icon={faFacebook} /> Facebook

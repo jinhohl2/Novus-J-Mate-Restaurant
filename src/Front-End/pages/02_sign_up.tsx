@@ -1,6 +1,6 @@
 import React from 'react';
 import '../scss/App.scss';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faMicrosoft,
@@ -9,6 +9,11 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 
+import auth from './firebase.js'
+import { FirebaseError } from 'firebase/app';
+import {createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider , FacebookAuthProvider } from 'firebase/auth'
+
+ 
 function SignUpView() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -28,12 +33,60 @@ function SignUpView() {
     }
 
     function trySignUp(event: React.SyntheticEvent): void {
+        event.preventDefault();
         if (password !== confirmPassword) {
             alert("The passwords do not match");
-            event.preventDefault();
-        } else {
-            alert(`tried to sign up in with email: ${email} and password: ${password}.`);
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
         }
+        else {
+            createUserWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                alert('User registered successfully!')
+                setEmail("");
+                setPassword("");
+                setConfirmPassword("");
+            })
+            .catch((err: FirebaseError)=>{
+                if (err.code === 'auth/email-already-in-use') {
+                    console.log('That email address is already in use!');
+                  }
+              
+                  if (err.code === 'auth/invalid-email') {
+                    console.log('That email address is invalid!');
+                  }
+            }) 
+        }
+    }
+
+    function googleSignUp(event: React.SyntheticEvent): void {
+        event.preventDefault();
+        console.log("here")
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            // The signed-in user info.
+            const user = result.user;
+        
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const accessToken = (credential)? credential.accessToken : null;
+        
+            // ...
+        })
+        .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+        
+            // ...
+          });
+
     }
 
     return (
@@ -60,11 +113,11 @@ function SignUpView() {
                     <h5>Or with a provider</h5>
 
                     <div id="provider-sign-up">
-                        <button id="microsoft-sign-up">
+                        <button id="microsoft-sign-up" >
                             <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
                         </button>
                         <button id="google-sign-up">
-                            <FontAwesomeIcon icon={faGoogle} /> Google
+                            <FontAwesomeIcon icon={faGoogle} onClick = {googleSignUp}/> Google
                         </button>
                         <button id="facebook-sign-up">
                             <FontAwesomeIcon icon={faFacebook} /> Facebook
