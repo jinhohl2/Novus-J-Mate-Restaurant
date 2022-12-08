@@ -16,6 +16,8 @@ var PlaceSchema = new mongoose.Schema({
         default: "N/A"
     },
 
+    dishes: [String],
+
     usersVisited: [String],
 
     reviews: [String],
