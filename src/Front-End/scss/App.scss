@@ -90,6 +90,10 @@ body {
         border: 10 solid black;
     }
 
+    .error-message {
+        color: red;
+    }
+
     section.section-01-log-in {
         display: flex;
         /* As there will be cards inside */
@@ -155,10 +159,6 @@ body {
                         margin-right: 0.7em;
                         min-height: 2.5em;
                         min-width: 23em;
-                    }
-
-                    input:nth-child(2) {
-                        margin-bottom: 0.1em;
                     }
 
                     h6 {
@@ -299,10 +299,6 @@ body {
                         min-width: 23em;
                     }
 
-                    input:nth-child(2) {
-                        margin-bottom: 0.1em;
-                    }
-
                     h6 {
                         font-size: 0.6em;
                         margin: 0;
@@ -317,6 +313,12 @@ body {
 
                     #sign-up-submit:hover {
                         filter: brightness(110%);
+                    }
+                }
+
+                #password-row {
+                    input {
+                        margin-bottom: 0.1em;
                     }
                 }
             }

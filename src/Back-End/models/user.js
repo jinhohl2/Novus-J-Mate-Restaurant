@@ -21,6 +21,11 @@ var UserSchema = new mongoose.Schema({
 
     reviews: [String],
 
+    uniqueVisits: {
+        type: [Number],
+        default: new Array(12).fill(0)
+    },
+
     dateCreated: {
         type: Date,
         default: Date.now

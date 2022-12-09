@@ -66,6 +66,9 @@ module.exports = function (router) {
                         const place = {};
                         place.name = req.body.name;
                         place.address = req.body.address;
+                        if("dishes" in req.body && req.body.dishes != undefined) place.dishes = req.body.dishes;
+                        if("imageUrl" in req.body && req.body.imageUrl != undefined) place.imageUrl = req.body.imageUrl;
+                        if("websiteUrl" in req.body && req.body.websiteUrl != undefined) place.websiteUrl = req.body.websiteUrl;
                         if("cuisine" in req.body && req.body.cuisine != undefined) {
                             place.cuisine = req.body.cuisine;
                         }

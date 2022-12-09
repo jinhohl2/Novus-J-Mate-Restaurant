@@ -16,10 +16,16 @@ var PlaceSchema = new mongoose.Schema({
         default: "N/A"
     },
 
+    dishes: [String],
+
     usersVisited: [String],
 
     reviews: [String],
     
+    imageUrl: String,
+
+    websiteUrl: String,
+
     dateCreated: {
         type:Date,
         default: Date.now

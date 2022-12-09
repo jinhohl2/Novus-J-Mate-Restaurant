@@ -63,7 +63,6 @@ module.exports = function (router) {
                 data: []
             });
         }
-
         User.findById(req.params.id)
         .then((tbUpdated)=>{
             if(tbUpdated) {
@@ -81,6 +80,13 @@ module.exports = function (router) {
                         user.Lname = req.body.Lname;
                         user.email = req.body.email;
                         user.address = req.body.address;
+                        if("uniqueVisits" in req.body && req.body.uniqueVisits != undefined) {
+                            user.uniqueVisits = req.body.uniqueVisits;
+                        }
+                        else {
+                            user.uniqueVisits = new Array(12).fill(0)
+                        }
+                    
                         var placeTbUpdated = [];
                         var reviewTbUpdated = [];
                         tbUpdated.placesVisited.forEach((tb)=>{

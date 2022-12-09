@@ -94,7 +94,13 @@ module.exports = function (router) {
                 user.Lname = req.body.Lname;
                 user.email = req.body.email;
                 user.address = req.body.address;
-
+                if("uniqueVisits" in req.body && req.body.uniqueVisits != undefined) {
+                    user.uniqueVisits = req.body.uniqueVisits;
+                }
+                else {
+                    user.uniqueVisits = new Array(12).fill(0);
+                }
+                console.log(user);
                 if("placesVisited" in req.body && req.body.placesVisited!= undefined) {
                     user.placesVisited = req.body.placesVisited;
 
