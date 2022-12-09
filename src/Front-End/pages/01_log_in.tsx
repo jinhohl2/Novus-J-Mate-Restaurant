@@ -8,7 +8,7 @@ import {
     faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './AuthContext'
+import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
 import { FirebaseError } from 'firebase/app';
 import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider , FacebookAuthProvider } from 'firebase/auth'
 
@@ -31,7 +31,7 @@ function LogInView() {
         }
     }
 
-    async function tryLogIn(event: React.SyntheticEvent) {
+    function tryLogIn(event: React.SyntheticEvent) {
         event.preventDefault();
         logIn(email, password)
         .then(()=>{

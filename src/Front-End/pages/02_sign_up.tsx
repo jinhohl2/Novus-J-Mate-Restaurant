@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { AuthProvider, useAuth } from './AuthContext';
+import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { FirebaseError } from 'firebase/app';
 //const axios = require('axios');
