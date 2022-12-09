@@ -2,8 +2,17 @@ import { randomUUID } from 'crypto';
 import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import {
+    Route,
+    Routes,
+    Link
+} from "react-router-dom";
 
-const RestaurantDetails = () => {
+interface RestaurantDetailsProps {
+    // Object of the Restaurant that's returned from API.
+}
+
+const RestaurantDetails = (props: RestaurantDetailsProps) => {
     const [tabKey, setTabKey] = useState<string>("ratingsReviewsKey");
     const [code, SetCode] = useState<string>("");
 
@@ -22,6 +31,13 @@ const RestaurantDetails = () => {
     return (
         <React.Fragment>
             <section className="section-07-restaurant-details">
+                <div id="back-to-results-container">
+                    <Link to="/restaurant-results">
+                        <button>
+                            Back
+                        </button>
+                    </Link>
+                </div>
                 <div id='restaurant-div'>
                     <img src="" alt="Restaurant image" />
                     <h2>Restaurant name</h2>

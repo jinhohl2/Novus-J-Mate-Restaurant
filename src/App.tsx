@@ -34,6 +34,9 @@ function App() {
                   <Route path={"/dashboard"} element={<Dashboard></Dashboard>}></Route>
                   <Route path={"/main-search-criteria"} element={<MainSearchCriterias></MainSearchCriterias>}></Route>
                   <Route path={"/restaurant-results"} element={<RestaurantResults></RestaurantResults>}></Route>
+                  <Route path={"/restaurant-results/1"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                  <Route path={"/restaurant-results/2"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                  <Route path={"/restaurant-results/3"} element={<RestaurantDetails></RestaurantDetails>}></Route>
                   <Route path={"/restaurant-details"} element={<RestaurantDetails></RestaurantDetails>}></Route>
                   <Route path={"/find-friends"} element={<FindFriends></FindFriends>}></Route>
                   <Route path={"/profile-of-friends"} element={<ProfileOfFriends></ProfileOfFriends>}></Route>

@@ -5,6 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useState } from "react";
 import CuisineChoice from '../components/05_cuisine_box';
+import { Link } from 'react-router-dom';
 
 const MainSearchCriterias = () => {
     const [tabKey, setTabKey] = useState<string>("cuisine");
@@ -59,7 +60,9 @@ const MainSearchCriterias = () => {
                                     <div id="cuisines-block">
                                         {getCuisineBoxes()}
                                     </div>
-                                    <button>Generate Restaurants</button>
+                                    <Link to={{pathname: "/restaurant-results" }} state={{ cuisines: ["Indian"] }} >
+                                        <button id="generate-results-from-cuisines">Generate Restaurants</button>
+                                    </Link>
                                 </div>
                             </div>
                         </Tab>

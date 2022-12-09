@@ -63,9 +63,11 @@ function LogInView() {
                 <h5 className="line-break">
                     <span>Or</span>
                 </h5>
-                <button id="switch-to-sign-up">
-                    <Link to="/sign-up">Sign Up</Link>
-                </button>
+                <Link to="/sign-up">
+                    <button id="switch-to-sign-up">
+                        Sign Up
+                    </button>
+                </Link>
             </section>
 
         </React.Fragment>
