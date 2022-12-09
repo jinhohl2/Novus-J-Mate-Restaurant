@@ -44,23 +44,23 @@ function LogInView() {
             console.log(err.code)
             return  setError(err.code);
         })
-        
+
     }
 
     /*
     function googleSignIn(event: React.SyntheticEvent): void {
         event.preventDefault();
-        
+
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
         .then((result) => {
             // The signed-in user info.
             const user = result.user;
-        
+
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const accessToken = (credential)? credential.accessToken : null;
-        
+
             // ...
         })
         .catch((error) => {
@@ -71,7 +71,7 @@ function LogInView() {
             const email = error.customData.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
-        
+
             // ...
           });
 
@@ -86,13 +86,13 @@ function LogInView() {
                         <h1>Log In</h1>
                         <div className = "error-message">
                             {error}
-                        </div> 
+                        </div>
                         <h5>With your email</h5>
                         <div id="default-log-in">
                             <form onSubmit={tryLogIn}>
                                 <input type="text" name="email" onChange={handleInputChange}
                                     value={email} placeholder="Enter email" />
-                                <input type="text" name="password" onChange={handleInputChange}
+                                <input type="password" name="password" onChange={handleInputChange}
                                     value={password} placeholder="Enter password" />
                                 <input type="submit" value="Log In" id="log-in-submit" />
                             </form>
