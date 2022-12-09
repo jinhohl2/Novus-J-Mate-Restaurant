@@ -53,6 +53,7 @@ body {
                 position: absolute;
 
                 li {
+                    text-decoration: none;
                     display: inline-block;
                     /* To display the li items next to each other */
                     padding: 1vh;
@@ -93,6 +94,7 @@ body {
     .error-message {
         color: red;
     }
+
 
     section.section-01-log-in {
         display: flex;
@@ -386,10 +388,573 @@ body {
         /* Very important for designing the content which doesn't fits */
 
         position: absolute;
-        height: 92vh;
-        width: 100%;
+        height: 100vh;
+        min-height: 100vh;
+        width: 100vw;
+        min-width: 100vw;
         background-color: $main_back_color;
         transform: translateY(8vh);
+
+        div.user-profile-content{
+            display: flex;
+            flex-direction: column;
+            margin: 5% auto auto;
+            justify-content: center;
+            align-items: center;
+
+            background-color: $main_back_color;
+            height: 80%;
+            min-height: 609px;
+            width: 85%;
+            min-width: 871px;
+
+            div.div-user-details {
+                display: flex;
+                flex-direction: row;
+                margin-top: 0px;
+                margin-bottom: auto;
+
+                background-color: #4267B2;
+                height: 25%;
+                width: 100%;
+
+                div.user-image{
+                    display: flex;
+                    /* top | right | bottom | left */
+                    margin: auto 0vw auto 2vw;
+
+                    justify-content: center;
+                    align-items: center;
+
+                    height: 15vh;
+                    width: 8vw;
+                    background-color: #F8C165;
+
+                    img {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+
+                div.user-detail-items{
+                    display: flex;
+                    /* top | right | bottom | left */
+                    margin: auto 2vw auto 2vw;
+                    padding-left: 1em;
+
+                    justify-content: left;
+                    align-items: center;
+
+                    height: 15vh;
+                    width: 86vw;
+
+                    background-color: #F8C165;
+
+                    ul {
+                        list-style: none;
+                        /* To remove the bullets in front of the nav menu items */
+                        position: absolute;
+
+                        li {
+                            text-decoration: none;
+                            padding: 0.25em;
+                        }
+            }
+
+                }
+
+
+
+            }
+
+            div.nav-edit-user-and-view-restaurant-visit-history {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                margin-top: auto;
+                margin-bottom: 0;
+                overflow-y: auto;
+                background-color: #F8C165;
+                height: 75%;
+                width: 100%;
+
+                section.navbar{
+                    display: flex;
+                    position: sticky;
+                    /* top | left+right | bottom */
+                    margin-top: 0;
+                    top:0;
+
+                    justify-content: right;
+                    align-items: center;
+
+                    height: 4em;
+                    width: 100%;
+                    background-color: #4267B2;
+
+                    button {
+                        /* top and bottom | left and right */
+                        margin: 0.7em 0.3em;
+                        height: 2.5em;
+                        width: 10em;
+                        background-color: #F8C165;
+                    }
+
+                    #button-logout {
+                        margin-right: 2em;
+                        background-color: #F8C165;
+                    }
+                }
+
+                section.section-user-profile{
+                    display: flex;
+                    flex-direction: column;
+                    /* top | left+right | bottom */
+                    margin-top: 0;
+
+                    height: auto;
+                    width: 100%;
+                    background-color: #4267B2;
+
+                    div.div-edit-cancel-save{
+                        display: flex;
+                        justify-content: right;
+                        width: 100%;
+
+                        button {
+                    /* top and bottom | left and right */
+                    margin: 0.7em 0.3em;
+                    height: 2.5em;
+                    width: 7em;
+                    }
+
+                        #edit {
+                            margin-left: 2em;
+                            background-color: #F8C165;
+                        }
+
+                        #cancel {
+                            margin-left: 0.3em;
+                            margin-right: auto;
+                            background-color: #de5246;
+                        }
+
+                        #save {
+                            margin-right: 2em;
+                            background-color: #7FBA00;
+                        }
+
+                    }
+
+                    div.div-user-profile-content{
+                        display: flex;
+                        align-items: flex-start;
+                        flex-direction: column;
+
+                        margin: 0.3em 2em 2em;
+                        padding: 1em 5em 1em;
+                        width: auto;
+                        height: 100%;
+                        overflow-y: auto;
+
+
+                        background-color: #7FBA00;
+
+                        div.upload-photo {
+                            display:grid;
+                            grid-template-columns: max-content max-content;
+                            grid-gap:5px;
+                            margin-top: 0.5em;
+                            margin-bottom: 0.25em;
+
+                            label{
+                                display: flex;
+                                text-align: right;
+                                width: 10em;
+                                align-items: center;
+                            }
+
+                            button{
+                                height: 2.5em;
+                                width: 7em;
+                            }
+
+                        }
+
+                        div.username {
+                            display:grid;
+                            grid-template-columns: max-content max-content;
+                            grid-gap:5px;
+                            margin-top: 0.25em;
+                            margin-bottom: 0.25em;
+
+                            label{
+                                display: flex;
+                                text-align: right;
+                                width: 10em;
+                                align-items: center;
+                            }
+
+                            input{
+                                height: 2.5em;
+                                width: 50vw;
+                            }
+
+                        }
+
+                        div.first-name {
+                            display:grid;
+                            grid-template-columns: max-content max-content;
+                            grid-gap:5px;
+                            margin-top: 0.25em;
+                            margin-bottom: 0.25em;
+
+                            label{
+                                display: flex;
+                                text-align: right;
+                                width: 10em;
+                                align-items: center;
+                            }
+
+                            input{
+                                height: 2.5em;
+                                width: 50vw;
+                            }
+
+                        }
+
+                        div.last-name {
+                            display:grid;
+                            grid-template-columns: max-content max-content;
+                            grid-gap:5px;
+                            margin-top: 0.25em;
+                            margin-bottom: 0.25em;
+
+                            label{
+                                display: flex;
+                                text-align: right;
+                                width: 10em;
+                                align-items: center;
+                            }
+
+                            input{
+                                height: 2.5em;
+                                width: 50vw;
+                            }
+
+                        }
+
+                        div.add-on-email {
+                            display:grid;
+                            grid-template-columns: max-content max-content;
+                            grid-gap:5px;
+                            margin-top: 0.25em;
+                            margin-bottom: 0.25em;
+
+                            label{
+                                display: flex;
+                                text-align: right;
+                                width: 10em;
+                                align-items: center;
+                            }
+
+                            input{
+                                height: 2.5em;
+                                width: 50vw;
+                            }
+
+                        }
+
+                        div.password-div {
+                            display:grid;
+                            grid-template-areas:
+                                    'password-label-grid password-input-grid'
+                                    'password-label-grid re-enter-password-input-grid';
+                            grid-gap:5px;
+                            margin-top: 1em;
+                            margin-bottom: 0.25em;
+
+                            label.password-label{
+                                display: flex;
+                                text-align: right;
+                                align-items: center;
+                                grid-area: password-label-grid;
+                                width: 10em;
+
+                            }
+
+                            input.password-input{
+                                height: 2.5em;
+                                width: 50vw;
+                                grid-area: password-input-grid;
+                            }
+
+                            input.re-enter-password-input{
+                                height: 2.5em;
+                                width: 50vw;
+                                grid-area: re-enter-password-input-grid;
+                            }
+
+                        }
+
+
+
+                    }
+
+
+
+
+                }
+
+                section.section-visited-restaurant{
+                    display: flex;
+                    flex-direction: column;
+                    /* top | left+right | bottom */
+                    margin-top: 0;
+
+                    height: auto;
+                    width: 100%;
+                    background-color: #4267B2;
+
+                    div.div-restaurant-list{
+                        display: flex;
+
+                        margin: 0.3em 2em 1em;
+                        padding: 0 0.5em 0;
+                        width: auto;
+                        height: 25em;
+                        justify-content: left;
+                        align-items: center;
+                        overflow-x: auto;
+
+                        background-color: #7FBA00;
+
+                        ul.restaurant-listing{
+                            margin: 1em;
+                            list-style: none;
+
+                            li.user-image-li{
+                                img {
+                                    height: 5em;
+                                    width: 5em;
+
+                                }
+                            }
+
+                            li.label{
+                                h6{
+
+                                }
+
+                            }
+                        }
+
+
+
+                    }
+
+                    h3{
+                        margin-left: 2em;
+                    }
+
+
+                    div.div-by-self-restaurant-rating-details{
+                        display:grid;
+
+                        /* defining the column(s) covered by one grid per row. */
+                        /* typing by-self-label 2x means that there are 2 columns.
+                         and both the columns will be covered by the same element with the grid-area: by-self-label
+                         */
+                        grid-template-areas:
+                                'by-self-label by-self-label'
+                                'ratings-by-self reviews-by-self';
+                        gap: 10px;
+                        /* Setting the height of the first row (2em) and second row as auto */
+                        grid-template-rows: 2em auto;
+
+                        margin: 0.3em 2em 1em;
+                        padding: 1em 5em 1em;
+                        width: auto;
+                        height: 100%;
+                        overflow-y: auto;
+                        background-color: #7FBA00;
+
+                        div.ratings-reviews-by-self-label{
+                            grid-area: by-self-label;
+                            background-color: #faf6f2;
+                        }
+
+                        div.ratings-by-self-label{
+                            grid-area: ratings-by-self;
+                            background-color: #faf6f2;
+
+                        }
+
+                        div.reviews-by-self-label{
+                            grid-area: reviews-by-self;
+                            background-color: #faf6f2;
+                        }
+
+
+
+
+
+
+
+
+
+                    }
+
+                    div.div-by-others-restaurant-rating-details{
+                        display:grid;
+
+                        /* defining the column(s) covered by one grid per row. */
+                        /* typing by-others-label 2x means that there are 2 columns.
+                         and both the columns will be covered by the same element with the grid-area: by-self-label
+                         */
+                        grid-template-areas:
+                                'by-others-label by-others-label'
+                                'ratings-by-others reviews-by-self'
+                                'ratings-by-others reviews-by-self';
+
+                        gap: 10px;
+                        /* Setting the height of the first row (2em) and second row as auto.
+                        This will repeat only first row. Repeating won't happen here.
+                         */
+                        grid-template-rows: 2em auto;
+
+                        margin: 0.3em 2em 1em;
+                        padding: 1em 5em 1em;
+                        width: auto;
+                        height: 100%;
+                        overflow-y: auto;
+                        background-color: #7FBA00;
+
+                        div.ratings-reviews-by-others-label{
+                            grid-area: by-others-label;
+                            background-color: #faf6f2;
+                        }
+
+                        div.ratings-by-others-label{
+                            grid-area: ratings-by-others;
+                            background-color: #faf6f2;
+
+                        }
+
+                        div.reviews-by-others-label{
+                            grid-area: reviews-by-self;
+                            background-color: #faf6f2;
+                        }
+
+
+
+
+
+
+
+
+
+                    }
+
+                    div.div-dish-details{
+                        display: grid;
+
+                        margin: 0.3em 2em 1em;
+                        padding: 0 0.5em 0;
+                        width: 100%;
+                        height: 100%;
+                        justify-content: left;
+                        align-items: center;
+                        overflow-x: auto;
+
+                        background-color: #7FBA00;
+
+
+
+                        h3{
+                            margin-top: 2em;
+                        }
+
+                        div.dish-one{
+
+                            display:grid;
+
+                            /* defining the column(s) covered by one grid per row. */
+                            /* typing by-others-label 2x means that there are 2 columns.
+                             and both the columns will be covered by the same element with the grid-area: by-self-label
+                             */
+                            grid-template-areas:
+                                    'dish-image-label dish-image-label dish-desc-ingredients-label dish-desc-ingredients-label dish-price-label dish-price-label'
+                                    'ratings-by-self-label ratings-by-self-label ratings-by-self-label reviews-by-self-label reviews-by-self-label reviews-by-self-label'
+                                    'ratings-by-others-label ratings-by-others-label ratings-by-others-label reviews-by-others-label reviews-by-others-label reviews-by-others-label';
+
+                            gap: 10px;
+                            /* Setting the height of the first row (2em) and second row as auto.
+                            This will repeat only first row. Repeating won't happen here.
+                             */
+
+                            top:150px; /*Edited here */
+                            bottom:0; /*Edited here */
+
+                            margin-top: auto;
+                            padding: 1em 5em 1em;
+                            width: 100vw;
+                            height: 50vh;
+                            overflow-y: auto;
+
+                            div.dish-image{
+                                grid-area: dish-image-label;
+                                background-color: #faf6f2;
+                            }
+
+                            div.dish-desc-ingredients{
+                                grid-area: dish-desc-ingredients-label;
+                                background-color: #faf6f2;
+
+                            }
+
+                            div.dish-price{
+                                grid-area: dish-price-label;
+                                background-color: #faf6f2;
+                            }
+
+                            div.ratings-by-self{
+                                grid-area: ratings-by-self-label;
+                                background-color: #faf6f2;
+                            }
+
+                            div.reviews-by-self{
+                                grid-area: reviews-by-self-label;
+                                background-color: #faf6f2;
+                            }
+
+                            div.ratings-by-others{
+                                grid-area: ratings-by-others-label;
+                                background-color: #faf6f2;
+                            }
+
+                            div.reviews-by-others{
+                                grid-area: reviews-by-others-label;
+                                background-color: #faf6f2;
+                            }
+                        }
+
+
+
+                    }
+
+
+
+                }
+
+
+
+            }
+
+
+        }
+
+
 
 
 
