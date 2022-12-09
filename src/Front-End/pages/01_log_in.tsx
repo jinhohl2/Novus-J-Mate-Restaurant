@@ -7,14 +7,18 @@ import {
     faGoogle,
     faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
-import auth from './firebase.js'
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './AuthContext'
 import { FirebaseError } from 'firebase/app';
 import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider , FacebookAuthProvider } from 'firebase/auth'
 
 function LogInView() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<String>("");
+    const [loading, setLoading] = useState<boolean>(false);
+    const { logIn } = useAuth()
+    const navigate = useNavigate()
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
         const name = event.target.name;
@@ -27,19 +31,23 @@ function LogInView() {
         }
     }
 
-    function tryLogIn(event: React.SyntheticEvent): void {
+    async function tryLogIn(event: React.SyntheticEvent) {
         event.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                alert('User signed in successfully!')
-                setEmail("");
-                setPassword("");
-            })
-            .catch((err: FirebaseError)=>{
+        logIn(email, password)
+        .then(()=>{
+            setError("")
+            setLoading(true)
+            navigate("/dashboard")
+            setLoading(false)
+        })
+        .catch((err : FirebaseError)=>{
+            console.log(err.code)
+            return  setError(err.code);
+        })
         
-            }) 
     }
 
+    /*
     function googleSignIn(event: React.SyntheticEvent): void {
         event.preventDefault();
         
@@ -67,48 +75,51 @@ function LogInView() {
             // ...
           });
 
-    }
+    }*/
 
     return (
 
         <React.Fragment>
+            <AuthProvider>
+                <section className="section-01-log-in">
+                    <div id="log-in-box">
+                        <h1>Log In</h1>
+                        <div className = "error-message">
+                            {error}
+                        </div> 
+                        <h5>With your email</h5>
+                        <div id="default-log-in">
+                            <form onSubmit={tryLogIn}>
+                                <input type="text" name="email" onChange={handleInputChange}
+                                    value={email} placeholder="Enter email" />
+                                <input type="text" name="password" onChange={handleInputChange}
+                                    value={password} placeholder="Enter password" />
+                                <input type="submit" value="Log In" id="log-in-submit" />
+                            </form>
+                        </div>
 
-            <section className="section-01-log-in">
-                <div id="log-in-box">
-                    <h1>Log In</h1>
-                    <h5>With your email</h5>
-                    <div id="default-log-in">
-                        <form onSubmit={tryLogIn}>
-                            <input type="text" name="email" onChange={handleInputChange}
-                                value={email} placeholder="Enter email" />
-                            <input type="text" name="password" onChange={handleInputChange}
-                                value={password} placeholder="Enter password" />
-                            <input type="submit" value="Log In" id="log-in-submit" />
-                        </form>
+                        <h5>Or with a provider</h5>
+                        <div id="provider-log-in">
+                            <button id="microsoft-log-in">
+                                <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
+                            </button>
+                            <button id="google-log-in">
+                                <FontAwesomeIcon icon={faGoogle} /> Google
+                            </button>
+                            <button id="facebook-log-in">
+                                <FontAwesomeIcon icon={faFacebook} /> Facebook
+                            </button>
+                        </div>
                     </div>
 
-                    <h5>Or with a provider</h5>
-                    <div id="provider-log-in">
-                        <button id="microsoft-log-in">
-                            <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
-                        </button>
-                        <button id="google-log-in">
-                            <FontAwesomeIcon icon={faGoogle} onClick = {googleSignIn}/> Google
-                        </button>
-                        <button id="facebook-log-in">
-                            <FontAwesomeIcon icon={faFacebook} /> Facebook
-                        </button>
-                    </div>
-                </div>
-
-                <h5 className="line-break">
-                    <span>Or</span>
-                </h5>
-                <button id="switch-to-sign-up">
-                    <Link to="/sign-up">Sign Up</Link>
-                </button>
-            </section>
-
+                    <h5 className="line-break">
+                        <span>Or</span>
+                    </h5>
+                    <button id="switch-to-sign-up">
+                        <Link to="/sign-up">Sign Up</Link>
+                    </button>
+                </section>
+            </AuthProvider>
         </React.Fragment>
 
 

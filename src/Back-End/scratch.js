@@ -1,8 +1,24 @@
 const axios = require('axios');
 
-axios("http://localhost:4001/api" + `/users?sort={"email": 1}`)
+/*
+axios.get("http://localhost:4001/api" + `/users?sort={"email": 1}`)
 .then((res)=>{
     console.log(res.data);
+})
+.catch((err)=>{
+    console.log(err);
+})*/
+
+axios.post("http://localhost:4001/api" + `/users`,{
+    "email" : "test9@gmail.com",
+    "Fname" : "test",
+    "Lname" : "nine",
+    "address" : [123,123],
+    "placesVisited" : [],
+    "reviews" : []
+})
+.then((res)=>{
+    console.log(res);
 })
 .catch((err)=>{
     console.log(err);

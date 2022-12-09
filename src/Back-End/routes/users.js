@@ -99,8 +99,6 @@ module.exports = function (router) {
                 }
                 else {
                     user.uniqueVisits = new Array(12).fill(0);
-                    
-                    console.log(user.uniqueVisits);
                 }
                 console.log(user);
                 if("placesVisited" in req.body && req.body.placesVisited!= undefined) {
