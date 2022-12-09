@@ -10,7 +10,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
 import { FirebaseError } from 'firebase/app';
-import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider , FacebookAuthProvider } from 'firebase/auth'
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth'
 
 function LogInView() {
     const [email, setEmail] = useState<string>("");
@@ -34,16 +34,16 @@ function LogInView() {
     function tryLogIn(event: React.SyntheticEvent) {
         event.preventDefault();
         logIn(email, password)
-        .then(()=>{
-            setError("")
-            setLoading(true)
-            navigate("/dashboard")
-            setLoading(false)
-        })
-        .catch((err : FirebaseError)=>{
-            console.log(err.code)
-            return  setError(err.code);
-        })
+            .then(() => {
+                setError("");
+                setLoading(true);
+                navigate("/dashboard");
+                setLoading(false);
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err.code);
+                return setError(err.code);
+            })
 
     }
 
@@ -84,7 +84,7 @@ function LogInView() {
                 <section className="section-01-log-in">
                     <div id="log-in-box">
                         <h1>Log In</h1>
-                        <div className = "error-message">
+                        <div className="error-message">
                             {error}
                         </div>
                         <h5>With your email</h5>

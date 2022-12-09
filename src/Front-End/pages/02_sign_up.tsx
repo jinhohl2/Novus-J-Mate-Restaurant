@@ -12,7 +12,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { FirebaseError } from 'firebase/app';
-//const axios = require('axios');
 
 function SignUpView() {
     const [email, setEmail] = useState<string>("");
@@ -64,34 +63,34 @@ function SignUpView() {
             return setError("Passwords do not match")
         }
 
-        axios.post("http://localhost:4001/api" + `/users`,{
-            "email" : email,
-            "Fname" : firstName,
-            "Lname" : lastName,
-            "address" : [123,123],
-            "placesVisited" : [],
-            "reviews" : []
+        axios.post("http://localhost:4001/api/users", {
+            "email": email,
+            "Fname": firstName,
+            "Lname": lastName,
+            "address": [123, 123],
+            "placesVisited": [],
+            "reviews": []
         })
-        .then((res: AxiosResponse)=>{
-            setError("");
-            setLoading(true);
-            var userId = res.data.data._id 
-            signUp(email, password)
-            .then(()=>{
-                navigate("/dashboard");
-                setLoading(false);
+            .then((res: AxiosResponse) => {
+                setError("");
+                setLoading(true);
+                var userId = res.data.data._id
+                signUp(email, password)
+                    .then(() => {
+                        navigate("/dashboard");
+                        setLoading(false);
+                    })
+                    .catch((err: FirebaseError) => {
+                        axios.delete(`http://localhost:4001/api/users/${userId}`)
+                        console.log(err);
+                        return setError("Failed to sign up");
+                    })
             })
-            .catch((err: FirebaseError)=>{
-                axios.delete("http://localhost:4001/api" + `/users/` + `${userId}`)
-                console.log(err);
-                return  setError("Failed to sign up");
+            .catch((err: AxiosError) => {
+                var errMessage = JSON.parse(err.response?.request.response).message
+                setLoading(false)
+                return setError(errMessage);
             })
-        })
-        .catch((err: AxiosError)=>{
-            var errMessage = JSON.parse(err.response?.request.response).message
-            setLoading(false)
-            return  setError(errMessage);
-        })
     }
 
     /*
@@ -131,7 +130,7 @@ function SignUpView() {
                 <section className="section-02-sign-up">
                     <div id="sign-up-box">
                         <h1>Sign Up</h1>
-                        <div className = "error-message">
+                        <div className="error-message">
                             {error}
                         </div>
                         <h5>With your email</h5>
@@ -145,10 +144,10 @@ function SignUpView() {
                                             value={lastName} placeholder="Enter last name" />
                                     </div>
                                     <div>
-                                    <input type="text" name="email" onChange={handleInputChange}
-                                        value={email} placeholder="Enter email" />
-                                    <input type="text" name="address" onChange={handleInputChange}
-                                        value={address} placeholder="Enter address" />
+                                        <input type="text" name="email" onChange={handleInputChange}
+                                            value={email} placeholder="Enter email" />
+                                        <input type="text" name="address" onChange={handleInputChange}
+                                            value={address} placeholder="Enter address" />
                                     </div>
                                     <div id="password-row">
                                         <input type="password" name="password" onChange={handleInputChange}
