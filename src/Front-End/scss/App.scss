@@ -90,6 +90,10 @@ body {
         border: 10 solid black;
     }
 
+    .error-message {
+        color: red;
+    }
+
     section.section-01-log-in {
         display: flex;
         /* As there will be cards inside */
