@@ -22,6 +22,10 @@ var PlaceSchema = new mongoose.Schema({
 
     reviews: [String],
     
+    imageUrl: String,
+
+    websiteUrl: String,
+
     dateCreated: {
         type:Date,
         default: Date.now
