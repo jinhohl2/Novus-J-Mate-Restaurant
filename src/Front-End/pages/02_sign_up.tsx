@@ -66,8 +66,8 @@ function SignUpView() {
 
         axios.post("http://localhost:4001/api" + `/users`,{
             "email" : email,
-            "Fname" : "inputBy",
-            "Lname" : "signIn",
+            "Fname" : firstName,
+            "Lname" : lastName,
             "address" : [123,123],
             "placesVisited" : [],
             "reviews" : []
@@ -75,20 +75,21 @@ function SignUpView() {
         .then((res: AxiosResponse)=>{
             setError("");
             setLoading(true);
-            console.log("here");
-            console.log(res);
+            var userId = res.data.data._id 
             signUp(email, password)
             .then(()=>{
                 navigate("/dashboard");
                 setLoading(false);
             })
             .catch((err: FirebaseError)=>{
+                axios.delete("http://localhost:4001/api" + `/users/` + `${userId}`)
                 console.log(err);
                 return  setError("Failed to sign up");
             })
         })
         .catch((err: AxiosError)=>{
             var errMessage = JSON.parse(err.response?.request.response).message
+            setLoading(false)
             return  setError(errMessage);
         })
     }
