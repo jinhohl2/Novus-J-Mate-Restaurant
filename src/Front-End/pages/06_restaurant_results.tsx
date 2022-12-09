@@ -34,6 +34,7 @@ const RestaurantResults = () => {
         );
     }
 
+    // TODO: add restaurant to arguments
     function getVisitedUnvisitedResults(restaurant_names: string[], restaurant_imgs: string[]) {
          // TODO: change condition to check if the user has been to any restaurants matching their search parameters.
          if (true) {
@@ -98,22 +99,18 @@ const RestaurantResults = () => {
         if (location.state && !location.state.cuisines && !location.state.dishes && !location.state.surprise_me) {
             restaurant_names = results.map(result => result.name);
             restaurant_imgs = results.map(result => result.img_src);
-            console.log("1")
         } else if (location.state && location.state.cuisines) {
             // TODO: incorporate distance and query database based on cuisines.
             restaurant_names = ["restaurant1A", "restaurant2A", "restaurant3A"];
             restaurant_imgs = ["../assets/logo.svg2", "../logo192.png2", "../logo512.png"];
-            console.log("2")
         } else if (location.state && location.state.dishes) {
             // TODO: incorporate distance and query database based on dishes.
-            console.log("3")
         } else if (location.state && location.state.surprise_me) {
             // TODO: incorporate distance and query database based on new experience.
         }
 
-        //useEffect(() => setResults([{name: restaurant_names[0], img_src: restaurant_imgs[0]}, {name: restaurant_names[1], img_src: restaurant_imgs[1]}, {name: restaurant_names[2], img_src: restaurant_imgs[2]}]), [results])
+        useEffect(() => setResults([{name: restaurant_names[0], img_src: restaurant_imgs[0]}, {name: restaurant_names[1], img_src: restaurant_imgs[1]}, {name: restaurant_names[2], img_src: restaurant_imgs[2]}]), [results])
 
-        console.log("a")
         return (
             <div>
                 {getVisitedUnvisitedResults(restaurant_names, restaurant_imgs)}

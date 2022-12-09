@@ -60,7 +60,7 @@ const MainSearchCriterias = () => {
                                     <div id="cuisines-block">
                                         {getCuisineBoxes()}
                                     </div>
-                                    <Link to={{pathname: "/restaurant-results" }} state={{ cuisines: ["Indian"] }} >
+                                    <Link to={{pathname: "/restaurant-results" }} state={{ cuisines: cuisines }} >
                                         <button id="generate-results-from-cuisines">Generate Restaurants</button>
                                     </Link>
                                 </div>

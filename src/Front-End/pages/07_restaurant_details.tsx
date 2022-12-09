@@ -8,11 +8,7 @@ import {
     Link
 } from "react-router-dom";
 
-interface RestaurantDetailsProps {
-    // Object of the Restaurant that's returned from API.
-}
-
-const RestaurantDetails = (props: RestaurantDetailsProps) => {
+const RestaurantDetails = () => {
     const [tabKey, setTabKey] = useState<string>("ratingsReviewsKey");
     const [code, SetCode] = useState<string>("");
 

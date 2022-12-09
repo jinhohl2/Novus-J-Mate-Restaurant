@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from "react";
 
 const DistanceToLocationComponent = () => {
-    const [distance, setDistance] = useState<number>(100);
+    const [distance, setDistance] = useState<number>(70);
 
     function updateDistance(event: React.ChangeEvent<HTMLInputElement>): void {
         setDistance(event.target.valueAsNumber);
