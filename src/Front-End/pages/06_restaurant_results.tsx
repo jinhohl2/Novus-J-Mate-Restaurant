@@ -115,7 +115,7 @@ const RestaurantResults = () => {
             <section className="section-06-restaurant-results">
                 <h1>Results</h1>
                 <div id="restaurant-results-container">
-                        {getVisitedUnvisitedResults()}
+                    {getVisitedUnvisitedResults()}
                 </div>
             </section>
         </React.Fragment>

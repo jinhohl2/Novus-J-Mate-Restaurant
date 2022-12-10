@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 const MainSearchCriterias = () => {
     const [tabKey, setTabKey] = useState<string>("cuisine");
     const [selectedDishes, setSelectedDishes] = useState<string[]>([]);
-
     const [searchQuery, setSearchQuery] = useState<string>("");
+    const [distance, setDistance] = useState<number>(70);
 
     const cuisines = ["Italian", "Indian", "Mexican", "Japanese", "Chinese", "Korean", "Nigerian", "American", "French", "U.K.", "Vietnamese", "Thai", "Other"];
     const img_srcs = ["../assets/italian-food.jpg", "../assets/indian-food.jpg", "../assets/mexican-food.jpg", "../assets/japanese-food.jpg", "../assets/chinese-food.jpg",
@@ -47,7 +47,7 @@ const MainSearchCriterias = () => {
         <React.Fragment>
 
             <section className="section-05-main-search-criterias">
-                <DistanceToLocationComponent></DistanceToLocationComponent>
+                <DistanceToLocationComponent setDistance={setDistance} distance={distance}></DistanceToLocationComponent>
                 <div id="search-criteria-tabs-container">
                     <Tabs id="search-criteria-tabs" activeKey={tabKey} onSelect={(tabKey) => setTabKey(tabKey ? tabKey : "cuisine")}>
                         <Tab className="criteria-tab" eventKey="cuisine" title="Cuisine">
@@ -59,7 +59,7 @@ const MainSearchCriterias = () => {
                                     <div id="cuisines-block">
                                         {getCuisineBoxes()}
                                     </div>
-                                    <Link to={{pathname: "/restaurant-results" }} state={{ cuisines: selectedDishes, distance: 20 }} >
+                                    <Link to={{pathname: "/restaurant-results" }} state={{ cuisines: selectedDishes, distance: distance }} >
                                         <button id="generate-results-from-cuisines">Generate Restaurants</button>
                                     </Link>
                                 </div>

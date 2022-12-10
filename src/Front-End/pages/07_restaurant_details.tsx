@@ -1,12 +1,7 @@
-import { randomUUID } from 'crypto';
 import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import {
-    Route,
-    Routes,
-    Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const RestaurantDetails = () => {
     const [tabKey, setTabKey] = useState<string>("ratingsReviewsKey");

@@ -1,18 +1,21 @@
 import React from 'react';
 import { useState } from "react";
 
-const DistanceToLocationComponent = () => {
-    const [distance, setDistance] = useState<number>(70);
+interface distanceToLocationComponentProps {
+    setDistance: React.Dispatch<React.SetStateAction<number>>,
+    distance: number
+}
 
+const DistanceToLocationComponent = (props: distanceToLocationComponentProps) => {
     function updateDistance(event: React.ChangeEvent<HTMLInputElement>): void {
-        setDistance(event.target.valueAsNumber);
+        props.setDistance(event.target.valueAsNumber);
     }
 
     return (
         <section className="section-04-distance-to-location-repeating-components">
             <div id="distance-to-location-container">
                 <h3>Maximum distance from your location (miles)</h3>
-                <input type="range" min="0" max="70" step="5" list="ticks" value={distance} onChange={updateDistance}/>
+                <input type="range" min="0" max="70" step="5" list="ticks" value={props.distance} onChange={updateDistance}/>
             </div>
             <datalist id="ticks">
                 <option value="0" label="0"></option>
