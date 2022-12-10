@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../User-Auth/AuthContext';
 const Dashboard = () => {
-    const {currentUser} = useAuth()
+    const { currentUser } = useAuth()
 
     return (
         <React.Fragment>
@@ -15,10 +15,12 @@ const Dashboard = () => {
                             <h4>then generate restaurants</h4>
                         </button>
                     </Link>
-                    <button>
-                        <h2>Surprise me</h2>
-                        <h4>with new experiences</h4>
-                    </button>
+                    <Link to={{pathname: "/restaurant-results"}} state={{surprise_me: true}} >
+                        <button>
+                            <h2>Surprise me</h2>
+                            <h4>with new experiences</h4>
+                        </button>
+                    </Link>
                 </div>
 
                 <div id='todays-results'>
