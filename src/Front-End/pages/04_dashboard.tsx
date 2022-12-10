@@ -7,7 +7,7 @@ const Dashboard = () => {
     return (
         <React.Fragment>
             <section className="section-04-dashboard">
-                <h1>welcome! {currentUser.email}</h1>
+                <h1>Welcome, {currentUser.email}!</h1>
                 <div id='daily-choice'>
                     <Link to={"/main-search-criteria"}>
                         <button>

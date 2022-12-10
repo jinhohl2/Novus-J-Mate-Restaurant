@@ -12,6 +12,7 @@ $main_button_color: rgba(255, 201, 115, 0.938);
 $microsoft_green: #7FBA00;
 $google_red: #de5246;
 $facebook_blue: #4267B2;
+$highlight_gold: rgb(185, 82, 2);
 
 * {
     margin: 0;
@@ -84,7 +85,7 @@ body {
     }
 
     a:hover {
-        color: rgb(185, 82, 2);
+        color: $highlight_gold;
     }
 
     .line-break {
@@ -973,6 +974,8 @@ body {
         width: 100%;
         background-color: $main_back_color;
         transform: translateY(8vh);
+        text-align: center;
+        padding-top: 1em;
 
         div {
             display: flex;
@@ -1134,6 +1137,100 @@ body {
                 }
             }
 
+            #search-bar-dish-name-container {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                width: 70vw;
+
+                input {
+                    height: 2.5em;
+                    width: 60vw;
+                    margin-bottom: 2em;
+                    border-radius: 20px;
+                    border-width: 1px;
+
+                    text-align: center;
+                }
+
+                div {
+                    display: flex;
+                    justify-content: space-around;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 90%;
+
+                    #chosen-dishes-and-generate {
+                        background-color: rgba(255, 0, 0, 0.8);
+                        border-radius: 20px;
+                        width: 95%;
+
+                        #chosen-dishes-display {
+                            max-width: 35em;
+                            height: 10em;
+                            padding-left: 1.5em;
+                            padding-right: 1.5em;
+
+                            div {
+                                background-color: #E8CB0A;
+                                border-radius: $main_border_radius;
+                                margin-left: 1em;
+                                margin-right: 1em;
+                                padding: 1em;
+
+                                h5 {
+                                    text-align: center;
+                                    color: white;
+                                    margin: 0;
+                                }
+                            }
+                        }
+
+                        a {
+                            #generate-results-from-dishes {
+                                max-width: 18em;
+                                height: 8em;
+                                padding-left: 1.5em;
+                                padding-right: 1.5em;
+                            }
+                        }
+                    }
+                }
+
+                #matching-dishes-container {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    align-items: center;
+
+                    h4 {
+                        margin-top: 2em;
+                        margin-bottom: 1em;
+                        text-align: center;
+                    }
+
+                    #dishes-block {
+                        display: flex;
+                        justify-content: center;
+                        flex-direction: row;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        align-items: center;
+
+                        max-width: 50em;
+                        margin: 0;
+
+                        p {
+                            margin-top: 1em;
+                            margin-bottom: 1em;
+                            margin-left: 1em;
+                            margin-right: 1em;
+                        }
+                    }
+                }
+            }
+
             #cuisines-block {
                 display: flex;
                 justify-content: center;
@@ -1166,6 +1263,21 @@ body {
             max-width: 90%;
             max-height: 60%;
         }
+    }
+
+    section.section-06-dish-box {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+
+        max-width: 20em;
+        min-width: 8em;
+        background-color: #ff3535;
+        margin: 1em;
+        border-radius: $main_border_radius;
+        color: white;
     }
 
     section.section-06-restaurant-results {
