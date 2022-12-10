@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from "react";
 
 interface distanceToLocationComponentProps {
     setDistance: React.Dispatch<React.SetStateAction<number>>,

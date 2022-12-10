@@ -36,7 +36,6 @@ const RestaurantResults = () => {
         );
     }
 
-    // TODO: add restaurant to arguments
     function getVisitedUnvisitedResults() {
          // TODO: change condition to check if the user has been to any restaurants matching their search parameters.
          if (true) {
@@ -60,7 +59,7 @@ const RestaurantResults = () => {
                                     {unvisitedText(resultsJSON[1].name, resultsJSON[1].img_src)}
                                 </Link>
                                 <Link to={"/restaurant-results/3"}>
-                                {   unvisitedText(resultsJSON[2].name, resultsJSON[2].img_src)}
+                                    {unvisitedText(resultsJSON[2].name, resultsJSON[2].img_src)}
                                 </Link>
                             </div>
                         </div>
@@ -97,7 +96,7 @@ const RestaurantResults = () => {
         if (location.state !== null && location.state.cuisines !== null && location.state.distance !== null) {
             // TODO: incorporate distance and query database based on cuisines.
             restaurant_names = location.state.cuisines;
-            restaurant_imgs = ["../assets/logo.svg2", "../logo192.png2", "../logo512.png"];
+            restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
             buildResults(restaurant_names, restaurant_imgs);
         } else if (location.state !== null && location.state.dishes !== null && location.state.distance !== null) {
             // TODO: incorporate distance and query database based on dishes.
@@ -107,8 +106,7 @@ const RestaurantResults = () => {
             // TODO: incorporate distance and query database based on new experience.
             buildResults(restaurant_names, restaurant_imgs);
         }
-
-    }, [])
+    }, []);
 
     return (
         <React.Fragment>

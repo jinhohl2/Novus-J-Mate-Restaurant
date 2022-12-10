@@ -1,5 +1,5 @@
 import React from 'react';
-import DistanceToLocationComponent from '../components/04_distance_to_location copy'
+import DistanceToLocationComponent from '../components/04_distance_to_location'
 import 'bootstrap/dist/css/bootstrap.css';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
