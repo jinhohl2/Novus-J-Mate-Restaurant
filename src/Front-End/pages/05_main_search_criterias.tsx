@@ -15,7 +15,7 @@ const MainSearchCriterias = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [distance, setDistance] = useState<number>(70);
 
-    const cuisines = ["Italian", "Indian", "Mexican", "Japanese", "Chinese", "Korean", "Nigerian", "American", "French", "British", "Vietnamese", "Thai", "Other"];
+    const cuisines = ["Italian", "Indian", "Mexican", "Japanese", "Chinese", "Korean", "African", "American", "French", "British", "Vietnamese", "Thai", "Other"];
     const img_srcs = ["../assets/italian-food.jpg", "../assets/indian-food.jpg", "../assets/mexican-food.jpg", "../assets/japanese-food.jpg", "../assets/chinese-food.jpg",
                       "../assets/korean-food.jpg", "../assets/nigerian-food.jpg", "../assets/american-food.jpg", "../assets/french-food.jpg", "../assets/uk-food.jpg",
                       "../assets/vietnamese-food.jpg", "../assets/thai-food.jpg", "../assets/other-food.jpg"];
