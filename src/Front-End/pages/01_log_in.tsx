@@ -112,18 +112,6 @@ function LogInView() {
                         </div>
                     </div>
 
-                    <h5>Or with a provider</h5>
-                    <div id="provider-log-in">
-                        <button id="microsoft-log-in">
-                            <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
-                        </button>
-                        <button id="google-log-in">
-                            <FontAwesomeIcon icon={faGoogle} /> Google
-                        </button>
-                        <button id="facebook-log-in">
-                            <FontAwesomeIcon icon={faFacebook} /> Facebook
-                        </button>
-                    </div>
 
 
                 <h5 className="line-break">
