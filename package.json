@@ -15,10 +15,15 @@
     "@types/node": "^16.18.3",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "body-parser": "^1.17.2",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.0.1",
+    "concurrently": "^7.6.0",
+    "express": "^4.15.3",
     "firebase": "^9.14.0",
     "fortawesome": "^0.0.1-security",
+    "mongoose": "^5.4.18",
+    "nodemon": "^1.11.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-chartjs-2": "^5.0.1",
@@ -31,10 +36,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"nodemon --exec node ./src/Back-End/server.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api-dev": "nodemon --exec node ./src/Back-End/server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -56,5 +62,6 @@
   },
   "devDependencies": {
     "sass": "^1.56.1"
-  }
+  },
+  "proxy": "http://localhost:4001"
 }

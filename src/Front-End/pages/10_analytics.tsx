@@ -114,7 +114,7 @@ const Analytics = () => {
 
             <section className="section-10-analytics">
                 <Tabs id="analytics-tabs" activeKey={tabKey} onSelect={(tabKey) => setTabKey(tabKey ? tabKey : "cuisine-distribution")}>
-                    <Tab className="analytics-tab" eventKey="cusine-distribution" title="Cuisine Distribution">
+                    <Tab className="analytics-tab" eventKey="cuisine-distribution" title="Cuisine Distribution">
                         <div id="pie-div">
                             <Pie data={getCuisineData()} />
                             <p>Click on the categories on the legend to remove or add them from the pie chart!</p>
