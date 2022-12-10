@@ -175,6 +175,17 @@ function SignUpView() {
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <h5 className="line-break">
+                    <span>Or</span>
+                </h5>
+                <Link to="/log-in">
+                    <button id="switch-to-log-in">
+                        Log In
+                    </button>
+                </Link>
+            </section>
 
                     <h5 className="line-break">
                         <span>Or</span>
