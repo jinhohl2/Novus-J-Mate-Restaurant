@@ -973,6 +973,8 @@ body {
         width: 100%;
         background-color: $main_back_color;
         transform: translateY(8vh);
+        text-align: center;
+        padding-top: 1em;
 
         div {
             display: flex;
