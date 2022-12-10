@@ -26,7 +26,6 @@ const MainSearchCriterias = () => {
             setSelectedDishes(selectedDishes.filter(curr_cuisine => curr_cuisine !== cuisine))
         } else {
             setSelectedDishes([...selectedDishes, cuisine]);
-            console.log([...selectedDishes, cuisine])
         }
     }
 
@@ -60,7 +59,7 @@ const MainSearchCriterias = () => {
                                     <div id="cuisines-block">
                                         {getCuisineBoxes()}
                                     </div>
-                                    <Link to={{pathname: "/restaurant-results" }} state={{ cuisines: cuisines }} >
+                                    <Link to={{pathname: "/restaurant-results" }} state={{ cuisines: selectedDishes, distance: 20 }} >
                                         <button id="generate-results-from-cuisines">Generate Restaurants</button>
                                     </Link>
                                 </div>

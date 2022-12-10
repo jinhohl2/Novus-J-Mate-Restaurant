@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link
-} from "react-router-dom";
-import RestaurantDetails from "./07_restaurant_details"
-import { useLocation as ul } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Link } from "react-router-dom";
+import { useLocation } from 'react-router-dom'
+import useLocalStorage from 'react-use-localstorage';
 
-interface RestaurantResults {
+interface RestaurantResult {
     name: string,
     img_src: string
 }
 
-// interface RestaurantResultsProps {
-//     dist_in_miles?: number,
-//     cuisines?: string[],
-//     dishes?: string[],
-//     surprise_me?: boolean
-// }
-
 const RestaurantResults = () => {
-    const [results, setResults] = useState<RestaurantResults[]>([{name: "restaurant1", img_src: "../assets/logo.svg"},
-                                                                 {name: "restaurant2", img_src: "../logo192.png"},
-                                                                 {name: "restaurant3", img_src: "../logo512.png"}]);
+    const [resultsString, setResultsString]
+        = useLocalStorage('results', JSON.stringify([{name: "restaurant1", img_src: "../assets/logo.svg"},
+                                                     {name: "restaurant2", img_src: "../assets/logo.svg"},
+                                                     {name: "restaurant3", img_src: "../assets/logo.svg"}]));
+    const resultsJSON = getStoredResults();
+    const location = useLocation();
+
+    function getStoredResults() {
+        return JSON.parse(resultsString);
+    }
+
+    function buildResults(restaurant_names: string[], img_srcs: string[]) {
+        const newResults = [{name: restaurant_names[0], img_src: img_srcs[0]},
+                            {name: restaurant_names[1], img_src: img_srcs[1]},
+                            {name: restaurant_names[2], img_src: img_srcs[2]}]
+        setResultsString(JSON.stringify(newResults));
+    }
 
     function unvisitedText(rest_name: string, rest_img: string): JSX.Element {
         return (
@@ -35,7 +37,7 @@ const RestaurantResults = () => {
     }
 
     // TODO: add restaurant to arguments
-    function getVisitedUnvisitedResults(restaurant_names: string[], restaurant_imgs: string[]) {
+    function getVisitedUnvisitedResults() {
          // TODO: change condition to check if the user has been to any restaurants matching their search parameters.
          if (true) {
             return (
@@ -45,8 +47,8 @@ const RestaurantResults = () => {
                             <h2>Visited</h2>
                             <h5>Revisit a place you know and love!</h5>
                             <Link to={"/restaurant-results/1"}>
-                                <img src={`${process.env.PUBLIC_URL}${restaurant_imgs[0]}`} alt={restaurant_names[0]} />
-                                <h3>{restaurant_names[0]}</h3>
+                                <img src={`${process.env.PUBLIC_URL}${resultsJSON[0].img_src}`} alt={resultsJSON[0].name} />
+                                <h3>{resultsJSON[0].name}</h3>
                             </Link>
                         </div>
 
@@ -55,10 +57,10 @@ const RestaurantResults = () => {
                             <h5>Expand the horizons of your palette!</h5>
                             <div>
                                 <Link to={"/restaurant-results/2"}>
-                                    {unvisitedText(restaurant_names[1], restaurant_imgs[1])}
+                                    {unvisitedText(resultsJSON[1].name, resultsJSON[1].img_src)}
                                 </Link>
                                 <Link to={"/restaurant-results/3"}>
-                                {   unvisitedText(restaurant_names[2], restaurant_imgs[2])}
+                                {   unvisitedText(resultsJSON[2].name, resultsJSON[2].img_src)}
                                 </Link>
                             </div>
                         </div>
@@ -73,13 +75,13 @@ const RestaurantResults = () => {
                         <h5>Expand the horizons of your palette!</h5>
                         <div>
                             <Link to={"/restaurant-results/1"}>
-                                {unvisitedText(restaurant_names[0], restaurant_imgs[0])}
+                                {unvisitedText(resultsJSON[0].name, resultsJSON[0].img_src)}
                             </Link>
                             <Link to={"/restaurant-results/2"}>
-                                {unvisitedText(restaurant_names[1], restaurant_imgs[1])}
+                                {unvisitedText(resultsJSON[1].name, resultsJSON[1].img_src)}
                             </Link>
                             <Link to={"/restaurant-results/3"}>
-                                {unvisitedText(restaurant_names[2], restaurant_imgs[2])}
+                                {unvisitedText(resultsJSON[2].name, resultsJSON[2].img_src)}
                             </Link>
                         </div>
                     </div>
@@ -88,42 +90,32 @@ const RestaurantResults = () => {
         }
     }
 
-    function getResults() {
-        const location = ul();
-        console.log(location)
+    useEffect(() => {
+        let restaurant_names = resultsJSON.map((result: RestaurantResult) => result.name);
+        let restaurant_imgs = resultsJSON.map((result: RestaurantResult) => result.img_src);
 
-        // placeholder
-        let restaurant_names = ["restaurant1", "restaurant2", "restaurant3"];
-        let restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
-
-        if (location.state && !location.state.cuisines && !location.state.dishes && !location.state.surprise_me) {
-            restaurant_names = results.map(result => result.name);
-            restaurant_imgs = results.map(result => result.img_src);
-        } else if (location.state && location.state.cuisines) {
+        if (location.state !== null && location.state.cuisines !== null && location.state.distance !== null) {
             // TODO: incorporate distance and query database based on cuisines.
-            restaurant_names = ["restaurant1A", "restaurant2A", "restaurant3A"];
+            restaurant_names = location.state.cuisines;
             restaurant_imgs = ["../assets/logo.svg2", "../logo192.png2", "../logo512.png"];
-        } else if (location.state && location.state.dishes) {
+            buildResults(restaurant_names, restaurant_imgs);
+        } else if (location.state !== null && location.state.dishes !== null && location.state.distance !== null) {
             // TODO: incorporate distance and query database based on dishes.
-        } else if (location.state && location.state.surprise_me) {
+
+            buildResults(restaurant_names, restaurant_imgs);
+        } else if (location.state !== null && location.state.surprise_me !== null && location.state.distance !== null) {
             // TODO: incorporate distance and query database based on new experience.
+            buildResults(restaurant_names, restaurant_imgs);
         }
 
-        useEffect(() => setResults([{name: restaurant_names[0], img_src: restaurant_imgs[0]}, {name: restaurant_names[1], img_src: restaurant_imgs[1]}, {name: restaurant_names[2], img_src: restaurant_imgs[2]}]), [results])
-
-        return (
-            <div>
-                {getVisitedUnvisitedResults(restaurant_names, restaurant_imgs)}
-            </div>
-        );
-    }
+    }, [])
 
     return (
         <React.Fragment>
             <section className="section-06-restaurant-results">
                 <h1>Results</h1>
                 <div id="restaurant-results-container">
-                    {getResults()}
+                        {getVisitedUnvisitedResults()}
                 </div>
             </section>
         </React.Fragment>
