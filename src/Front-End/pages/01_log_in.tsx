@@ -124,7 +124,7 @@ function LogInView() {
                             <FontAwesomeIcon icon={faFacebook} /> Facebook
                         </button>
                     </div>
-                </div>
+
 
                 <h5 className="line-break">
                     <span>Or</span>
@@ -134,7 +134,8 @@ function LogInView() {
                         Sign Up
                     </button>
                 </Link>
-            </section>
+                </section>
+            </AuthProvider>
 
         </React.Fragment>
 
