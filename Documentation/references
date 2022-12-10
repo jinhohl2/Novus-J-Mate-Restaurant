@@ -19,9 +19,31 @@ and not just 'firebase'. Otherwise this will throw error the way it was throwing
 the user authentication. Reference:
 https://www.youtube.com/watch?v=vDT7EnUpEoo
 
+2. Flex-box:
+https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
+https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
+
+3. Margins:
+https://developer.mozilla.org/en-US/docs/Web/CSS/margin
+
+4. px vs rem vs em:
+https://www.youtube.com/watch?v=G_V53syo2QQ
+
 ---------------
 Resolving error:
 
 1. Resolving merge conflicts (comment 19):
 https://stackoverflow.com/questions/58325295/merge-conflict-marker-encountered
-    Comment: https://stackoverflow.com/a/58325815
+Comment: https://stackoverflow.com/a/58325815
+
+2. Git rebasing:
+https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+
+3. Making an element sticky:
+Do include {display: block} in order to make the sticky work.
+https://stackoverflow.com/questions/43707076/how-does-the-position-sticky-property-work
+
+
+
+
+

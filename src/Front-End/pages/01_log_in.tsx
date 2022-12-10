@@ -8,9 +8,9 @@ import {
     faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './AuthContext'
+import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
 import { FirebaseError } from 'firebase/app';
-import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider , FacebookAuthProvider } from 'firebase/auth'
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth'
 
 function LogInView() {
     const [email, setEmail] = useState<string>("");
@@ -31,19 +31,19 @@ function LogInView() {
         }
     }
 
-    async function tryLogIn(event: React.SyntheticEvent) {
+    function tryLogIn(event: React.SyntheticEvent) {
         event.preventDefault();
         logIn(email, password)
-        .then(()=>{
-            setError("")
-            setLoading(true)
-            navigate("/dashboard")
-            setLoading(false)
-        })
-        .catch((err : FirebaseError)=>{
-            console.log(err.code)
-            return  setError(err.code);
-        })
+            .then(() => {
+                setError("");
+                setLoading(true);
+                navigate("/dashboard");
+                setLoading(false);
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err.code);
+                return setError(err.code);
+            })
 
     }
 
@@ -84,7 +84,7 @@ function LogInView() {
                 <section className="section-01-log-in">
                     <div id="log-in-box">
                         <h1>Log In</h1>
-                        <div className = "error-message">
+                        <div className="error-message">
                             {error}
                         </div>
                         <h5>With your email</h5>
@@ -112,19 +112,7 @@ function LogInView() {
                         </div>
                     </div>
 
-                    <h5>Or with a provider</h5>
-                    <div id="provider-log-in">
-                        <button id="microsoft-log-in">
-                            <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
-                        </button>
-                        <button id="google-log-in">
-                            <FontAwesomeIcon icon={faGoogle} /> Google
-                        </button>
-                        <button id="facebook-log-in">
-                            <FontAwesomeIcon icon={faFacebook} /> Facebook
-                        </button>
-                    </div>
-                </div>
+
 
                 <h5 className="line-break">
                     <span>Or</span>
@@ -134,7 +122,8 @@ function LogInView() {
                         Sign Up
                     </button>
                 </Link>
-            </section>
+                </section>
+            </AuthProvider>
 
         </React.Fragment>
 

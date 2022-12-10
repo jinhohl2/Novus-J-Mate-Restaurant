@@ -93,17 +93,21 @@ const RestaurantResults = () => {
         let restaurant_names = resultsJSON.map((result: RestaurantResult) => result.name);
         let restaurant_imgs = resultsJSON.map((result: RestaurantResult) => result.img_src);
 
-        if (location.state !== null && location.state.cuisines !== null && location.state.distance !== null) {
+        if (location.state !== null && location.state.cuisines !== undefined && location.state.distance !== undefined) {
             // TODO: incorporate distance and query database based on cuisines.
             restaurant_names = location.state.cuisines;
             restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
             buildResults(restaurant_names, restaurant_imgs);
-        } else if (location.state !== null && location.state.dishes !== null && location.state.distance !== null) {
+        } else if (location.state !== null && location.state.dishes !== undefined && location.state.distance !== undefined) {
             // TODO: incorporate distance and query database based on dishes.
+            restaurant_names = ["restaurantA", "restaurantB", "restaurantC"];
+            restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
 
             buildResults(restaurant_names, restaurant_imgs);
-        } else if (location.state !== null && location.state.surprise_me !== null && location.state.distance !== null) {
+        } else if (location.state !== null && location.state.surprise_me !== undefined && location.state.distance !== undefined) {
             // TODO: incorporate distance and query database based on new experience.
+            restaurant_names = ["restaurant1", "restaurant2", "restaurant3"];
+            restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
             buildResults(restaurant_names, restaurant_imgs);
         }
     }, []);

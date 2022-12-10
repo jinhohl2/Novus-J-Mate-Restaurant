@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from './AuthContext'
+import { useAuth } from '../../User-Auth/AuthContext';
 const Dashboard = () => {
     const {currentUser} = useAuth()
 
     return (
         <React.Fragment>
             <section className="section-04-dashboard">
-                <h1>welcome! {currentUser.email}</h1>
+                <h1>Welcome, {currentUser.email}!</h1>
                 <div id='daily-choice'>
                     <Link to={"/main-search-criteria"}>
                         <button>
