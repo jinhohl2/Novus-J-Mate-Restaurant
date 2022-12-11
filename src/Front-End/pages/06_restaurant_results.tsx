@@ -10,9 +10,9 @@ interface RestaurantResult {
 
 const RestaurantResults = () => {
     const [resultsString, setResultsString]
-        = useLocalStorage('results', JSON.stringify([{name: "restaurant1", img_src: "../assets/logo.svg"},
-                                                     {name: "restaurant2", img_src: "../assets/logo.svg"},
-                                                     {name: "restaurant3", img_src: "../assets/logo.svg"}]));
+        = useLocalStorage('results', JSON.stringify([{ name: "restaurant1", img_src: "../assets/logo.svg" },
+        { name: "restaurant2", img_src: "../assets/logo.svg" },
+        { name: "restaurant3", img_src: "../assets/logo.svg" }]));
     const resultsJSON = getStoredResults();
     const location = useLocation();
 
@@ -21,9 +21,9 @@ const RestaurantResults = () => {
     }
 
     function buildResults(restaurant_names: string[], img_srcs: string[]) {
-        const newResults = [{name: restaurant_names[0], img_src: img_srcs[0]},
-                            {name: restaurant_names[1], img_src: img_srcs[1]},
-                            {name: restaurant_names[2], img_src: img_srcs[2]}]
+        const newResults = [{ name: restaurant_names[0], img_src: img_srcs[0] },
+        { name: restaurant_names[1], img_src: img_srcs[1] },
+        { name: restaurant_names[2], img_src: img_srcs[2] }]
         setResultsString(JSON.stringify(newResults));
     }
 
@@ -37,8 +37,8 @@ const RestaurantResults = () => {
     }
 
     function getVisitedUnvisitedResults() {
-         // TODO: change condition to check if the user has been to any restaurants matching their search parameters.
-         if (true) {
+        // TODO: change condition to check if the user has been to any restaurants matching their search parameters.
+        if (true) {
             return (
                 <div>
                     <div>
