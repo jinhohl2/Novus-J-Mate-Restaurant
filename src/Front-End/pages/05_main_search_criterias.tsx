@@ -72,16 +72,17 @@ const MainSearchCriterias = () => {
 
     function getDishBoxes() {
         api.get('places').then((response) => {
-            // Reset to prevent double counting.
             if (response.data) {
+                let returnedDishes: string[] = [];
                 response.data.data.forEach((restaurant: Place) => {
                     const restaurantDishes = restaurant.dishes;
                     restaurantDishes.forEach((dish: string) => {
-                        if (!dishes.includes(dish)) {
-                            setDishes([...dishes, dish]);
+                        if (!returnedDishes.includes(dish)) {
+                            returnedDishes.push(dish);
                         }
                     });
                 });
+                setDishes(returnedDishes);
             }
         });
         const dishBoxes = [];

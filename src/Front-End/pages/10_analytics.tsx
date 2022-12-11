@@ -37,11 +37,12 @@ const Analytics = () => {
     const [numCuisines, setNumCuisines] = useState<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const [freqVisitedRest, setFreqVisitedRest] = useState<RestaurantAndFrequency[]>([]);
     const { currentUser } = useAuth();
-    const email = currentUser.email;
-    const cuisine_to_idx: { [key: string]: number } = {'italian': 0, 'indian': 1, 'mexican': 2, 'japanese': 3, 'chinese': 4, 'korean': 5,
-                            'african': 6, 'american': 7, 'french': 8, 'british': 9, 'vietnamese': 10, 'thai': 11, 'other': 12}
 
     useEffect(() => {
+        const email = currentUser.email;
+        const cuisine_to_idx: { [key: string]: number } = {'italian': 0, 'indian': 1, 'mexican': 2, 'japanese': 3, 'chinese': 4, 'korean': 5,
+                                'african': 6, 'american': 7, 'french': 8, 'british': 9, 'vietnamese': 10, 'thai': 11, 'other': 12};
+
         api.get('users').then((response) => {
             if (response.data) {
                 const user = response.data.data.find((user: User) => user.email === email);
@@ -59,7 +60,7 @@ const Analytics = () => {
                                 // Get cuisine distribution.
                                 let idx = cuisine_to_idx[restaurant.cuisine.toString().toLowerCase()];
                                 if (idx === undefined) {
-                                    const otherCuisinesIdx = 13;
+                                    const otherCuisinesIdx = 12;
                                     idx = otherCuisinesIdx;
                                 }
 
