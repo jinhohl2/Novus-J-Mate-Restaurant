@@ -1,6 +1,6 @@
 import React from 'react';
 import '../scss/App.scss';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faMicrosoft,
@@ -156,7 +156,7 @@ function SignUpView() {
                                             value={confirmPassword} placeholder="Confirm password" />
                                     </div>
                                     <h6>Use 7-27 characters with at least one letter and one number. </h6>
-                                    <input type="submit" value="Create Account" id="sign-up-submit" />
+                                    <input type="submit" value="Create Account" id="sign-up-submit"/>
                                 </form>
                             </fieldset>
                         </div>
