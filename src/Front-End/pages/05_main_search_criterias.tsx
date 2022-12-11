@@ -7,6 +7,12 @@ import { useState } from "react";
 import CuisineChoice from '../components/05_cuisine_box';
 import DishChoice from '../components/06_dish_box';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+import { type Place } from "../../App";
+
+const api = axios.create({
+    baseURL: "http://localhost:4001/api/"
+});
 
 const MainSearchCriterias = () => {
     const [tabKey, setTabKey] = useState<string>("cuisine");
@@ -14,6 +20,7 @@ const MainSearchCriterias = () => {
     const [selectedDishes, setSelectedDishes] = useState<string[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [distance, setDistance] = useState<number>(70);
+    const [dishes, setDishes] = useState<string[]>([]);
 
     const cuisines = ["Italian", "Indian", "Mexican", "Japanese", "Chinese", "Korean", "African", "American", "French", "British", "Vietnamese", "Thai", "Other"];
     const img_srcs = ["../assets/italian-food.jpg", "../assets/indian-food.jpg", "../assets/mexican-food.jpg", "../assets/japanese-food.jpg", "../assets/chinese-food.jpg",
@@ -64,11 +71,24 @@ const MainSearchCriterias = () => {
     }
 
     function getDishBoxes() {
+        api.get('places').then((response) => {
+            // Reset to prevent double counting.
+            if (response.data) {
+                response.data.data.forEach((restaurant: Place) => {
+                    const restaurantDishes = restaurant.dishes;
+                    restaurantDishes.forEach((dish: string) => {
+                        if (!dishes.includes(dish)) {
+                            setDishes([...dishes, dish]);
+                        }
+                    });
+                });
+            }
+        });
         const dishBoxes = [];
-        //TODO: update to query dishes.
-        let dishes = ["dish1", "dish2", "dish3", "dish4", "dish5", "dish6", "dish7", "dish8", "dish9"];
         for (let i = 0; i < dishes.length; i++) {
-            dishBoxes.push(<DishChoice dish_name={dishes[i]} selectedDishFunc={updateSelectedDishes} key={dishes[i] + " section"}></DishChoice>);
+            if (dishes[i].toLowerCase().match(searchQuery)) {
+                dishBoxes.push(<DishChoice dish_name={dishes[i]} selectedDishFunc={updateSelectedDishes} key={dishes[i] + " section"}></DishChoice>);
+            }
         }
 
         return dishBoxes;
@@ -100,6 +120,9 @@ const MainSearchCriterias = () => {
                         <Tab className="criteria-tab" eventKey="dish" title="Dish">
                             <div className="search-criteria-tab-content">
                                 <div id="search-bar-dish-name-container">
+                                    <div id="dish-search-instructions">
+                                        <p>Use the search bar to find amazing dishes! Select up to three by clicking on them from the results. You can deselct by clicking on the selected dish. </p>
+                                    </div>
                                     <input id="search-bar-dish-name" type="text" onChange={UpdateSearchQuery} value={searchQuery} placeholder={"Search the names of your favorite dishes!"}/>
                                     <div>
                                         <div id="chosen-dishes-and-generate">
@@ -108,7 +131,7 @@ const MainSearchCriterias = () => {
                                                     (dish: string) => {
                                                         return (
                                                             <div onClick={removeFromSelectedDish} dish-group={dish}>
-                                                                <h5 dish-group={dish}>{dish}</h5>
+                                                                <p dish-group={dish}>{dish}</p>
                                                             </div>
                                                         )
                                                 })}
