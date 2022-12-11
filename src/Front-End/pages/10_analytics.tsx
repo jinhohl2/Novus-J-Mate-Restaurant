@@ -48,13 +48,10 @@ const Analytics = () => {
                 const user = response.data.data.find((user: User) => user.email === email);
                 setVisits(user!.uniqueVisits);
 
-                // Reset to default to prevent double counting.
-                setNumCuisines([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-                // Reset to default to prevent double counting.
-                setFreqVisitedRest([]);
-
                 api.get('places/').then((response) => {
                     if (response.data) {
+                        let numCuisinesResponse = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        let freqVisitedRestResponse: RestaurantAndFrequency[] = [];
                         response.data.data.forEach((restaurant: Place) => {
                             if (user!.placesVisited.includes(restaurant._id)) {
                                 // Get cuisine distribution.
@@ -64,29 +61,22 @@ const Analytics = () => {
                                     idx = otherCuisinesIdx;
                                 }
 
-                                setNumCuisines((originalArray) => {
-                                    const tempArray = [...originalArray];
-                                    tempArray[idx] += 1;
-                                    return tempArray;
-                                });
+                                numCuisinesResponse[idx] += 1;
 
-                                // Get frequency of restaurant visits.
-                                setFreqVisitedRest((originalArray) => {
-                                    let found = false;
-                                    let tempArray = [...originalArray];
-                                    for (let i = 0; i < originalArray.length; i++) {
-                                        if (tempArray[i].name === restaurant.name) {
-                                            found = true;
-                                            tempArray[i].frequency += 1;
-                                        }
+                                let found = false;
+                                for (let i = 0; i < freqVisitedRestResponse.length; i++) {
+                                    if (freqVisitedRestResponse[i].name === restaurant.name) {
+                                        found = true;
+                                        freqVisitedRestResponse[i].frequency += 1;
                                     }
-                                    if (found !== true) {
-                                        tempArray.push({"name": restaurant.name, "frequency": 1});
-                                    }
-                                    return tempArray;
-                                });
+                                }
+                                if (found !== true) {
+                                    freqVisitedRestResponse.push({"name": restaurant.name, "frequency": 1});
+                                }
                             }
                         });
+                        setNumCuisines(numCuisinesResponse);
+                        setFreqVisitedRest(freqVisitedRestResponse);
                     }
                 });
             }
