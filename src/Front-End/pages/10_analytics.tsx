@@ -37,55 +37,46 @@ const Analytics = () => {
     const [numCuisines, setNumCuisines] = useState<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const [freqVisitedRest, setFreqVisitedRest] = useState<RestaurantAndFrequency[]>([]);
     const { currentUser } = useAuth();
-    const email = currentUser.email;
-    const cuisine_to_idx: { [key: string]: number } = {'italian': 0, 'indian': 1, 'mexican': 2, 'japanese': 3, 'chinese': 4, 'korean': 5,
-                            'african': 6, 'american': 7, 'french': 8, 'british': 9, 'vietnamese': 10, 'thai': 11, 'other': 12}
 
     useEffect(() => {
+        const email = currentUser.email;
+        const cuisine_to_idx: { [key: string]: number } = {'italian': 0, 'indian': 1, 'mexican': 2, 'japanese': 3, 'chinese': 4, 'korean': 5,
+                                'african': 6, 'american': 7, 'french': 8, 'british': 9, 'vietnamese': 10, 'thai': 11, 'other': 12};
+
         api.get('users').then((response) => {
             if (response.data) {
                 const user = response.data.data.find((user: User) => user.email === email);
                 setVisits(user!.uniqueVisits);
 
-                // Reset to default to prevent double counting.
-                setNumCuisines([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-                // Reset to default to prevent double counting.
-                setFreqVisitedRest([]);
-
                 api.get('places/').then((response) => {
                     if (response.data) {
+                        let numCuisinesResponse = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        let freqVisitedRestResponse: RestaurantAndFrequency[] = [];
                         response.data.data.forEach((restaurant: Place) => {
                             if (user!.placesVisited.includes(restaurant._id)) {
                                 // Get cuisine distribution.
                                 let idx = cuisine_to_idx[restaurant.cuisine.toString().toLowerCase()];
                                 if (idx === undefined) {
-                                    const otherCuisinesIdx = 13;
+                                    const otherCuisinesIdx = 12;
                                     idx = otherCuisinesIdx;
                                 }
 
-                                setNumCuisines((originalArray) => {
-                                    const tempArray = [...originalArray];
-                                    tempArray[idx] += 1;
-                                    return tempArray;
-                                });
+                                numCuisinesResponse[idx] += 1;
 
-                                // Get frequency of restaurant visits.
-                                setFreqVisitedRest((originalArray) => {
-                                    let found = false;
-                                    let tempArray = [...originalArray];
-                                    for (let i = 0; i < originalArray.length; i++) {
-                                        if (tempArray[i].name === restaurant.name) {
-                                            found = true;
-                                            tempArray[i].frequency += 1;
-                                        }
+                                let found = false;
+                                for (let i = 0; i < freqVisitedRestResponse.length; i++) {
+                                    if (freqVisitedRestResponse[i].name === restaurant.name) {
+                                        found = true;
+                                        freqVisitedRestResponse[i].frequency += 1;
                                     }
-                                    if (found !== true) {
-                                        tempArray.push({"name": restaurant.name, "frequency": 1});
-                                    }
-                                    return tempArray;
-                                });
+                                }
+                                if (found !== true) {
+                                    freqVisitedRestResponse.push({"name": restaurant.name, "frequency": 1});
+                                }
                             }
                         });
+                        setNumCuisines(numCuisinesResponse);
+                        setFreqVisitedRest(freqVisitedRestResponse);
                     }
                 });
             }
