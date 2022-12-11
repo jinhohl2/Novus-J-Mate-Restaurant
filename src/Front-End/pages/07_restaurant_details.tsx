@@ -30,7 +30,7 @@ const RestaurantDetails = () => {
                     </Link>
                 </div>
                 <div id='restaurant-div'>
-                    <img src="" alt="Restaurant image" />
+                    <img src="" alt="Restaurant" />
                     <h2>Restaurant name</h2>
                     <h5>Number: 314 159 2653</h5>
                     <h5>Get directions</h5>

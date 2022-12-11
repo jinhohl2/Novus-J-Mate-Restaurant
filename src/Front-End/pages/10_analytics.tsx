@@ -38,14 +38,13 @@ const Analytics = () => {
     const [freqVisitedRest, setFreqVisitedRest] = useState<RestaurantAndFrequency[]>([]);
     const { currentUser } = useAuth();
     const email = currentUser.email;
-    let user: User | null = null;
     const cuisine_to_idx: { [key: string]: number } = {'italian': 0, 'indian': 1, 'mexican': 2, 'japanese': 3, 'chinese': 4, 'korean': 5,
                             'african': 6, 'american': 7, 'french': 8, 'british': 9, 'vietnamese': 10, 'thai': 11, 'other': 12}
 
     useEffect(() => {
         api.get('users').then((response) => {
             if (response.data) {
-                user = response.data.data.find((user: User) => user.email === email);
+                const user = response.data.data.find((user: User) => user.email === email);
                 setVisits(user!.uniqueVisits);
 
                 // Reset to default to prevent double counting.
@@ -140,11 +139,11 @@ const Analytics = () => {
 
     function getFrequentRestaurantsSentence() {
         const topRestaurants = getFrequentRestaurants();
-        if (topRestaurants.length == 0) {
+        if (topRestaurants.length === 0) {
             return "You haven't visited any restaurants yet. Check back here later to see your most visited restaurants!"
-        } else if (topRestaurants.length == 1) {
+        } else if (topRestaurants.length === 1) {
             return `You're top restaurant is: ${topRestaurants[0].name}!`
-        } else if ((topRestaurants.length == 2)) {
+        } else if ((topRestaurants.length === 2)) {
             return `You're top restaurants are: ${topRestaurants[0].name} and ${topRestaurants[1].name}!`
         }
         return `You're top restaurants are ${topRestaurants[0].name}, ${topRestaurants[1].name}, and ${topRestaurants[2].name}!`
@@ -160,16 +159,16 @@ const Analytics = () => {
         const topRestaurants = getFrequentRestaurants();
         let labels: string[] = [];
         let data: number[] = [];
-        if (topRestaurants.length == 0) {
+        if (topRestaurants.length === 0) {
             labels = [];
             data = [];
-        } else if (topRestaurants.length == 1) {
+        } else if (topRestaurants.length === 1) {
             labels = [topRestaurants[0].name];
             data = [topRestaurants[0].frequency];
-        } else if ((topRestaurants.length == 2)) {
+        } else if ((topRestaurants.length === 2)) {
             labels = [topRestaurants[0].name, topRestaurants[1].name];
             data = [topRestaurants[0].frequency, topRestaurants[1].frequency];
-        } else if ((topRestaurants.length == 3)) {
+        } else if ((topRestaurants.length === 3)) {
             labels = [topRestaurants[0].name, topRestaurants[1].name, topRestaurants[2].name];
             data = [topRestaurants[0].frequency, topRestaurants[1].frequency, topRestaurants[2].frequency];
         }
