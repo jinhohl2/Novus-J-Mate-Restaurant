@@ -100,10 +100,14 @@ const RestaurantResults = () => {
             buildResults(restaurant_names, restaurant_imgs);
         } else if (location.state !== null && location.state.dishes !== undefined && location.state.distance !== undefined) {
             // TODO: incorporate distance and query database based on dishes.
+            restaurant_names = ["restaurantA", "restaurantB", "restaurantC"];
+            restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
 
             buildResults(restaurant_names, restaurant_imgs);
         } else if (location.state !== null && location.state.surprise_me !== undefined) {
             // TODO: incorporate distance and query database based on new experience.
+            restaurant_names = ["restaurant", "restaurant2", "restaurant3"];
+            restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
             buildResults(restaurant_names, restaurant_imgs);
         }
     }, []);
