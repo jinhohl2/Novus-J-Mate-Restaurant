@@ -1572,4 +1572,80 @@ body {
             background: rgba(0, 0, 0, 0)
         }
     }
+
+    section.section-11-front-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+
+        position: absolute;
+        height: 92vh;
+        width: 100%;
+        background-color: $main_back_color;
+        transform: translateY(8vh);
+
+        div#front-page-background {
+            background-image: url("../../../public/assets/front-page-background.png");
+            background-size: cover;
+            height: 100%;
+            width: 100vw;
+            opacity: 50%;
+        }
+
+        div#front-page-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #f0c273b4;
+            padding: 5em 5em;
+            border-radius: 3em;
+            border-width: 1em;
+
+            h1,
+            h3 {
+                color: #54321d;
+            }
+
+            h1#front-page-title {
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                font-size: 7em;
+                text-align: center;
+            }
+
+            h3#slogan {
+                text-align: center;
+                margin-bottom: 5vh;
+            }
+
+            div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                button {
+                    margin: 0 5vw;
+                    height: 5em;
+                    padding: 1em 1em;
+                    width: 30vw;
+                    border-style: none;
+
+                    h2 {
+                        margin-bottom: 0px;
+                    }
+                }
+
+                #front-page-signup {
+                    background-color: #7FBA00;
+                }
+
+                #front-page-login {
+                    background-color: coral;
+                }
+            }
+        }
+    }
 }

@@ -2,9 +2,9 @@ import React from 'react';
 import '../src/Front-End/scss/App.scss';
 
 import {
-  BrowserRouter as Router,
-  Route,
-  Routes
+    BrowserRouter as Router,
+    Route,
+    Routes
 } from "react-router-dom";
 
 import NavBar from "./Front-End/pages/00_nav_bar";
@@ -18,34 +18,70 @@ import RestaurantDetails from "./Front-End/pages/07_restaurant_details";
 import FindFriends from "./Front-End/pages/08_find_friends";
 import ProfileOfFriends from "./Front-End/pages/09_profile_of_friends";
 import Analytics from "./Front-End/pages/10_analytics";
+import FrontPage from './Front-End/pages/11_front_page';
 
+export interface User {
+  "_id": string,
+  "email": string,
+  "Fname": string,
+  "Lname": string,
+  "address": number[]
+  "placesVisited": string[],
+  "reviews": string[],
+  "uniqueVisits": number[],
+  "dateCreated": Date
+}
 
+export interface Place {
+  "_id": string,
+  "name": string,
+  "address": number[],
+  "required": true,
+  "cuisine": string,
+  "dishes": string[],
+  "usersVisited": string[],
+  "reviews": string[],
+  "imageUrl": string,
+  "websiteUrl": string,
+  "dateCreated": Date
+}
+
+export interface Review {
+  "_id": string,
+  "restaurant": string,
+  "restaurantName": string,
+  "author": string,
+  "rating": number,
+  "description": string,
+  "dateCreated": Date,
+}
 
 function App() {
-  return (
-      <React.Fragment>
-          <Router>
-              <NavBar/>
+    return (
+        <React.Fragment>
+            <Router>
+                <NavBar />
 
-              <Routes>
-                  <Route path={"/log-in"} element={<LogInView></LogInView>}></Route>
-                  <Route path={"/sign-up"} element={<SignUpView></SignUpView>}></Route>
-                  <Route path={"/user-profile"} element={<UserProfile></UserProfile>}></Route>
-                  <Route path={"/dashboard"} element={<Dashboard></Dashboard>}></Route>
-                  <Route path={"/main-search-criteria"} element={<MainSearchCriterias></MainSearchCriterias>}></Route>
-                  <Route path={"/restaurant-results"} element={<RestaurantResults></RestaurantResults>}></Route>
-                  <Route path={"/restaurant-results/1"} element={<RestaurantDetails></RestaurantDetails>}></Route>
-                  <Route path={"/restaurant-results/2"} element={<RestaurantDetails></RestaurantDetails>}></Route>
-                  <Route path={"/restaurant-results/3"} element={<RestaurantDetails></RestaurantDetails>}></Route>
-                  <Route path={"/restaurant-details"} element={<RestaurantDetails></RestaurantDetails>}></Route>
-                  <Route path={"/find-friends"} element={<FindFriends></FindFriends>}></Route>
-                  <Route path={"/profile-of-friends"} element={<ProfileOfFriends></ProfileOfFriends>}></Route>
-                  <Route path={"/analytics"} element={<Analytics></Analytics>}></Route>
+                <Routes>
+                    <Route path={"/"} element={<FrontPage></FrontPage>}></Route>
+                    <Route path={"/log-in"} element={<LogInView></LogInView>}></Route>
+                    <Route path={"/sign-up"} element={<SignUpView></SignUpView>}></Route>
+                    <Route path={"/user-profile"} element={<UserProfile></UserProfile>}></Route>
+                    <Route path={"/dashboard"} element={<Dashboard></Dashboard>}></Route>
+                    <Route path={"/main-search-criteria"} element={<MainSearchCriterias></MainSearchCriterias>}></Route>
+                    <Route path={"/restaurant-results"} element={<RestaurantResults></RestaurantResults>}></Route>
+                    <Route path={"/restaurant-results/1"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                    <Route path={"/restaurant-results/2"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                    <Route path={"/restaurant-results/3"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                    <Route path={"/restaurant-details"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                    <Route path={"/find-friends"} element={<FindFriends></FindFriends>}></Route>
+                    <Route path={"/profile-of-friends"} element={<ProfileOfFriends></ProfileOfFriends>}></Route>
+                    <Route path={"/analytics"} element={<Analytics></Analytics>}></Route>
 
-              </Routes>
-          </Router>
-      </React.Fragment>
-  );
+                </Routes>
+            </Router>
+        </React.Fragment>
+    );
 }
 
 export default App;
