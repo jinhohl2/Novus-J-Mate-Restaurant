@@ -110,7 +110,7 @@ const RestaurantResults = () => {
             restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
             buildResults(restaurant_names, restaurant_imgs);
         }
-    }, []);
+    });
 
     return (
         <React.Fragment>
