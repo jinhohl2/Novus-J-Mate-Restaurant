@@ -320,7 +320,7 @@ const UserProfile = () => {
 
                             <div className="div-dish-details">
 
-                                <h3 /> Dish One
+                                <h3 > Dish One </h3>
                                 <div className="dish-one">
 
                                     <div className="dish-image">
@@ -355,7 +355,7 @@ const UserProfile = () => {
 
                                 </div>
 
-                                <h3 /> Dish Two
+                                <h3 > Dish Two </h3>
                                 <div className="dish-one">
 
                                     <div className="dish-image">
