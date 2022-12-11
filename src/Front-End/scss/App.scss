@@ -395,7 +395,7 @@ body {
         background-color: $main_back_color;
         transform: translateY(8vh);
 
-        div.user-profile-content{
+        div.user-profile-content {
             display: flex;
             flex-direction: column;
             margin: 5% auto auto;
@@ -418,7 +418,7 @@ body {
                 height: 25%;
                 width: 100%;
 
-                div.user-image{
+                div.user-image {
                     display: flex;
                     /* top | right | bottom | left */
                     margin: auto 0vw auto 2vw;
@@ -436,7 +436,7 @@ body {
                     }
                 }
 
-                div.user-detail-items{
+                div.user-detail-items {
                     display: flex;
                     /* top | right | bottom | left */
                     margin: auto 2vw auto 2vw;
@@ -459,7 +459,7 @@ body {
                             text-decoration: none;
                             padding: 0.25em;
                         }
-            }
+                    }
 
                 }
 
@@ -478,12 +478,12 @@ body {
                 height: 75%;
                 width: 100%;
 
-                section.navbar{
+                section.navbar {
                     display: flex;
                     position: sticky;
                     /* top | left+right | bottom */
                     margin-top: 0;
-                    top:0;
+                    top: 0;
 
                     justify-content: right;
                     align-items: center;
@@ -506,7 +506,7 @@ body {
                     }
                 }
 
-                section.section-user-profile{
+                section.section-user-profile {
                     display: flex;
                     flex-direction: column;
                     /* top | left+right | bottom */
@@ -516,17 +516,17 @@ body {
                     width: 100%;
                     background-color: #4267B2;
 
-                    div.div-edit-cancel-save{
+                    div.div-edit-cancel-save {
                         display: flex;
                         justify-content: right;
                         width: 100%;
 
                         button {
-                    /* top and bottom | left and right */
-                    margin: 0.7em 0.3em;
-                    height: 2.5em;
-                    width: 7em;
-                    }
+                            /* top and bottom | left and right */
+                            margin: 0.7em 0.3em;
+                            height: 2.5em;
+                            width: 7em;
+                        }
 
                         #edit {
                             margin-left: 2em;
@@ -546,7 +546,7 @@ body {
 
                     }
 
-                    div.div-user-profile-content{
+                    div.div-user-profile-content {
                         display: flex;
                         align-items: flex-start;
                         flex-direction: column;
@@ -561,20 +561,20 @@ body {
                         background-color: #7FBA00;
 
                         div.upload-photo {
-                            display:grid;
+                            display: grid;
                             grid-template-columns: max-content max-content;
-                            grid-gap:5px;
+                            grid-gap: 5px;
                             margin-top: 0.5em;
                             margin-bottom: 0.25em;
 
-                            label{
+                            label {
                                 display: flex;
                                 text-align: right;
                                 width: 10em;
                                 align-items: center;
                             }
 
-                            button{
+                            button {
                                 height: 2.5em;
                                 width: 7em;
                             }
@@ -582,20 +582,20 @@ body {
                         }
 
                         div.username {
-                            display:grid;
+                            display: grid;
                             grid-template-columns: max-content max-content;
-                            grid-gap:5px;
+                            grid-gap: 5px;
                             margin-top: 0.25em;
                             margin-bottom: 0.25em;
 
-                            label{
+                            label {
                                 display: flex;
                                 text-align: right;
                                 width: 10em;
                                 align-items: center;
                             }
 
-                            input{
+                            input {
                                 height: 2.5em;
                                 width: 50vw;
                             }
@@ -603,20 +603,20 @@ body {
                         }
 
                         div.first-name {
-                            display:grid;
+                            display: grid;
                             grid-template-columns: max-content max-content;
-                            grid-gap:5px;
+                            grid-gap: 5px;
                             margin-top: 0.25em;
                             margin-bottom: 0.25em;
 
-                            label{
+                            label {
                                 display: flex;
                                 text-align: right;
                                 width: 10em;
                                 align-items: center;
                             }
 
-                            input{
+                            input {
                                 height: 2.5em;
                                 width: 50vw;
                             }
@@ -624,20 +624,20 @@ body {
                         }
 
                         div.last-name {
-                            display:grid;
+                            display: grid;
                             grid-template-columns: max-content max-content;
-                            grid-gap:5px;
+                            grid-gap: 5px;
                             margin-top: 0.25em;
                             margin-bottom: 0.25em;
 
-                            label{
+                            label {
                                 display: flex;
                                 text-align: right;
                                 width: 10em;
                                 align-items: center;
                             }
 
-                            input{
+                            input {
                                 height: 2.5em;
                                 width: 50vw;
                             }
@@ -645,20 +645,20 @@ body {
                         }
 
                         div.add-on-email {
-                            display:grid;
+                            display: grid;
                             grid-template-columns: max-content max-content;
-                            grid-gap:5px;
+                            grid-gap: 5px;
                             margin-top: 0.25em;
                             margin-bottom: 0.25em;
 
-                            label{
+                            label {
                                 display: flex;
                                 text-align: right;
                                 width: 10em;
                                 align-items: center;
                             }
 
-                            input{
+                            input {
                                 height: 2.5em;
                                 width: 50vw;
                             }
@@ -666,15 +666,15 @@ body {
                         }
 
                         div.password-div {
-                            display:grid;
+                            display: grid;
                             grid-template-areas:
-                                    'password-label-grid password-input-grid'
-                                    'password-label-grid re-enter-password-input-grid';
-                            grid-gap:5px;
+                                'password-label-grid password-input-grid'
+                                'password-label-grid re-enter-password-input-grid';
+                            grid-gap: 5px;
                             margin-top: 1em;
                             margin-bottom: 0.25em;
 
-                            label.password-label{
+                            label.password-label {
                                 display: flex;
                                 text-align: right;
                                 align-items: center;
@@ -683,13 +683,13 @@ body {
 
                             }
 
-                            input.password-input{
+                            input.password-input {
                                 height: 2.5em;
                                 width: 50vw;
                                 grid-area: password-input-grid;
                             }
 
-                            input.re-enter-password-input{
+                            input.re-enter-password-input {
                                 height: 2.5em;
                                 width: 50vw;
                                 grid-area: re-enter-password-input-grid;
@@ -706,7 +706,7 @@ body {
 
                 }
 
-                section.section-visited-restaurant{
+                section.section-visited-restaurant {
                     display: flex;
                     flex-direction: column;
                     /* top | left+right | bottom */
@@ -716,7 +716,7 @@ body {
                     width: 100%;
                     background-color: #4267B2;
 
-                    div.div-restaurant-list{
+                    div.div-restaurant-list {
                         display: flex;
 
                         margin: 0.3em 2em 1em;
@@ -729,11 +729,11 @@ body {
 
                         background-color: #7FBA00;
 
-                        ul.restaurant-listing{
+                        ul.restaurant-listing {
                             margin: 1em;
                             list-style: none;
 
-                            li.user-image-li{
+                            li.user-image-li {
                                 img {
                                     height: 5em;
                                     width: 5em;
@@ -741,10 +741,8 @@ body {
                                 }
                             }
 
-                            li.label{
-                                h6{
-
-                                }
+                            li.label {
+                                h6 {}
 
                             }
                         }
@@ -753,21 +751,21 @@ body {
 
                     }
 
-                    h3{
+                    h3 {
                         margin-left: 2em;
                     }
 
 
-                    div.div-by-self-restaurant-rating-details{
-                        display:grid;
+                    div.div-by-self-restaurant-rating-details {
+                        display: grid;
 
                         /* defining the column(s) covered by one grid per row. */
                         /* typing by-self-label 2x means that there are 2 columns.
                          and both the columns will be covered by the same element with the grid-area: by-self-label
                          */
                         grid-template-areas:
-                                'by-self-label by-self-label'
-                                'ratings-by-self reviews-by-self';
+                            'by-self-label by-self-label'
+                            'ratings-by-self reviews-by-self';
                         gap: 10px;
                         /* Setting the height of the first row (2em) and second row as auto */
                         grid-template-rows: 2em auto;
@@ -779,18 +777,18 @@ body {
                         overflow-y: auto;
                         background-color: #7FBA00;
 
-                        div.ratings-reviews-by-self-label{
+                        div.ratings-reviews-by-self-label {
                             grid-area: by-self-label;
                             background-color: #faf6f2;
                         }
 
-                        div.ratings-by-self-label{
+                        div.ratings-by-self-label {
                             grid-area: ratings-by-self;
                             background-color: #faf6f2;
 
                         }
 
-                        div.reviews-by-self-label{
+                        div.reviews-by-self-label {
                             grid-area: reviews-by-self;
                             background-color: #faf6f2;
                         }
@@ -805,17 +803,17 @@ body {
 
                     }
 
-                    div.div-by-others-restaurant-rating-details{
-                        display:grid;
+                    div.div-by-others-restaurant-rating-details {
+                        display: grid;
 
                         /* defining the column(s) covered by one grid per row. */
                         /* typing by-others-label 2x means that there are 2 columns.
                          and both the columns will be covered by the same element with the grid-area: by-self-label
                          */
                         grid-template-areas:
-                                'by-others-label by-others-label'
-                                'ratings-by-others reviews-by-self'
-                                'ratings-by-others reviews-by-self';
+                            'by-others-label by-others-label'
+                            'ratings-by-others reviews-by-self'
+                            'ratings-by-others reviews-by-self';
 
                         gap: 10px;
                         /* Setting the height of the first row (2em) and second row as auto.
@@ -830,18 +828,18 @@ body {
                         overflow-y: auto;
                         background-color: #7FBA00;
 
-                        div.ratings-reviews-by-others-label{
+                        div.ratings-reviews-by-others-label {
                             grid-area: by-others-label;
                             background-color: #faf6f2;
                         }
 
-                        div.ratings-by-others-label{
+                        div.ratings-by-others-label {
                             grid-area: ratings-by-others;
                             background-color: #faf6f2;
 
                         }
 
-                        div.reviews-by-others-label{
+                        div.reviews-by-others-label {
                             grid-area: reviews-by-self;
                             background-color: #faf6f2;
                         }
@@ -856,7 +854,7 @@ body {
 
                     }
 
-                    div.div-dish-details{
+                    div.div-dish-details {
                         display: grid;
 
                         margin: 0.3em 2em 1em;
@@ -871,30 +869,32 @@ body {
 
 
 
-                        h3{
+                        h3 {
                             margin-top: 2em;
                         }
 
-                        div.dish-one{
+                        div.dish-one {
 
-                            display:grid;
+                            display: grid;
 
                             /* defining the column(s) covered by one grid per row. */
                             /* typing by-others-label 2x means that there are 2 columns.
                              and both the columns will be covered by the same element with the grid-area: by-self-label
                              */
                             grid-template-areas:
-                                    'dish-image-label dish-image-label dish-desc-ingredients-label dish-desc-ingredients-label dish-price-label dish-price-label'
-                                    'ratings-by-self-label ratings-by-self-label ratings-by-self-label reviews-by-self-label reviews-by-self-label reviews-by-self-label'
-                                    'ratings-by-others-label ratings-by-others-label ratings-by-others-label reviews-by-others-label reviews-by-others-label reviews-by-others-label';
+                                'dish-image-label dish-image-label dish-desc-ingredients-label dish-desc-ingredients-label dish-price-label dish-price-label'
+                                'ratings-by-self-label ratings-by-self-label ratings-by-self-label reviews-by-self-label reviews-by-self-label reviews-by-self-label'
+                                'ratings-by-others-label ratings-by-others-label ratings-by-others-label reviews-by-others-label reviews-by-others-label reviews-by-others-label';
 
                             gap: 10px;
                             /* Setting the height of the first row (2em) and second row as auto.
                             This will repeat only first row. Repeating won't happen here.
                              */
 
-                            top:150px; /*Edited here */
-                            bottom:0; /*Edited here */
+                            top: 150px;
+                            /*Edited here */
+                            bottom: 0;
+                            /*Edited here */
 
                             margin-top: auto;
                             padding: 1em 5em 1em;
@@ -902,38 +902,38 @@ body {
                             height: 50vh;
                             overflow-y: auto;
 
-                            div.dish-image{
+                            div.dish-image {
                                 grid-area: dish-image-label;
                                 background-color: #faf6f2;
                             }
 
-                            div.dish-desc-ingredients{
+                            div.dish-desc-ingredients {
                                 grid-area: dish-desc-ingredients-label;
                                 background-color: #faf6f2;
 
                             }
 
-                            div.dish-price{
+                            div.dish-price {
                                 grid-area: dish-price-label;
                                 background-color: #faf6f2;
                             }
 
-                            div.ratings-by-self{
+                            div.ratings-by-self {
                                 grid-area: ratings-by-self-label;
                                 background-color: #faf6f2;
                             }
 
-                            div.reviews-by-self{
+                            div.reviews-by-self {
                                 grid-area: reviews-by-self-label;
                                 background-color: #faf6f2;
                             }
 
-                            div.ratings-by-others{
+                            div.ratings-by-others {
                                 grid-area: ratings-by-others-label;
                                 background-color: #faf6f2;
                             }
 
-                            div.reviews-by-others{
+                            div.reviews-by-others {
                                 grid-area: reviews-by-others-label;
                                 background-color: #faf6f2;
                             }
@@ -978,27 +978,18 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-        }
 
-        #daily-choice {
-            flex: 1;
-            flex-direction: row;
-        }
+            button {
+                margin: 0 5vw;
+                height: 15em;
+                padding: 1em 1em;
+                width: 30vw;
 
-        #todays-results {
-            flex: 1;
-        }
-
-        button {
-            margin: 0 1em;
-            padding: 1em 1em;
-            width: 30vw;
-        }
-
-        // TODO: control which div is hidden
-        .hidden {
-            display: none;
+                h1,
+                h4 {
+                    margin-bottom: 0px;
+                }
+            }
         }
     }
 
@@ -1279,9 +1270,11 @@ body {
     }
 
     section.section-07-restaurant-details {
-        display: flex; /* As there will be cards inside */
+        display: flex;
+        /* As there will be cards inside */
         justify-content: center;
-        flex-wrap: wrap; /* Very important for designing the content which doesn't fits */
+        flex-wrap: wrap;
+        /* Very important for designing the content which doesn't fits */
 
         position: absolute;
         min-height: 92vh;

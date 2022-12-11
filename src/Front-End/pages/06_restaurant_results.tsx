@@ -10,9 +10,9 @@ interface RestaurantResult {
 
 const RestaurantResults = () => {
     const [resultsString, setResultsString]
-        = useLocalStorage('results', JSON.stringify([{name: "restaurant1", img_src: "../assets/logo.svg"},
-                                                     {name: "restaurant2", img_src: "../assets/logo.svg"},
-                                                     {name: "restaurant3", img_src: "../assets/logo.svg"}]));
+        = useLocalStorage('results', JSON.stringify([{ name: "restaurant1", img_src: "../assets/logo.svg" },
+        { name: "restaurant2", img_src: "../assets/logo.svg" },
+        { name: "restaurant3", img_src: "../assets/logo.svg" }]));
     const resultsJSON = getStoredResults();
     const location = useLocation();
 
@@ -21,9 +21,9 @@ const RestaurantResults = () => {
     }
 
     function buildResults(restaurant_names: string[], img_srcs: string[]) {
-        const newResults = [{name: restaurant_names[0], img_src: img_srcs[0]},
-                            {name: restaurant_names[1], img_src: img_srcs[1]},
-                            {name: restaurant_names[2], img_src: img_srcs[2]}]
+        const newResults = [{ name: restaurant_names[0], img_src: img_srcs[0] },
+        { name: restaurant_names[1], img_src: img_srcs[1] },
+        { name: restaurant_names[2], img_src: img_srcs[2] }]
         setResultsString(JSON.stringify(newResults));
     }
 
@@ -37,8 +37,8 @@ const RestaurantResults = () => {
     }
 
     function getVisitedUnvisitedResults() {
-         // TODO: change condition to check if the user has been to any restaurants matching their search parameters.
-         if (true) {
+        // TODO: change condition to check if the user has been to any restaurants matching their search parameters.
+        if (true) {
             return (
                 <div>
                     <div>
@@ -93,16 +93,16 @@ const RestaurantResults = () => {
         let restaurant_names = resultsJSON.map((result: RestaurantResult) => result.name);
         let restaurant_imgs = resultsJSON.map((result: RestaurantResult) => result.img_src);
 
-        if (location.state !== null && location.state.cuisines !== null && location.state.distance !== null) {
+        if (location.state !== null && location.state.cuisines !== undefined && location.state.distance !== undefined) {
             // TODO: incorporate distance and query database based on cuisines.
             restaurant_names = location.state.cuisines;
             restaurant_imgs = ["../assets/logo.svg", "../logo192.png", "../logo512.png"];
             buildResults(restaurant_names, restaurant_imgs);
-        } else if (location.state !== null && location.state.dishes !== null && location.state.distance !== null) {
+        } else if (location.state !== null && location.state.dishes !== undefined && location.state.distance !== undefined) {
             // TODO: incorporate distance and query database based on dishes.
 
             buildResults(restaurant_names, restaurant_imgs);
-        } else if (location.state !== null && location.state.surprise_me !== null && location.state.distance !== null) {
+        } else if (location.state !== null && location.state.surprise_me !== undefined) {
             // TODO: incorporate distance and query database based on new experience.
             buildResults(restaurant_names, restaurant_imgs);
         }
