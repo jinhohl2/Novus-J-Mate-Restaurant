@@ -2,9 +2,30 @@ import React from 'react';
 import '../scss/App.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faSave, faEdit, faCancel, faUpload } from '@fortawesome/free-solid-svg-icons'
+import {useAuth} from '../../User-Auth/AuthContext';
+import {useState} from 'react'
+import {useNavigate } from 'react-router-dom';
+import { FirebaseError } from 'firebase/app';
 
 const UserProfile = () => {
+    const { currentUser, logOut } = useAuth()
+    const [error, setError] = useState<String>("");
+    const navigate = useNavigate();
 
+    function tryLogOut(event: React.SyntheticEvent) {
+        event.preventDefault();
+        logOut()
+            .then(() => {
+                setError("");
+                
+                navigate("/log-in");
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err.code);
+                return setError(err.code);
+            })
+
+    }
 
 
     return (
@@ -40,7 +61,7 @@ const UserProfile = () => {
                             <button id="visited-restaurants">
                                 Visited-Restaurants
                             </button>
-                            <button id="button-logout">
+                            <button id="button-logout" onClick = {tryLogOut}>
                                 Logout
                             </button>
                         </section>

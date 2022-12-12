@@ -23,15 +23,15 @@ import Analytics from "./Front-End/pages/10_analytics";
 import FrontPage from './Front-End/pages/11_front_page';
 
 export interface User {
-  "_id": string,
-  "email": string,
-  "Fname": string,
-  "Lname": string,
-  "address": number[]
-  "placesVisited": string[],
-  "reviews": string[],
-  "uniqueVisits": number[],
-  "dateCreated": Date
+    "_id": string,
+    "email": string,
+    "Fname": string,
+    "Lname": string,
+    "address": number[]
+    "placesVisited": string[],
+    "reviews": string[],
+    "uniqueVisits": number[],
+    "dateCreated": Date
 }
 
 export interface Place {
@@ -48,13 +48,13 @@ export interface Place {
 }
 
 export interface Review {
-  "_id": string,
-  "restaurant": string,
-  "restaurantName": string,
-  "author": string,
-  "rating": number,
-  "description": string,
-  "dateCreated": Date,
+    "_id": string,
+    "restaurant": string,
+    "restaurantName": string,
+    "author": string,
+    "rating": number,
+    "description": string,
+    "dateCreated": Date,
 }
 
 const api = axios.create({
@@ -80,7 +80,7 @@ function App() {
         <React.Fragment>
             <Router>
                 <NavBar />
-
+              
                 <Routes>
                     <Route path={"/"} element={<FrontPage></FrontPage>}></Route>
                     <Route path={"/log-in"} element={<LogInView></LogInView>}></Route>
