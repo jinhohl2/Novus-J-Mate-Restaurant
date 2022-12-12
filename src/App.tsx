@@ -61,7 +61,7 @@ function App() {
         <React.Fragment>
             <Router>
                 <NavBar />
-
+              
                 <Routes>
                     <Route path={"/"} element={<FrontPage></FrontPage>}></Route>
                     <Route path={"/log-in"} element={<LogInView></LogInView>}></Route>
