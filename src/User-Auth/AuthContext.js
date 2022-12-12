@@ -24,6 +24,10 @@ export function AuthProvider({ children }) {
         return auth.signOut();
     }
 
+    function updateInfo(newEmail) {
+        return auth.currentUser.updateEmail(newEmail)
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
@@ -39,7 +43,8 @@ export function AuthProvider({ children }) {
         currentUser,
         signUp,
         logIn,
-        logOut
+        logOut,
+        updateInfo
     }
 
     return (
