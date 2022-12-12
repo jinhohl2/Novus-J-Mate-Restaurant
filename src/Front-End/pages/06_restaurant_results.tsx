@@ -5,6 +5,7 @@ import useLocalStorage from 'react-use-localstorage';
 import axios from 'axios';
 import { type Place, type User } from '../../App';
 import { useAuth } from '../../User-Auth/AuthContext';
+import { getDistance, convertDistance } from 'geolib';
 
 const api = axios.create({
     baseURL: "http://localhost:4001/api/"
@@ -187,10 +188,19 @@ const RestaurantResults = (props: RestaurantResultProps) => {
     }
 
     function filterPlacesUsingDistance(places: Place[]) {
-        // [Lat, Long]
+        // [Lat, Long].
         const userLocation = user.address;
+        const userLatLong = {latitude: userLocation[0], longitude: userLocation[1]};
         let closePlaces : Place[] = [];
-        return places;
+        places.forEach((place: Place) => {
+            const restaurantLatLong = {latitude: place.address[0], longitude: place.address[1]};
+            const distance = getDistance(userLatLong, restaurantLatLong);
+            const miles = convertDistance(distance, 'mi');
+            if (miles <= location.state.distance) {
+                closePlaces.push(place);
+            }
+        });
+        return closePlaces;
     }
 
     function filterPlacesUsingCuisine(places: Place[]) {
