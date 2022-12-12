@@ -15,7 +15,8 @@ import { FirebaseError } from 'firebase/app';
 
 function SignUpView() {
     const [email, setEmail] = useState<string>("");
-    const [address, setAddress] = useState<string>("");
+    const [lng, setLng] = useState<string>("");
+    const [lat, setLat] = useState<string>("");
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -42,8 +43,12 @@ function SignUpView() {
                 setEmail(value);
                 break;
             }
-            case "address": {
-                setAddress(value);
+            case "Latitude": {
+                setLat(value);
+                break;
+            }
+            case "Longitude": {
+                setLng(value);
                 break;
             }
             case "password": {
@@ -57,17 +62,20 @@ function SignUpView() {
         }
     }
 
+
     function trySignUp(event: React.SyntheticEvent) {
         event.preventDefault();
         if (password !== confirmPassword) {
             return setError("Passwords do not match")
         }
 
+        var latitude = Number(lat)
+        var longitude = Number(lng)
         axios.post("http://localhost:4001/api/users", {
             "email": email,
             "Fname": firstName,
             "Lname": lastName,
-            "address": [123, 123],
+            "address": [latitude, longitude],
             "placesVisited": [],
             "reviews": []
         })
@@ -143,11 +151,15 @@ function SignUpView() {
                                         <input type="text" name="last-name" onChange={handleInputChange}
                                             value={lastName} placeholder="Enter last name" />
                                     </div>
-                                    <div>
+                                    <div id = "middle-row">
                                         <input type="text" name="email" onChange={handleInputChange}
                                             value={email} placeholder="Enter email" />
-                                        <input type="text" name="address" onChange={handleInputChange}
-                                            value={address} placeholder="Enter address" />
+                                        <div className = "LatLng-container">
+                                            <input id = "latlng" type="text" name="Latitude" onChange={handleInputChange}
+                                                value={lat} placeholder="Enter Latitude" />
+                                            <input id = "latlng" type="text" name="Longitude" onChange={handleInputChange}
+                                                value={lng} placeholder="Enter Longitude" />
+                                        </div>
                                     </div>
                                     <div id="password-row">
                                         <input type="password" name="password" onChange={handleInputChange}

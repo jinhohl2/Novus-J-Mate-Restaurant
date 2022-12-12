@@ -10,6 +10,7 @@ Dependencies:
 6. npm install react-bootstrap
 7. npm install --save chart.js react-chartjs-2
 8. npm install react-use-localstorage
+9. npm install geolib
 
 -------------------
 Guides:

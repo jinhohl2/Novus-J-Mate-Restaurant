@@ -373,8 +373,25 @@ body {
             width: 23em;
             background-color: $main_button_color;
         }
-    }
 
+        #middle-row {
+            display:flex;
+        }
+
+        .LatLng-container {
+            display:flex;
+            margin-left: 0.7em;
+            margin-right: 0.7em;
+            min-height: 2.5em;
+            min-width: 23em;
+        }
+
+        .LatLng-container #latlng{
+            min-height: 2.5em !important; 
+            min-width: 11em !important;
+        }
+    }
+;
     section.section-03-user-profile {
         display: flex;
         /* As there will be cards inside */
@@ -1317,7 +1334,7 @@ body {
                     padding-bottom: 1em;
                     text-align: center;
                     min-width: 20vw;
-                    height: auto;
+                    min-height: auto;
                 }
 
                 #not-visited-restaurant-recommendation-block {
@@ -1346,7 +1363,7 @@ body {
                     }
                 }
 
-                #only-not-visited-restaurant-recommendation-block {
+                #one-recommendation-block, #only-not-visited-restaurant-recommendation-block {
                     border-radius: $main_border_radius;
                     border-color: black;
                     border-style: solid;
@@ -1446,7 +1463,7 @@ body {
 
         #restaurant-details-tabs-tab-ratingsReviewsKey,
         #restaurant-details-tabs-tab-menuKey,
-        #restaurant-details-tabs-tab-notesReviewsKey,
+        #restaurant-details-tabs-tab-visitorsKey,
         #restaurant-details-tabs-tab-couponKey {
             text-align: center;
             display: block;
@@ -1460,13 +1477,12 @@ body {
 
         #restaurant-details-tabs-tab-ratingsReviewsKey.active,
         #restaurant-details-tabs-tab-menuKey.active,
-        #restaurant-details-tabs-tab-notesReviewsKey.active,
+        #restaurant-details-tabs-tab-visitorsKey.active,
         #restaurant-details-tabs-tab-couponKey.active {
             color: rgb(203, 135, 8);
             border: none;
             background: rgba(0, 0, 0, 0)
         }
-
     }
 
     section.section-08-find-friends {

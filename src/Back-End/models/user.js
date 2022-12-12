@@ -25,7 +25,8 @@ var UserSchema = new mongoose.Schema({
         type: [Number],
         default: new Array(12).fill(0)
     },
-
+    lastClickOnFilitering: Date,
+    lastClickOnSurprise: Date,
     dateCreated: {
         type: Date,
         default: Date.now
