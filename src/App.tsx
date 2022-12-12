@@ -36,7 +36,6 @@ export interface Place {
   "_id": string,
   "name": string,
   "address": number[],
-  "required": true,
   "cuisine": string,
   "dishes": string[],
   "usersVisited": string[],
