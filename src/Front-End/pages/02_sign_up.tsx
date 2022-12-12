@@ -151,13 +151,13 @@ function SignUpView() {
                                         <input type="text" name="last-name" onChange={handleInputChange}
                                             value={lastName} placeholder="Enter last name" />
                                     </div>
-                                    <div>
+                                    <div id = "middle-row">
                                         <input type="text" name="email" onChange={handleInputChange}
                                             value={email} placeholder="Enter email" />
                                         <div className = "LatLng-container">
-                                            <input type="text" name="Latitude" onChange={handleInputChange}
+                                            <input id = "latlng" type="text" name="Latitude" onChange={handleInputChange}
                                                 value={lat} placeholder="Enter Latitude" />
-                                            <input type="text" name="Longitude" onChange={handleInputChange}
+                                            <input id = "latlng" type="text" name="Longitude" onChange={handleInputChange}
                                                 value={lng} placeholder="Enter Longitude" />
                                         </div>
                                     </div>

@@ -374,17 +374,24 @@ body {
             background-color: $main_button_color;
         }
 
+        #middle-row {
+            display:flex;
+        }
+
         .LatLng-container {
             display:flex;
-            margin-top: 0.7em;
-            margin-bottom: 0.7em;
             margin-left: 0.7em;
             margin-right: 0.7em;
             min-height: 2.5em;
             min-width: 23em;
         }
-    }
 
+        .LatLng-container #latlng{
+            min-height: 2.5em !important; 
+            min-width: 11em !important;
+        }
+    }
+;
     section.section-03-user-profile {
         display: flex;
         /* As there will be cards inside */
