@@ -28,6 +28,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
     const location = useLocation();
     const { currentUser } = useAuth();
     const email = currentUser.email;
+    const cuisines = ["Italian", "Indian", "Mexican", "Japanese", "Chinese", "Korean", "African", "American", "French", "British", "Vietnamese", "Thai"];
 
     function getStoredResultsVisited() {
         return JSON.parse(resultsStringVisited);
@@ -201,7 +202,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
     function filterPlacesUsingCuisine(places: Place[]) {
         let cuisineFilteredPlaces : Place[] = [];
         places.forEach((place: Place) => {
-            if (location.state.cuisines.includes(place.cuisine)) {
+            if (location.state.cuisines.includes(place.cuisine) || (location.state.cuisines.toLowerCase() === "other" && !cuisines.includes(place.cuisine))) {
                 cuisineFilteredPlaces.push(place);
             }
         });
