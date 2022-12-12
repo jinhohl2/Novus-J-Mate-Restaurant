@@ -10,12 +10,15 @@ const api = axios.create({
     baseURL: "http://localhost:4001/api/"
 });
 
-const RestaurantResults = () => {
+interface RestaurantResultProps {
+    restaurants: Place[]
+}
+
+const RestaurantResults = (props: RestaurantResultProps) => {
     // Type: string of Place[].
     const [resultsStringVisited, setResultsStringVisited] = useLocalStorage('resultsVisited', JSON.stringify([]));
     // Type: string of Place[].
     const [resultsStringUnvisited, setResultsStringUnvisited] = useLocalStorage('resultsUnvisited', JSON.stringify([]));
-    const [restaurantsFoundString, setRestaurantsFoundString] = useState<Place[]>([]);
     const [user, setUser] = useState<User>({_id: "none", email: "none", Fname: "none",  Lname: "none",
                                             address: [], placesVisited: [], reviews: [],
                                             uniqueVisits: [], dateCreated: new Date()});
@@ -24,27 +27,6 @@ const RestaurantResults = () => {
     const location = useLocation();
     const { currentUser } = useAuth();
     const email = currentUser.email;
-
-    // useEffect(() => {
-    //     api.get('users').then((response) => {
-    //         if (response.data) {
-    //             let foundUser = response.data.data.find((user: User) => user.email === email);
-    //             if (foundUser !== null) {
-    //                 setUser(foundUser);
-    //             }
-    //         }
-    //     });
-
-    //     api.get('places').then((response) => {
-    //         if (response.data) {
-    //             let returnedPlaces: Place[] = [];
-    //             response.data.data.forEach((restaurant: Place) => {
-    //                 returnedPlaces.push(restaurant);
-    //             });
-    //             setRestaurantsFoundString(returnedPlaces);
-    //         }
-    //     });
-    // }, []);
 
     function getStoredResultsVisited() {
         return JSON.parse(resultsStringVisited);
@@ -183,9 +165,8 @@ const RestaurantResults = () => {
     }
 
     function getVisitedPlaces() {
-        const restaurantsFound = JSON.parse(JSON.stringify(restaurantsFoundString));
         const places: Place[] = [];
-        restaurantsFound.forEach((restaurant: Place) => {
+        props.restaurants.forEach((restaurant: Place) => {
             if (user.placesVisited.includes(restaurant._id)) {
                 places.push(restaurant);
             }
@@ -195,15 +176,29 @@ const RestaurantResults = () => {
     }
 
     function getUnvisitedPlaces() {
-        const restaurantsFound = JSON.parse(JSON.stringify(restaurantsFoundString));
         const places: Place[] = [];
-        restaurantsFound.forEach((restaurant: Place) => {
+        props.restaurants.forEach((restaurant: Place) => {
             if (!user.placesVisited.includes(restaurant._id)) {
                 places.push(restaurant);
             }
         });
 
         return places;
+    }
+
+    function filterPlacesUsingDistance(places: Place[]) {
+        let closePlaces : Place[] = [];
+        return closePlaces;
+    }
+
+    function filterPlacesUsingCuisine(places: Place[]) {
+        let closePlaces : Place[] = [];
+        return closePlaces;
+    }
+
+    function filterPlacesUsingDishes(places: Place[]) {
+        let closePlaces : Place[] = [];
+        return closePlaces;
     }
 
     useEffect(() => {
@@ -221,16 +216,6 @@ const RestaurantResults = () => {
             }
         });
 
-        api.get('places').then((response) => {
-            if (response.data) {
-                let returnedPlaces: Place[] = [];
-                response.data.data.forEach((restaurant: Place) => {
-                    returnedPlaces.push(restaurant);
-                });
-                setRestaurantsFoundString(returnedPlaces);
-            }
-        });
-
         let foundRestaurantResultsVisited: Place[] = getVisitedPlaces();
         let foundRestaurantResultsUnvisited: Place[] = getUnvisitedPlaces();
 
@@ -238,15 +223,25 @@ const RestaurantResults = () => {
         let filteredRestaurantsUnvisited: Place[] = [];
 
         if (location.state !== null && location.state.cuisines !== undefined && location.state.distance !== undefined) {
-            //buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
-        } else if (location.state !== null && location.state.dishes !== undefined && location.state.distance !== undefined) {
+            filteredRestaurantsVisited = filterPlacesUsingDistance(foundRestaurantResultsVisited);
+            filteredRestaurantsUnvisited = filterPlacesUsingDistance(foundRestaurantResultsUnvisited);
 
-            //buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
+            filteredRestaurantsVisited = filterPlacesUsingCuisine(filteredRestaurantsVisited);
+            filteredRestaurantsUnvisited = filterPlacesUsingCuisine(filteredRestaurantsUnvisited);
+
+            buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
+        } else if (location.state !== null && location.state.dishes !== undefined && location.state.distance !== undefined) {
+            filteredRestaurantsVisited = filterPlacesUsingDistance(foundRestaurantResultsVisited);
+            filteredRestaurantsUnvisited = filterPlacesUsingDistance(foundRestaurantResultsUnvisited);
+
+            filteredRestaurantsVisited = filterPlacesUsingDishes(filteredRestaurantsVisited);
+            filteredRestaurantsUnvisited = filterPlacesUsingDishes(filteredRestaurantsUnvisited);
+
+            buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
         } else if (location.state !== null && location.state.surprise_me !== undefined) {
             // If the array is less than 3, set filtered to that array, otherwise get a random slice or 3.
             filteredRestaurantsVisited = foundRestaurantResultsVisited.length >= 3 ? foundRestaurantResultsVisited.sort(() => Math.random() - Math.random()).slice(0, 3) : foundRestaurantResultsVisited;
             filteredRestaurantsUnvisited = foundRestaurantResultsUnvisited.length >= 3 ? foundRestaurantResultsUnvisited.sort(() => Math.random() - Math.random()).slice(0, 3) : foundRestaurantResultsUnvisited;
-            console.log("1", filteredRestaurantsVisited, filteredRestaurantsUnvisited)
             buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
         }
     }, []);
