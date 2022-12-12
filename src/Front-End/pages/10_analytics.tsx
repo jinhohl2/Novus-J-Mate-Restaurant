@@ -81,6 +81,7 @@ const Analytics = () => {
                 });
             }
         });
+        // eslint-disable-next-line
     }, []);
 
     function getCuisineData() {

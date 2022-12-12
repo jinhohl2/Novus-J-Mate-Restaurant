@@ -51,12 +51,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
         );
     }
 
-    function getVisitedOrUnvisitedText(rest_name: string, rest_img: string) {
-
-    }
-
     function getVisitedUnvisitedResults() {
-        let hasVisited = false;
         // If there is >= visited results, place it in idx 0, visited/unvisited results can be placed in idx 1 or 2 if applicable.
         let results: Place[] = [];
         if (resultsJSONVisited.length >= 1) {
@@ -267,6 +262,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
             filteredRestaurantsUnvisited = foundRestaurantResultsUnvisited.length >= 3 ? foundRestaurantResultsUnvisited.sort(() => Math.random() - Math.random()).slice(0, 3) : foundRestaurantResultsUnvisited;
             buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
         }
+        // eslint-disable-next-line
     }, []);
 
     return (
