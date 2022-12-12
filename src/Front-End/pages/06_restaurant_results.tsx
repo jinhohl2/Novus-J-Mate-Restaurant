@@ -50,7 +50,12 @@ const RestaurantResults = (props: RestaurantResultProps) => {
         );
     }
 
+    function getVisitedOrUnvisitedText(rest_name: string, rest_img: string) {
+
+    }
+
     function getVisitedUnvisitedResults() {
+        let hasVisited = false;
         // If there is >= visited results, place it in idx 0, visited/unvisited results can be placed in idx 1 or 2 if applicable.
         let results: Place[] = [];
         if (resultsJSONVisited.length >= 1) {
@@ -60,11 +65,6 @@ const RestaurantResults = (props: RestaurantResultProps) => {
         resultsJSONUnvisited.forEach((restaurant: Place) => {
             results.push(restaurant);
         });
-
-        console.log("visited", resultsJSONVisited);
-        console.log("unvisited", resultsJSONUnvisited);
-
-        // Make sure images are valid or set to default.
 
         if (results.length === 0) {
             return (
@@ -187,18 +187,31 @@ const RestaurantResults = (props: RestaurantResultProps) => {
     }
 
     function filterPlacesUsingDistance(places: Place[]) {
+        // [Lat, Long]
+        const userLocation = user.address;
         let closePlaces : Place[] = [];
-        return closePlaces;
+        return places;
     }
 
     function filterPlacesUsingCuisine(places: Place[]) {
-        let closePlaces : Place[] = [];
-        return closePlaces;
+        let cuisineFilteredPlaces : Place[] = [];
+        places.forEach((place: Place) => {
+            if (location.state.cuisines.includes(place.cuisine)) {
+                cuisineFilteredPlaces.push(place);
+            }
+        });
+        return cuisineFilteredPlaces;
     }
 
     function filterPlacesUsingDishes(places: Place[]) {
-        let closePlaces : Place[] = [];
-        return closePlaces;
+        let dishFilteredPlaces : Place[] = [];;
+        places.forEach((place: Place) => {
+            const overlappedDishes = location.state.dishes.filter((dish: string) => place.dishes.includes(dish));
+            if (overlappedDishes.length !== 0) {
+                dishFilteredPlaces.push(place);
+            }
+        });
+        return dishFilteredPlaces;
     }
 
     useEffect(() => {
