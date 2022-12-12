@@ -290,16 +290,46 @@ body {
                     flex-wrap: wrap;
                     justify-content: center;
                     align-items: center;
-
                     text-align: center;
+                    max-width: 50em;
+                    padding: 0;
 
-                    input {
-                        margin-top: 0.7em;
-                        margin-bottom: 0.7em;
-                        margin-left: 0.7em;
-                        margin-right: 0.7em;
-                        min-height: 2.5em;
-                        min-width: 23em;
+                    #first-row, #password-row {
+                        input {
+                            margin-top: 0.7em;
+                            margin-bottom: 0.7em;
+                            margin-left: 0.7em;
+                            margin-right: 0.7em;
+                            min-height: 2.5em;
+                            width: 20em;
+                        }
+                    }
+
+                    #first-row, #middle-row, #password-row {
+                        width: 100%;
+                    }
+
+                    #middle-row {
+                        display:flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;
+
+                        input {
+                            margin-top: 0.7em;
+                            margin-bottom: 0.7em;
+                            margin-left: 0.7em;
+                            margin-right: 0.7em;
+                            min-height: 2.5em;
+                            width: 5em;
+                        }
+
+                        #lat, #lng{
+                            width: 9.3em;
+                        }
+                        #email-part {
+                            width: 20em;
+                        }
                     }
 
                     h6 {
@@ -312,6 +342,12 @@ body {
                         border-width: $main_border_width;
                         border-radius: $main_border_radius;
                         background-color: $main_button_color;
+                        margin-top: 0.7em;
+                        margin-bottom: 0.7em;
+                        margin-left: 0.7em;
+                        margin-right: 0.7em;
+                        min-height: 2.5em;
+                        width: 20em;
                     }
 
                     #sign-up-submit:hover {
@@ -372,23 +408,6 @@ body {
             height: 2.5em;
             width: 23em;
             background-color: $main_button_color;
-        }
-
-        #middle-row {
-            display:flex;
-        }
-
-        .LatLng-container {
-            display:flex;
-            margin-left: 0.7em;
-            margin-right: 0.7em;
-            min-height: 2.5em;
-            min-width: 23em;
-        }
-
-        .LatLng-container #latlng{
-            min-height: 2.5em !important; 
-            min-width: 11em !important;
         }
     }
 ;
@@ -1614,6 +1633,7 @@ body {
             padding: 5em 5em;
             border-radius: 3em;
             border-width: 1em;
+            width: 70vw;
 
             h1,
             h3 {
@@ -1622,7 +1642,7 @@ body {
 
             h1#front-page-title {
                 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-                font-size: 7em;
+                font-size: 5em;
                 text-align: center;
             }
 
@@ -1640,7 +1660,7 @@ body {
                     margin: 0 5vw;
                     height: 5em;
                     padding: 1em 1em;
-                    width: 30vw;
+                    min-width: 20vw;
                     border-style: none;
 
                     h2 {

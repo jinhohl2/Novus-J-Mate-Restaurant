@@ -145,19 +145,19 @@ function SignUpView() {
                         <div id="default-sign-up">
                             <fieldset disabled={loading}>
                                 <form onSubmit={trySignUp}>
-                                    <div>
+                                    <div id="first-row">
                                         <input type="text" name="first-name" onChange={handleInputChange}
                                             value={firstName} placeholder="Enter first name" />
                                         <input type="text" name="last-name" onChange={handleInputChange}
                                             value={lastName} placeholder="Enter last name" />
                                     </div>
-                                    <div id = "middle-row">
-                                        <input type="text" name="email" onChange={handleInputChange}
+                                    <div id="middle-row">
+                                        <input id="email-part" type="text" name="email" onChange={handleInputChange}
                                             value={email} placeholder="Enter email" />
-                                        <div className = "LatLng-container">
-                                            <input id = "latlng" type="text" name="Latitude" onChange={handleInputChange}
+                                        <div>
+                                            <input id="lat" type="text" name="Latitude" onChange={handleInputChange}
                                                 value={lat} placeholder="Enter Latitude" />
-                                            <input id = "latlng" type="text" name="Longitude" onChange={handleInputChange}
+                                            <input id="lng" type="text" name="Longitude" onChange={handleInputChange}
                                                 value={lng} placeholder="Enter Longitude" />
                                         </div>
                                     </div>
