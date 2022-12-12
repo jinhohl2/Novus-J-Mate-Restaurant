@@ -31,7 +31,7 @@ export interface User {
     "placesVisited": string[],
     "reviews": string[],
     "uniqueVisits": number[],
-    "lastClickOn": Date,
+    "lastClick": Date,
     "dateCreated": Date
     
 }
