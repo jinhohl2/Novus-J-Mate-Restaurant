@@ -65,7 +65,7 @@ function App() {
     const [restaurants, setRestaurants] = useState<Place[]>([]);
     useEffect(() => {
         api.get('places').then((response) => {
-          const tempArray: Place[] = []
+          const tempArray: Place[] = [];
           if (response.data) {
             const restaurantsFound = response.data.data;
             restaurantsFound.forEach((restaurantFound: Place) => {
@@ -80,7 +80,7 @@ function App() {
         <React.Fragment>
             <Router>
                 <NavBar />
-              
+
                 <Routes>
                     <Route path={"/"} element={<FrontPage></FrontPage>}></Route>
                     <Route path={"/log-in"} element={<LogInView></LogInView>}></Route>
