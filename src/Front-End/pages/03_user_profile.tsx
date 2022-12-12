@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../scss/App.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faSave, faEdit, faCancel, faUpload } from '@fortawesome/free-solid-svg-icons'
@@ -6,27 +6,117 @@ import {useAuth} from '../../User-Auth/AuthContext';
 import {useState} from 'react'
 import {useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
+import axios, {AxiosError, AxiosResponse} from "axios";
+
+const api = axios.create({
+    baseURL: "http://localhost:4001/api/"
+});
 
 const UserProfile = () => {
-    const { currentUser, logOut } = useAuth()
-    const [error, setError] = useState<String>("");
-    const navigate = useNavigate();
+    const [fname, setFname] = useState<string>("");
+    const [lname, setLname] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [lng, setLng] = useState<string>("");
+    const [lat, setLat] = useState<string>("");
+    const { currentUser } = useAuth();
+    const { updateInfo } = useAuth();
 
-    function tryLogOut(event: React.SyntheticEvent) {
-        event.preventDefault();
-        logOut()
-            .then(() => {
-                setError("");
-                
-                navigate("/log-in");
-            })
-            .catch((err: FirebaseError) => {
-                console.log(err.code);
-                return setError(err.code);
-            })
+    const [userId, setUserId] = useState<string>("")
+    const [newfname, setNewfname] = useState<string>("")
+    const [newlname, setNewlname] = useState<string>("")
+    const [newemail, setNewemail] = useState<string>("")
+    const [newlng, setNewlng] = useState<string>("");
+    const [newlat, setNewlat] = useState<string>("");
+    
 
+    useEffect(()=>{
+        const queryemail = currentUser.email
+        console.log(queryemail);
+        api.get('users?'+`where={"email":"${queryemail}"}`)
+        .then((res)=>{
+            const userInfo = res.data.data[0]
+            setFname(userInfo.Fname)
+            setLname(userInfo.Lname)
+            setEmail(queryemail);
+            setLat(String(userInfo.address[0]))
+            setLng(String(userInfo.address[1]))
+            setUserId(userInfo._id)
+
+            
+        })
+    },[])
+
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        switch (name) {
+            case "first-name": {
+                setNewfname(value);
+                break;
+            }
+            case "last-name": {
+                setNewlname(value);
+                break;
+            }
+            case "email": {
+                setNewemail(value);
+                break;
+            }
+            case "latitude": {
+                setNewlat(value);
+                break;
+            }
+            case "longitude": {
+                setNewlng(value);
+                break;
+            }
+        }
     }
 
+    function updateUserInfo(e: React.MouseEvent<HTMLElement, MouseEvent>){
+        e.preventDefault();
+
+        var newLatitude = newlat==""? lat : Number(newlat)
+        var newLongitude = newlng==""? lng : Number(newlng)
+        api.put('users/' + `${userId}`, {
+            "email": newemail=="" ? email : newemail,
+            "Fname": newfname=="" ? fname : newfname,
+            "Lname": newlname=="" ? lname : newlname,
+            "address": [newLatitude, newLongitude],
+            "placesVisited": [],
+            "reviews": []
+        })
+        .then((res: AxiosResponse) => {
+            console.log(res.data.data)
+            setFname(res.data.data.Fname);
+            setLname(res.data.data.Lname);
+            setEmail(res.data.data.email);
+            setLat(String(res.data.data.address[0]))
+            setLng(String(res.data.data.address[1]))
+            
+            console.log(newemail)
+            if(newemail != "") {
+                updateInfo(newemail)
+                .then(()=>{
+                    alert("User Information Successsfully updated!");
+                    setNewfname("")
+                    setNewlname("")
+                    setNewemail("")
+                    setNewlat("")
+                    setNewlng("")
+                })
+                .catch((err: FirebaseError)=>{
+                    console.log(err)
+                })
+            }
+        })
+        .catch((err: AxiosError) => {
+            console.log(err)
+            var errMessage = JSON.parse(err.response?.request.response).message
+            alert(errMessage);
+        })
+    }
 
     return (
 
@@ -34,19 +124,16 @@ const UserProfile = () => {
             <section className="section-03-user-profile">
                 <div className="user-profile-content">
                     <div className="div-user-details">
-                        <div className="user-image">
-                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                        </div>
                         <div className="user-detail-items">
                             <ul>
                                 <li>
-                                    <h1>Johnny Depp</h1>
+                                    <h1>Hello, {fname+" "+lname}</h1>
                                 </li>
                                 <li>
-                                    <h6>@johnnydepp</h6>
+                                    <h6>{email}</h6>
                                 </li>
                                 <li>
-                                    <h6>Champaign, Illinois</h6>
+                                    <h6>Location (Lat, Lng) : {lat + " " + lng}</h6>
                                 </li>
                             </ul>
                         </div>
@@ -55,13 +142,8 @@ const UserProfile = () => {
                     <div className="nav-edit-user-and-view-restaurant-visit-history">
 
                         <section className="navbar">
-                            <button id="user-profile">
-                                User-Profile
-                            </button>
-                            <button id="visited-restaurants">
-                                Visited-Restaurants
-                            </button>
-                            <button id="button-logout" onClick = {tryLogOut}>
+
+                            <button id="button-logout">
                                 Logout
                             </button>
                         </section>
@@ -76,345 +158,49 @@ const UserProfile = () => {
                                 <button id="cancel">
                                     <FontAwesomeIcon icon={faCancel} /> Cancel
                                 </button>
-                                <button id="save">
+                                <button id="save" onClick={updateUserInfo}>
                                     <FontAwesomeIcon icon={faSave} /> Save
                                 </button>
 
                             </div>
 
                             <div className="div-user-profile-content">
-                                <div className="upload-photo">
-                                    <label>
-                                        Upload Photo:
-                                    </label>
-                                    <button id="button-upload">
-                                        <FontAwesomeIcon icon={faUpload} /> Upload
-                                    </button>
+                                <div>
+                                    <h3>Change User Information</h3>
                                 </div>
-
-                                <div className="username">
-                                    <label>
-                                        Username:
-                                    </label>
-                                    <input placeholder="Enter the username"/>
-                                </div>
-
                                 <div className="first-name">
                                     <label>
                                         First Name:
                                     </label>
-                                    <input placeholder="Enter the first name"/>
+                                    <input type="text" name="first-name" onChange={handleInputChange} value={newfname} placeholder="Enter the first name"/>
                                 </div>
                                 <div className="last-name">
                                     <label>
                                         Last Name:
                                     </label>
-                                    <input placeholder="Enter the last name"/>
+                                    <input type="text" name="last-name" onChange={handleInputChange} value={newlname} placeholder="Enter the last name"/>
                                 </div>
 
-                                <div className="add-on-email">
+                                <div className="email">
                                     <label>
                                         Add-on Email:
                                     </label>
-                                    <input placeholder="(Optional) Enter the add-on email"/>
+                                    <input type="text" name="email" onChange={handleInputChange} value={newemail} placeholder="Enter the email"/>
                                 </div>
 
-                                <div className="password-div">
-                                    <label className="password-label">
-                                        Password:
+                                <div className="latlng-div">
+                                    <label>
+                                        Adress:
                                     </label>
 
-                                    <input className="password-input" placeholder="Enter password"/>
-                                    <input className="re-enter-password-input" placeholder="Re-enter password"/>
+                                    <input type="text" name="latitude" onChange={handleInputChange} value={newlat} className="latlng" placeholder="Enter Latitude"/>
+                                    <input type="text" name="longitude" onChange={handleInputChange} value={newlng} className="latlng" placeholder="Enter Longitude"/>
 
                                 </div>
 
                             </div>
                         </section>
 
-                        <section className="section-visited-restaurant">
-
-
-                            <div className="div-restaurant-list">
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                                <ul className="restaurant-listing">
-                                        <li className="user-image-li">
-                                            <img src="https://media.glamour.es/photos/616f801d66688768fd3ae584/master/w_1600%2Cc_limit/672532.jpg" alt="Johnny Depp"/>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Restaurant Name</h6>
-                                        </li>
-                                        <li className="label">
-                                            <h6>Location</h6>
-                                        </li>
-                                    </ul>
-                            </div>
-
-
-                            <h3>Restaurant ratings:</h3>
-
-                            <div className="div-by-self-restaurant-rating-details">
-                                <div className="ratings-reviews-by-self-label">
-                                    By self
-                                </div>
-
-                                <div className="ratings-by-self-label">
-                                    Ratings by self
-                                </div>
-
-                                <div className="reviews-by-self-label">
-                                    Reviews by self
-                                </div>
-
-                            </div>
-
-                            <div className="div-by-others-restaurant-rating-details">
-                                <div className="ratings-reviews-by-others-label">
-                                    By others
-                                </div>
-
-                                <div className="ratings-by-others-label">
-                                    Ratings by others
-                                </div>
-
-                                <div className="reviews-by-others-label">
-                                    Reviews by others
-                                </div>
-
-                            </div>
-
-
-                            <h3>Menu details:</h3>
-
-                            <div className="div-dish-details">
-
-                                <h3 > Dish One </h3>
-                                <div className="dish-one">
-
-                                    <div className="dish-image">
-                                        Image of the dish
-                                    </div>
-
-                                    <div className="dish-desc-ingredients">
-                                        Description and ingredients of the dish
-                                    </div>
-
-
-
-                                    <div className="dish-price">
-                                        Price of the dish
-                                    </div>
-
-                                    <div className="ratings-by-self">
-                                        Ratings by self
-                                    </div>
-
-                                    <div className="reviews-by-self">
-                                        Reviews by self
-                                    </div>
-
-                                    <div className="ratings-by-others">
-                                        Ratings by others
-                                    </div>
-
-                                    <div className="reviews-by-others">
-                                        Reviews by others
-                                    </div>
-
-                                </div>
-
-                                <h3 > Dish Two </h3>
-                                <div className="dish-one">
-
-                                    <div className="dish-image">
-                                        Image of the dish
-                                    </div>
-
-                                    <div className="dish-desc-ingredients">
-                                        Description and ingredients of the dish
-                                    </div>
-
-
-
-                                    <div className="dish-price">
-                                        Price of the dish
-                                    </div>
-
-                                    <div className="ratings-by-self">
-                                        Ratings by self
-                                    </div>
-
-                                    <div className="reviews-by-self">
-                                        Reviews by self
-                                    </div>
-
-                                    <div className="ratings-by-others">
-                                        Ratings by others
-                                    </div>
-
-                                    <div className="reviews-by-others">
-                                        Reviews by others
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                        </section>
 
 
 
