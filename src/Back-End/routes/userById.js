@@ -86,7 +86,8 @@ module.exports = function (router) {
                         else {
                             user.uniqueVisits = new Array(12).fill(0)
                         }
-                    
+                        if(("lastClickOnFilitering" in req.body) && (req.body.lastClickOnFilitering != undefined)) user.lastClickOnFilitering = req.body.lastClickOnFiltering
+                        if(("lastClickOnSurprise" in req.body) && (req.body.lastClickOnSurprise != undefined)) user.lastClickOnSurprise = req.body.lastClickOnSurprise
                         var placeTbUpdated = [];
                         var reviewTbUpdated = [];
                         tbUpdated.placesVisited.forEach((tb)=>{
