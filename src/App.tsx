@@ -6,6 +6,8 @@ import {
     Route,
     Routes
 } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import NavBar from "./Front-End/pages/00_nav_bar";
 import LogInView from "./Front-End/pages/01_log_in";
@@ -33,16 +35,16 @@ export interface User {
 }
 
 export interface Place {
-    "_id": string,
-    "name": string,
-    "address": number[],
-    "cuisine": string,
-    "dishes": string[],
-    "usersVisited": string[],
-    "reviews": string[],
-    "imageUrl": string,
-    "websiteUrl": string,
-    "dateCreated": Date
+  "_id": string,
+  "name": string,
+  "address": number[],
+  "cuisine": string,
+  "dishes": string[],
+  "usersVisited": string[],
+  "reviews": string[],
+  "imageUrl": string,
+  "websiteUrl": string,
+  "dateCreated": Date
 }
 
 export interface Review {
@@ -55,7 +57,25 @@ export interface Review {
     "dateCreated": Date,
 }
 
+const api = axios.create({
+  baseURL: "http://localhost:4001/api/"
+});
+
 function App() {
+    const [restaurants, setRestaurants] = useState<Place[]>([]);
+    useEffect(() => {
+        api.get('places').then((response) => {
+          const tempArray: Place[] = []
+          if (response.data) {
+            const restaurantsFound = response.data.data;
+            restaurantsFound.forEach((restaurantFound: Place) => {
+              tempArray.push(restaurantFound);
+            })
+          }
+          setRestaurants(tempArray)
+        }
+    )}, []);
+
     return (
         <React.Fragment>
             <Router>
@@ -68,7 +88,7 @@ function App() {
                     <Route path={"/user-profile"} element={<UserProfile></UserProfile>}></Route>
                     <Route path={"/dashboard"} element={<Dashboard></Dashboard>}></Route>
                     <Route path={"/main-search-criteria"} element={<MainSearchCriterias></MainSearchCriterias>}></Route>
-                    <Route path={"/restaurant-results"} element={<RestaurantResults></RestaurantResults>}></Route>
+                    <Route path={"/restaurant-results"} element={<RestaurantResults restaurants={restaurants}></RestaurantResults>}></Route>
                     <Route path={"/restaurant-results/1"} element={<RestaurantDetails></RestaurantDetails>}></Route>
                     <Route path={"/restaurant-results/2"} element={<RestaurantDetails></RestaurantDetails>}></Route>
                     <Route path={"/restaurant-results/3"} element={<RestaurantDetails></RestaurantDetails>}></Route>

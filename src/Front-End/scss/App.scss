@@ -1334,7 +1334,7 @@ body {
                     padding-bottom: 1em;
                     text-align: center;
                     min-width: 20vw;
-                    height: auto;
+                    min-height: auto;
                 }
 
                 #not-visited-restaurant-recommendation-block {
@@ -1363,7 +1363,7 @@ body {
                     }
                 }
 
-                #only-not-visited-restaurant-recommendation-block {
+                #one-recommendation-block, #only-not-visited-restaurant-recommendation-block {
                     border-radius: $main_border_radius;
                     border-color: black;
                     border-style: solid;
