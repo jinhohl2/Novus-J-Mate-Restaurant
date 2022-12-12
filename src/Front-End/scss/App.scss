@@ -1452,7 +1452,7 @@ body {
 
         #restaurant-details-tabs-tab-ratingsReviewsKey,
         #restaurant-details-tabs-tab-menuKey,
-        #restaurant-details-tabs-tab-notesReviewsKey,
+        #restaurant-details-tabs-tab-visitorsKey,
         #restaurant-details-tabs-tab-couponKey {
             text-align: center;
             display: block;
@@ -1466,13 +1466,12 @@ body {
 
         #restaurant-details-tabs-tab-ratingsReviewsKey.active,
         #restaurant-details-tabs-tab-menuKey.active,
-        #restaurant-details-tabs-tab-notesReviewsKey.active,
+        #restaurant-details-tabs-tab-visitorsKey.active,
         #restaurant-details-tabs-tab-couponKey.active {
             color: rgb(203, 135, 8);
             border: none;
             background: rgba(0, 0, 0, 0)
         }
-
     }
 
     section.section-08-find-friends {

@@ -1,23 +1,42 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { Link } from "react-router-dom";
+import { Link, Location, useLocation } from "react-router-dom";
+import { Place, User } from '../../App';
 
 const RestaurantDetails = () => {
     const [tabKey, setTabKey] = useState<string>("ratingsReviewsKey");
-    const [code, SetCode] = useState<string>("");
+    const [code, setCode] = useState<string>("");
+    const [visitorNames, setVisitorNames] = useState<string[]>([]);
 
-    const menu_items = [{
-        name: "raw chicken leg",
-        about_dish: "straight from the factory farms of Urbana",
-        price: 13,
-        rating_self: 1,
-        rating_others: 4
-    }];
+    let location: Location = useLocation();
+    let restaurant: Place = location.state.restaurant;
+    let userIDs = restaurant.usersVisited;
+
+    const api = axios.create({
+        baseURL: "http://localhost:4001/api/"
+    });
 
     function getCode() {
-        SetCode(crypto.randomUUID());
+        setCode(crypto.randomUUID());
     }
+
+    useEffect(() => {
+        api.get("users").then((response) => {
+            if (response.data) {
+                let users = response.data.data;
+                let tempArr: string[] = [];
+                userIDs.forEach((userID) => {
+                    let user = users.filter((temp: User) => {
+                        return temp._id === userID;
+                    })[0];
+                    tempArr.push(`${user?.Fname} ${user?.Lname}`);
+                });
+                setVisitorNames(tempArr);
+            }
+        });
+    }, []);
 
     return (
         <React.Fragment>
@@ -29,69 +48,44 @@ const RestaurantDetails = () => {
                         </button>
                     </Link>
                 </div>
+
                 <div id='restaurant-div'>
-                    <img src="" alt="Restaurant" />
-                    <h2>Restaurant name</h2>
-                    <h5>Number: 314 159 2653</h5>
-                    <h5>Get directions</h5>
-                    <a href="google.com">Website</a>
+                    <img src={restaurant.imageUrl} alt="Restaurant picture" />
+                    <h2>{restaurant.name}</h2>
+                    <h5>Address: {restaurant.address.join(", ")}</h5>
+                    <a href={restaurant.websiteUrl}>Website</a>
                 </div>
+
                 <div id="restaurant-details-div">
-                <Tabs id="restaurant-details-tabs" activeKey={tabKey} onSelect={(tabKey) => setTabKey(tabKey ? tabKey : "ratingsReviewsKey")}>
-                    <Tab className="restaurant-details-tab" eventKey="ratingsReviewsKey" title="Ratings and Reviews">
-                        <div id='ratings-self'></div>
-                        <div id='ratings-others'></div>
-                    </Tab>
+                    <Tabs id="restaurant-details-tabs" activeKey={tabKey} onSelect={(tabKey) => setTabKey(tabKey ? tabKey : "ratingsReviewsKey")}>
+                        <Tab className="restaurant-details-tab" eventKey="ratingsReviewsKey" title="Ratings and Reviews">
+                            {/* TODO: // MAP RATINGS HERE */}
+                            {/* <div id='ratings-self'></div> */}
+                            <div id='ratings-others'>
 
-                    <Tab className="restaurant-details-tab" eventKey="menuKey" title="Menu">
-                        <div id='menu-details'>
-                            {menu_items.map((item) => {
-                                return <div>
-                                    <h3>{item.name}</h3>
-                                    <h5>{item.about_dish}</h5>
-                                    <h4>{item.price}</h4>
-                                    <h5>Rating by me: {item.rating_self}</h5>
-                                    <h5>Ratings by others: {item.rating_others}</h5>
-                                </div>
-                            })}
-                        </div>
-                    </Tab>
-
-                    <Tab className="restaurant-details-tab" eventKey="notesReviewsKey" title="Own Notes and Reviews">
-                        <div id='notes-and-reviews-by-self'>
-                            <div id='notes-by-self'>
-                                <h2>Private notes (Visible only to self)</h2>
-
-                                <div id='notes-buttons'>
-                                    <button className='edit'>Edit</button>
-                                    <button className='cancel'>Cancel</button>
-                                    <button className='submit'>Submit</button>
-                                </div>
-
-                                <textarea id="notes-by-self-textarea" cols={30} rows={10}></textarea>
                             </div>
+                        </Tab>
 
-                            <div id='ratings-after-visit'>
-                                <h2>Submit ratings after visit</h2>
 
-                                <div id='reviews-buttons'>
-                                    <button className='edit'>Edit</button>
-                                    <button className='cancel'>Cancel</button>
-                                    <button className='submit'>Submit</button>
-                                </div>
-
-                                <textarea id="reviews-by-self-textarea" cols={30} rows={10}></textarea>
+                        <Tab className="restaurant-details-tab" eventKey="menuKey" title="Top Menu Items">
+                            <div id='menu-details'>
+                                {restaurant.dishes.map(dish => <h3>{dish}</h3>)}
                             </div>
-                        </div>
-                    </Tab>
+                        </Tab>
 
-                    <Tab className="restaurant-details-tab" eventKey="couponKey" title="Coupons">
-                        <div id='coupon'>
-                            <button onClick={getCode}>Generate Code</button>
-                            <h3>{code}</h3>
-                        </div>
-                    </Tab>
-                </Tabs>
+                        <Tab className="restaurant-details-tab" eventKey="visitorsKey" title="Past Visitors">
+                            <div id='past-visitors'>
+                                {visitorNames.map(visitor => <h3>{visitor}</h3>)}
+                            </div>
+                        </Tab>
+
+                        <Tab className="restaurant-details-tab" eventKey="couponKey" title="Coupons">
+                            <div id='coupon'>
+                                <button onClick={getCode}>Generate Code</button>
+                                <h3>{code}</h3>
+                            </div>
+                        </Tab>
+                    </Tabs>
                 </div>
             </section>
         </React.Fragment>
