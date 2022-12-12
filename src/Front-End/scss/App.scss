@@ -373,6 +373,16 @@ body {
             width: 23em;
             background-color: $main_button_color;
         }
+
+        .LatLng-container {
+            display:flex;
+            margin-top: 0.7em;
+            margin-bottom: 0.7em;
+            margin-left: 0.7em;
+            margin-right: 0.7em;
+            min-height: 2.5em;
+            min-width: 23em;
+        }
     }
 
     section.section-03-user-profile {
