@@ -11,7 +11,7 @@ var ReviewSchema = new mongoose.Schema({
         required: true
     },
 
-    author: {
+    authorID: {
         type: String,
         required: true
     },

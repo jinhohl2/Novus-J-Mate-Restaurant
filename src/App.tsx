@@ -31,7 +31,9 @@ export interface User {
     "placesVisited": string[],
     "reviews": string[],
     "uniqueVisits": number[],
+    "lastClickOn": Date,
     "dateCreated": Date
+    
 }
 
 export interface Place {
@@ -51,7 +53,7 @@ export interface Review {
     "_id": string,
     "restaurant": string,
     "restaurantName": string,
-    "author": string,
+    "authorID": string,
     "rating": number,
     "description": string,
     "dateCreated": Date,
