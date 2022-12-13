@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {createContext, useReducer} from 'react';
 import '../src/Front-End/scss/App.scss';
+import {initialState, reducer} from "./reducer/UseReducer";
 
 import {
     BrowserRouter as Router,
@@ -63,7 +64,14 @@ const api = axios.create({
   baseURL: "http://localhost:4001/api/"
 });
 
+// @ts-ignore
+export const UserContext = createContext();
+
+
 function App() {
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+
     const [restaurants, setRestaurants] = useState<Place[]>([]);
     useEffect(() => {
         api.get('places').then((response) => {
@@ -79,28 +87,32 @@ function App() {
     )}, []);
 
     return (
+
+
         <React.Fragment>
-            <Router>
-                <NavBar />
+            <UserContext.Provider value={{state, dispatch}}>
+                <Router>
+                    <NavBar />
 
-                <Routes>
-                    <Route path={"/"} element={<FrontPage></FrontPage>}></Route>
-                    <Route path={"/log-in"} element={<LogInView></LogInView>}></Route>
-                    <Route path={"/sign-up"} element={<SignUpView></SignUpView>}></Route>
-                    <Route path={"/user-profile"} element={<UserProfile></UserProfile>}></Route>
-                    <Route path={"/dashboard"} element={<Dashboard></Dashboard>}></Route>
-                    <Route path={"/main-search-criteria"} element={<MainSearchCriterias></MainSearchCriterias>}></Route>
-                    <Route path={"/restaurant-results"} element={<RestaurantResults restaurants={restaurants}></RestaurantResults>}></Route>
-                    <Route path={"/restaurant-results/1"} element={<RestaurantDetails></RestaurantDetails>}></Route>
-                    <Route path={"/restaurant-results/2"} element={<RestaurantDetails></RestaurantDetails>}></Route>
-                    <Route path={"/restaurant-results/3"} element={<RestaurantDetails></RestaurantDetails>}></Route>
-                    <Route path={"/restaurant-details"} element={<RestaurantDetails></RestaurantDetails>}></Route>
-                    <Route path={"/find-friends"} element={<FindFriends></FindFriends>}></Route>
-                    <Route path={"/profile-of-friends"} element={<ProfileOfFriends></ProfileOfFriends>}></Route>
-                    <Route path={"/analytics"} element={<Analytics></Analytics>}></Route>
+                    <Routes>
+                        <Route path={"/"} element={<FrontPage></FrontPage>}></Route>
+                        <Route path={"/log-in"} element={<LogInView></LogInView>}></Route>
+                        <Route path={"/sign-up"} element={<SignUpView></SignUpView>}></Route>
+                        <Route path={"/user-profile"} element={<UserProfile></UserProfile>}></Route>
+                        <Route path={"/dashboard"} element={<Dashboard></Dashboard>}></Route>
+                        <Route path={"/main-search-criteria"} element={<MainSearchCriterias></MainSearchCriterias>}></Route>
+                        <Route path={"/restaurant-results"} element={<RestaurantResults restaurants={restaurants}></RestaurantResults>}></Route>
+                        <Route path={"/restaurant-results/1"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                        <Route path={"/restaurant-results/2"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                        <Route path={"/restaurant-results/3"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                        <Route path={"/restaurant-details"} element={<RestaurantDetails></RestaurantDetails>}></Route>
+                        <Route path={"/find-friends"} element={<FindFriends></FindFriends>}></Route>
+                        <Route path={"/profile-of-friends"} element={<ProfileOfFriends></ProfileOfFriends>}></Route>
+                        <Route path={"/analytics"} element={<Analytics></Analytics>}></Route>
 
-                </Routes>
-            </Router>
+                    </Routes>
+                </Router>
+            </UserContext.Provider>
         </React.Fragment>
     );
 }
