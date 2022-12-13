@@ -31,50 +31,52 @@ export interface User {
     "placesVisited": string[],
     "reviews": string[],
     "uniqueVisits": number[],
+    "lastClick": Date,
     "dateCreated": Date
 }
 
 export interface Place {
-  "_id": string,
-  "name": string,
-  "address": number[],
-  "cuisine": string,
-  "dishes": string[],
-  "usersVisited": string[],
-  "reviews": string[],
-  "imageUrl": string,
-  "websiteUrl": string,
-  "dateCreated": Date
+    "_id": string,
+    "name": string,
+    "address": number[],
+    "cuisine": string,
+    "dishes": string[],
+    "usersVisited": string[],
+    "reviews": string[],
+    "imageUrl": string,
+    "websiteUrl": string,
+    "dateCreated": Date
 }
 
 export interface Review {
     "_id": string,
     "restaurant": string,
     "restaurantName": string,
-    "author": string,
+    "authorID": string,
     "rating": number,
     "description": string,
     "dateCreated": Date,
 }
 
 const api = axios.create({
-  baseURL: "http://localhost:4001/api/"
+    baseURL: "http://localhost:4001/api/"
 });
 
 function App() {
     const [restaurants, setRestaurants] = useState<Place[]>([]);
     useEffect(() => {
         api.get('places').then((response) => {
-          const tempArray: Place[] = [];
-          if (response.data) {
-            const restaurantsFound = response.data.data;
-            restaurantsFound.forEach((restaurantFound: Place) => {
-              tempArray.push(restaurantFound);
-            })
-          }
-          setRestaurants(tempArray)
+            const tempArray: Place[] = [];
+            if (response.data) {
+                const restaurantsFound = response.data.data;
+                restaurantsFound.forEach((restaurantFound: Place) => {
+                    tempArray.push(restaurantFound);
+                })
+            }
+            setRestaurants(tempArray)
         }
-    )}, []);
+        )
+    }, []);
 
     return (
         <React.Fragment>
@@ -96,7 +98,6 @@ function App() {
                     <Route path={"/find-friends"} element={<FindFriends></FindFriends>}></Route>
                     <Route path={"/profile-of-friends"} element={<ProfileOfFriends></ProfileOfFriends>}></Route>
                     <Route path={"/analytics"} element={<Analytics></Analytics>}></Route>
-
                 </Routes>
             </Router>
         </React.Fragment>
