@@ -16,6 +16,9 @@ const NavBar = () => {
     const { currentUser, logOut } = useAuth()
     const [error, setError] = useState<String>("");
     const navigate = useNavigate();
+    if (!currentUser && error) {
+        console.log("currentUser does not exist");
+    }
 
     // @ts-ignore
     const {state, dispatch} = useContext(UserContext);

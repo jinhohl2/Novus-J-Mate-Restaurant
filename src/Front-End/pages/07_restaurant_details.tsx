@@ -48,6 +48,7 @@ const RestaurantDetails = () => {
                 setVisitorNames(tempArr);
             }
         });
+    // eslint-disable-next-line
     }, []);
 
     function visited() {
@@ -78,7 +79,7 @@ const RestaurantDetails = () => {
                 </div>
 
                 <div id='restaurant-div'>
-                    <img src={restaurant.imageUrl} alt="Restaurant picture" />
+                    <img src={restaurant.imageUrl} alt="Restaurant" />
                     <h2>{restaurant.name}</h2>
                     <h5>Address: {restaurant.address.join(", ")}</h5>
                     <h5>Cuisine: {restaurant.cuisine}</h5>

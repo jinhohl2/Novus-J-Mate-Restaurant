@@ -18,6 +18,10 @@ function LogInView() {
     const { logIn } = useAuth()
     const navigate = useNavigate()
 
+    if (!state && !loading) {
+        console.log("Did not load correctly");
+    }
+
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
         const name = event.target.name;
         const value = event.target.value;

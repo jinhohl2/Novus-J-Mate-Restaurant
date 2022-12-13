@@ -32,6 +32,7 @@ const Dashboard = () => {
                 setFirstTimeIn24Hrs(currDate > mostRecentDate);
             }
         });
+    // eslint-disable-next-line
     }, []);
 
     let buttons: JSX.Element;

@@ -26,6 +26,10 @@ function SignUpView() {
     const { signUp } = useAuth();
     const navigate = useNavigate();
 
+    if (!state) {
+        console.log("Does not have a state");
+    }
+
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
         const name = event.target.name;
         const value = event.target.value;

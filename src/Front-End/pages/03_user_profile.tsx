@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../scss/App.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faSave, faEdit, faCancel, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { faSave, faEdit, faCancel } from '@fortawesome/free-solid-svg-icons'
 import {useAuth} from '../../User-Auth/AuthContext';
 import {useState} from 'react'
 import { FirebaseError } from 'firebase/app';
@@ -31,7 +31,7 @@ const UserProfile = () => {
     useEffect(()=>{
         const queryemail = currentUser.email
         console.log(queryemail);
-        api.get('users?'+`where={"email":"${queryemail}"}`)
+        api.get(`users?where={"email":"${queryemail}"}`)
         .then((res)=>{
             const userInfo = res.data.data[0]
             setFname(userInfo.Fname)
@@ -43,6 +43,7 @@ const UserProfile = () => {
 
             
         })
+    // eslint-disable-next-line
     },[])
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -76,12 +77,12 @@ const UserProfile = () => {
     function updateUserInfo(e: React.MouseEvent<HTMLElement, MouseEvent>){
         e.preventDefault();
 
-        var newLatitude = newlat==""? lat : Number(newlat)
-        var newLongitude = newlng==""? lng : Number(newlng)
-        api.put('users/' + `${userId}`, {
-            "email": newemail=="" ? email : newemail,
-            "Fname": newfname=="" ? fname : newfname,
-            "Lname": newlname=="" ? lname : newlname,
+        var newLatitude = newlat===""? lat : Number(newlat)
+        var newLongitude = newlng===""? lng : Number(newlng)
+        api.put(`users/${userId}`, {
+            "email": newemail==="" ? email : newemail,
+            "Fname": newfname==="" ? fname : newfname,
+            "Lname": newlname==="" ? lname : newlname,
             "address": [newLatitude, newLongitude],
             "placesVisited": [],
             "reviews": []
@@ -95,7 +96,7 @@ const UserProfile = () => {
             setLng(String(res.data.data.address[1]))
             
             console.log(newemail)
-            if(newemail != "") {
+            if(newemail !== "") {
                 updateInfo(newemail)
                 .then(()=>{
                     alert("User Information Successsfully updated!");
