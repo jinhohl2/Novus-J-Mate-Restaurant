@@ -18,6 +18,7 @@ const RestaurantDetails = () => {
         lastClick: new Date(),
         uniqueVisits: [], dateCreated: new Date()
     });
+    // eslint-disable-next-line
     const [visitorNames, setVisitorNames] = useState<string[]>([]);
 
     let location: Location = useLocation();
@@ -60,6 +61,7 @@ const RestaurantDetails = () => {
         let payloadUser = currUser;
         payloadUser.placesVisited.push(restaurant._id);
         payloadUser.uniqueVisits[payloadUser.uniqueVisits.length - 1]++;
+        console.log(payloadUser);
         api.put(`users/${currUser._id}`, payloadUser)
             .catch((error) => { console.log(`Error updating user after visit button is clicked\n${error}`) });
     }
@@ -86,24 +88,9 @@ const RestaurantDetails = () => {
 
                 <div id="restaurant-details-div">
                     <Tabs id="restaurant-details-tabs" activeKey={tabKey} onSelect={(tabKey) => setTabKey(tabKey ? tabKey : "ratingsReviewsKey")}>
-                        <Tab className="restaurant-details-tab" eventKey="ratingsReviewsKey" title="Ratings and Reviews">
-                            {/* TODO: // MAP RATINGS HERE */}
-                            {/* <div id='ratings-self'></div> */}
-                            <div id='ratings-others'>
-
-                            </div>
-                        </Tab>
-
-
                         <Tab className="restaurant-details-tab" eventKey="menuKey" title="Top Menu Items">
                             <div id='menu-details'>
                                 {restaurant.dishes.map(dish => <h3>{dish}</h3>)}
-                            </div>
-                        </Tab>
-
-                        <Tab className="restaurant-details-tab" eventKey="visitorsKey" title="Past Visitors">
-                            <div id='past-visitors'>
-                                {visitorNames.map(visitor => <h3>{visitor}</h3>)}
                             </div>
                         </Tab>
 

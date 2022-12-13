@@ -100,10 +100,10 @@ module.exports = function (router) {
                         .then((prevPlaces)=>{
                             prevPlaces.forEach((prevPlace)=>{
                                 if(prevPlace){
-                                    var temp = prevPlace.usersVisited;
-                                    temp = temp.filter(item => item != tbUpdated.id);
-                                    prevPlace.usersVisited = temp;
-                                    prevPlace.save();
+                                    //var temp = prevPlace.usersVisited;
+                                    //temp = temp.filter(item => item != tbUpdated.id);
+                                    //prevPlace.usersVisited = temp;
+                                    //prevPlace.save();
                                 }
                             })
                             Promise.all(reviewTbUpdated)
@@ -117,7 +117,12 @@ module.exports = function (router) {
                             })
                             
                             if("placesVisited" in req.body && req.body.placesVisited!= undefined) {
-                                user.placesVisited = req.body.placesVisited;
+                                if (typeof(req.body.placesVisited) == "string") {
+                                    user.placesVisited = [];
+                                    user.placesVisited.push(req.body.placesVisited);
+                                } else {
+                                    user.placesVisited = req.body.placesVisited;
+                                }
                                 var check = []
                                 user.placesVisited.forEach((t)=> {
                                     check.push(Place.findById(t).exec());
