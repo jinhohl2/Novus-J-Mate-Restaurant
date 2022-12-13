@@ -4,7 +4,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faSave, faEdit, faCancel, faUpload } from '@fortawesome/free-solid-svg-icons'
 import {useAuth} from '../../User-Auth/AuthContext';
 import {useState} from 'react'
-import {useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 import axios, {AxiosError, AxiosResponse} from "axios";
 
@@ -59,15 +58,15 @@ const UserProfile = () => {
                 setNewlname(value);
                 break;
             }
-            case "email": {
+            case "add-on-email": {
                 setNewemail(value);
                 break;
             }
-            case "latitude": {
+            case "latitude-input": {
                 setNewlat(value);
                 break;
             }
-            case "longitude": {
+            case "longitude-input": {
                 setNewlng(value);
                 break;
             }
@@ -141,12 +140,6 @@ const UserProfile = () => {
 
                     <div className="nav-edit-user-and-view-restaurant-visit-history">
 
-                        <section className="navbar">
-
-                            <button id="button-logout">
-                                Logout
-                            </button>
-                        </section>
 
                         <section className="section-user-profile">
 
@@ -181,28 +174,25 @@ const UserProfile = () => {
                                     <input type="text" name="last-name" onChange={handleInputChange} value={newlname} placeholder="Enter the last name"/>
                                 </div>
 
-                                <div className="email">
+                                <div className="add-on-email">
                                     <label>
                                         Add-on Email:
                                     </label>
-                                    <input type="text" name="email" onChange={handleInputChange} value={newemail} placeholder="Enter the email"/>
+                                    <input type="text" name="add-on-email" onChange={handleInputChange} value={newemail} placeholder="Enter the email"/>
                                 </div>
 
                                 <div className="latlng-div">
-                                    <label>
-                                        Adress:
+                                    <label className="latlng-label">
+                                        Geolocation:
                                     </label>
 
-                                    <input type="text" name="latitude" onChange={handleInputChange} value={newlat} className="latlng" placeholder="Enter Latitude"/>
-                                    <input type="text" name="longitude" onChange={handleInputChange} value={newlng} className="latlng" placeholder="Enter Longitude"/>
+                                    <input className="latitude-input" type="text" name="latitude-input" onChange={handleInputChange} value={newlat} placeholder="Enter Latitude"/>
+                                    <input className="longitude-input" type="text" name="longitude-input" onChange={handleInputChange} value={newlng} placeholder="Enter Longitude"/>
 
                                 </div>
 
                             </div>
                         </section>
-
-
-
 
                     </div>
                 </div>

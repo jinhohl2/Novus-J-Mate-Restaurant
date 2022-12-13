@@ -1,21 +1,34 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import '../scss/App.scss';
 import {Link} from "react-router-dom";
+import {useAuth} from '../../User-Auth/AuthContext';
+import {useState} from 'react'
+import {useNavigate } from 'react-router-dom';
+import { FirebaseError } from 'firebase/app';
+import {UserContext} from "../../App";
+
+
+
 
 
 const NavBar = () => {
-    return (
-        <React.Fragment>
-            <nav>
-                <div className="div-nav-menu-items">
-                    <ul>
 
-                        <li className="menu-item-sign-up">
-                            <Link to="/sign-up">Sign-Up</Link>
-                        </li>
+    const { currentUser, logOut } = useAuth()
+    const [error, setError] = useState<String>("");
+    const navigate = useNavigate();
 
-                        <li className="menu-item-log-in">
-                            <Link to="/log-in">Log-In</Link>
+    // @ts-ignore
+    const {state, dispatch} = useContext(UserContext);
+
+    const RenderMenu = () => {
+        if (state) {
+            return(
+                <React.Fragment>
+
+                        <li className="menu-item-home-button">
+                            <Link to="/">
+                                Home
+                            </Link>
                         </li>
 
                         <li className="menu-item-user-profile">
@@ -26,30 +39,66 @@ const NavBar = () => {
                             <Link to="/dashboard">Dashboard</Link>
                         </li>
 
-                        <li className="menu-item-main-search-criteria">
-                            <Link to="/main-search-criteria">Main-Search-Criteria</Link>
-                        </li>
-
-                        <li className="menu-item-restaurant-results">
-                            <Link to="/restaurant-results">Restaurant-Results</Link>
-                        </li>
-
-                        <li className="menu-item-restaurant-details">
-                            <Link to="/restaurant-details">Restaurant-Details</Link>
-                        </li>
-
-                        <li className="menu-item-find-friends">
-                            <Link to="/find-friends">Find-Friends</Link>
-                        </li>
-
-                        <li className="menu-item-profile-of-friends">
-                            <Link to="/profile-of-friends">Profile-of-Friends</Link>
-                        </li>
-
                         <li className="menu-item-analytics">
                             <Link to="/analytics">Analytics</Link>
                         </li>
 
+                        <li className="menu-item-logout" onClick = {tryLogOut}>
+                            <button className="menu-item-logout">
+                                Logout
+                            </button>
+
+                        </li>
+                </React.Fragment>
+            )
+        } else {
+            return(
+                <React.Fragment>
+
+                        <li className="menu-item-sign-up">
+                            <Link to="/sign-up">
+                                <button>
+                                    Sign-Up
+                                </button>
+                            </Link>
+                        </li>
+
+                        <li className="menu-item-log-in">
+                            <Link to="/log-in">
+                                <button>
+                                    Log-In
+                                </button>
+                            </Link>
+                        </li>
+                </React.Fragment>
+            )
+        }
+    }
+
+    function tryLogOut(event: React.SyntheticEvent) {
+        event.preventDefault();
+        logOut()
+            .then(() => {
+                setError("");
+                dispatch({type: "USER", payload: false})
+                navigate("/log-in");
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err.code);
+                return setError(err.code);
+            })
+
+    }
+
+
+
+    return (
+        <React.Fragment>
+            <nav>
+                <div className="div-nav-menu-items">
+                    <ul>
+
+                        <RenderMenu />
 
                     </ul>
                 </div>
