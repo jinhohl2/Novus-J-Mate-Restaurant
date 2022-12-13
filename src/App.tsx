@@ -38,16 +38,16 @@ export interface User {
 }
 
 export interface Place {
-  "_id": string,
-  "name": string,
-  "address": number[],
-  "cuisine": string,
-  "dishes": string[],
-  "usersVisited": string[],
-  "reviews": string[],
-  "imageUrl": string,
-  "websiteUrl": string,
-  "dateCreated": Date
+    "_id": string,
+    "name": string,
+    "address": number[],
+    "cuisine": string,
+    "dishes": string[],
+    "usersVisited": string[],
+    "reviews": string[],
+    "imageUrl": string,
+    "websiteUrl": string,
+    "dateCreated": Date
 }
 
 export interface Review {
@@ -61,7 +61,7 @@ export interface Review {
 }
 
 const api = axios.create({
-  baseURL: "http://localhost:4001/api/"
+    baseURL: "http://localhost:4001/api/"
 });
 
 // @ts-ignore
@@ -75,16 +75,17 @@ function App() {
     const [restaurants, setRestaurants] = useState<Place[]>([]);
     useEffect(() => {
         api.get('places').then((response) => {
-          const tempArray: Place[] = [];
-          if (response.data) {
-            const restaurantsFound = response.data.data;
-            restaurantsFound.forEach((restaurantFound: Place) => {
-              tempArray.push(restaurantFound);
-            })
-          }
-          setRestaurants(tempArray)
+            const tempArray: Place[] = [];
+            if (response.data) {
+                const restaurantsFound = response.data.data;
+                restaurantsFound.forEach((restaurantFound: Place) => {
+                    tempArray.push(restaurantFound);
+                })
+            }
+            setRestaurants(tempArray)
         }
-    )}, []);
+        )
+    }, []);
 
     return (
 

@@ -78,7 +78,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                     <div>
                         <div id="one-recommendation-block">
                             <h2>Your restaurant match!</h2>
-                            <Link to={"/restaurant-results/1"} state={{restaurant: results[0]}}>
+                            <Link to={"/restaurant-results/1"} state={{ restaurant: results[0] }}>
                                 <img src={`${results[0].imageUrl}`} alt={"Restaurant: " + results[0].name} />
                                 <h3>{results[0].name}</h3>
                             </Link>
@@ -93,11 +93,11 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                         <div id="only-not-visited-restaurant-recommendation-block">
                             <h2>Your matches!</h2>
                             <div>
-                                <Link to={"/restaurant-results/1"} state={{restaurant: results[0]}}>
+                                <Link to={"/restaurant-results/1"} state={{ restaurant: results[0] }}>
                                     <img src={`${results[0].imageUrl}`} alt={"Restaurant: " + results[0].name} />
                                     <h3>{results[0].name}</h3>
                                 </Link>
-                                <Link to={"/restaurant-results/2"} state={{restaurant: results[1]}}>
+                                <Link to={"/restaurant-results/2"} state={{ restaurant: results[1] }}>
                                     <img src={`${results[1].imageUrl}`} alt={"Restaurant: " + results[1].name} />
                                     <h3>{results[1].name}</h3>
                                 </Link>
@@ -116,7 +116,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                         <div id="visited-restaurant-recommendation-block">
                             <h2>Visited</h2>
                             <h5>Revisit a place you know and love!</h5>
-                            <Link to={"/restaurant-results/1"} state={{restaurant: results[0]}}>
+                            <Link to={"/restaurant-results/1"} state={{ restaurant: results[0] }}>
                                 <img src={`${results[0].imageUrl}`} alt={"Restaurant: " + results[0].name} />
                                 <h3>{results[0].name}</h3>
                             </Link>
@@ -126,10 +126,10 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                             <h2>Unexplored</h2>
                             <h5>Expand the horizons of your palette!</h5>
                             <div>
-                                <Link to={"/restaurant-results/2"} state={{restaurant: results[1]}}>
+                                <Link to={"/restaurant-results/2"} state={{ restaurant: results[1] }}>
                                     {unvisitedText(results[1].name, results[1].imageUrl)}
                                 </Link>
-                                <Link to={"/restaurant-results/3"} state={{restaurant: results[2]}}>
+                                <Link to={"/restaurant-results/3"} state={{ restaurant: results[2] }}>
                                     {unvisitedText(results[2].name, results[2].imageUrl)}
                                 </Link>
                             </div>
@@ -144,13 +144,13 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                         <h2>Unexplored</h2>
                         <h5>Expand the horizons of your palette!</h5>
                         <div>
-                            <Link to={"/restaurant-results/1"} state={{restaurant: results[0]}}>
+                            <Link to={"/restaurant-results/1"} state={{ restaurant: results[0] }}>
                                 {unvisitedText(results[0].name, results[0].imageUrl)}
                             </Link>
-                            <Link to={"/restaurant-results/2"} state={{restaurant: results[1]}}>
+                            <Link to={"/restaurant-results/2"} state={{ restaurant: results[1] }}>
                                 {unvisitedText(results[1].name, results[1].imageUrl)}
                             </Link>
-                            <Link to={"/restaurant-results/3"} state={{restaurant: results[2]}}>
+                            <Link to={"/restaurant-results/3"} state={{ restaurant: results[2] }}>
                                 {unvisitedText(results[2].name, results[2].imageUrl)}
                             </Link>
                         </div>
@@ -192,7 +192,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
         const userLatLong = {latitude: userLocation[0], longitude: userLocation[1]};
         let closePlaces : Place[] = [];
         places.forEach((place: Place) => {
-            const restaurantLatLong = {latitude: place.address[0], longitude: place.address[1]};
+            const restaurantLatLong = { latitude: place.address[0], longitude: place.address[1] };
             const distance = getDistance(userLatLong, restaurantLatLong);
             const miles = convertDistance(distance, 'mi');
             if (miles <= location.state.distance) {
@@ -203,7 +203,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
     }
 
     function filterPlacesUsingCuisine(places: Place[]) {
-        let cuisineFilteredPlaces : Place[] = [];
+        let cuisineFilteredPlaces: Place[] = [];
         places.forEach((place: Place) => {
             if (location.state.cuisines.includes(place.cuisine) || (location.state.cuisines.includes("Other") && !cuisines.includes(place.cuisine))) {
                 cuisineFilteredPlaces.push(place);

@@ -320,7 +320,8 @@ body {
                     max-width: 50em;
                     padding: 0;
 
-                    #first-row, #password-row {
+                    #first-row,
+                    #password-row {
                         input {
                             margin-top: 0.7em;
                             margin-bottom: 0.7em;
@@ -331,12 +332,14 @@ body {
                         }
                     }
 
-                    #first-row, #middle-row, #password-row {
+                    #first-row,
+                    #middle-row,
+                    #password-row {
                         width: 100%;
                     }
 
                     #middle-row {
-                        display:flex;
+                        display: flex;
                         flex-wrap: wrap;
                         justify-content: center;
                         align-items: center;
@@ -350,9 +353,11 @@ body {
                             width: 5em;
                         }
 
-                        #lat, #lng{
+                        #lat,
+                        #lng {
                             width: 9.3em;
                         }
+
                         #email-part {
                             width: 20em;
                         }
@@ -436,7 +441,9 @@ body {
             background-color: $main_button_color;
         }
     }
-;
+
+    ;
+
     section.section-03-user-profile {
         display: flex;
         /* As there will be cards inside */
@@ -1177,7 +1184,8 @@ body {
                     }
                 }
 
-                #one-recommendation-block, #only-not-visited-restaurant-recommendation-block {
+                #one-recommendation-block,
+                #only-not-visited-restaurant-recommendation-block {
                     border-radius: $main_border_radius;
                     border-color: black;
                     border-style: solid;
@@ -1238,8 +1246,11 @@ body {
             flex-wrap: wrap;
             flex-direction: column;
             align-items: flex-start;
-
             text-align: center;
+
+            img {
+                max-width: 300px;
+            }
         }
 
         #restaurant-details-div {
