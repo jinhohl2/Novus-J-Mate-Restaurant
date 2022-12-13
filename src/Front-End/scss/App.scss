@@ -64,24 +64,24 @@ body {
 
                     button {
                         /* top and bottom | left and right */
-                            margin: 0.7em 0.3em;
-                            height: 2.5em;
-                            width: 7em;
+                        margin: 0.7em 0.3em;
+                        height: 2.5em;
+                        width: 7em;
 
                     }
 
 
                 }
 
-                li.menu-item-logout{
+                li.menu-item-logout {
                     margin-right: 5em;
                 }
 
-                li.menu-item-log-in{
+                li.menu-item-log-in {
                     margin-right: 5em;
                 }
 
-                li.menu-item-home-button{
+                li.menu-item-home-button {
                     text-align: center;
 
                 }
@@ -1000,6 +1000,7 @@ body {
                                     text-align: center;
                                     color: white;
                                     margin: 0;
+                                    font-weight: 1000;
                                 }
                             }
                         }
@@ -1043,6 +1044,7 @@ body {
                             margin-bottom: 1em;
                             margin-left: 1em;
                             margin-right: 1em;
+                            font-weight: 1000;
                         }
                     }
                 }
@@ -1080,6 +1082,10 @@ body {
             max-width: 90%;
             max-height: 60%;
         }
+
+        p {
+            font-weight: 1000;
+        }
     }
 
     section.section-06-dish-box {
@@ -1095,6 +1101,10 @@ body {
         margin: 1em;
         border-radius: $main_border_radius;
         color: white;
+
+        p {
+            font-weight: 1000;
+        }
     }
 
     section.section-06-restaurant-results {
