@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import '../scss/App.scss';
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,8 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { FirebaseError } from 'firebase/app';
+import {UserContext} from "../../App";
+
 
 function SignUpView() {
+
+    // @ts-ignore
+    const {state, dispatch} = useContext(UserContext);
+
     const [email, setEmail] = useState<string>("");
     const [lng, setLng] = useState<string>("");
     const [lat, setLat] = useState<string>("");
@@ -79,6 +85,7 @@ function SignUpView() {
                 var userId = res.data.data._id
                 signUp(email, password)
                     .then(() => {
+                        dispatch({type: "USER", payload: true})
                         navigate("/dashboard");
                         setLoading(false);
                     })

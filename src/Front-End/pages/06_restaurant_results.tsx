@@ -27,7 +27,6 @@ const RestaurantResults = (props: RestaurantResultProps) => {
     const resultsJSONUnvisited = getStoredResultsUnvisited();
     const location = useLocation();
     const { currentUser } = useAuth();
-    const email = currentUser.email;
     const cuisines = ["Italian", "Indian", "Mexican", "Japanese", "Chinese", "Korean", "African", "American", "French", "British", "Vietnamese", "Thai"];
 
     function getStoredResultsVisited() {
@@ -79,7 +78,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                     <div>
                         <div id="one-recommendation-block">
                             <h2>Your restaurant match!</h2>
-                            <Link to={"/restaurant-results/1"} state={{restaurant: results[0]}}>
+                            <Link to={"/restaurant-results/1"} state={{ restaurant: results[0] }}>
                                 <img src={`${results[0].imageUrl}`} alt={"Restaurant: " + results[0].name} />
                                 <h3>{results[0].name}</h3>
                             </Link>
@@ -94,11 +93,11 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                         <div id="only-not-visited-restaurant-recommendation-block">
                             <h2>Your matches!</h2>
                             <div>
-                                <Link to={"/restaurant-results/1"} state={{restaurant: results[0]}}>
+                                <Link to={"/restaurant-results/1"} state={{ restaurant: results[0] }}>
                                     <img src={`${results[0].imageUrl}`} alt={"Restaurant: " + results[0].name} />
                                     <h3>{results[0].name}</h3>
                                 </Link>
-                                <Link to={"/restaurant-results/2"} state={{restaurant: results[1]}}>
+                                <Link to={"/restaurant-results/2"} state={{ restaurant: results[1] }}>
                                     <img src={`${results[1].imageUrl}`} alt={"Restaurant: " + results[1].name} />
                                     <h3>{results[1].name}</h3>
                                 </Link>
@@ -117,7 +116,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                         <div id="visited-restaurant-recommendation-block">
                             <h2>Visited</h2>
                             <h5>Revisit a place you know and love!</h5>
-                            <Link to={"/restaurant-results/1"} state={{restaurant: results[0]}}>
+                            <Link to={"/restaurant-results/1"} state={{ restaurant: results[0] }}>
                                 <img src={`${results[0].imageUrl}`} alt={"Restaurant: " + results[0].name} />
                                 <h3>{results[0].name}</h3>
                             </Link>
@@ -127,10 +126,10 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                             <h2>Unexplored</h2>
                             <h5>Expand the horizons of your palette!</h5>
                             <div>
-                                <Link to={"/restaurant-results/2"} state={{restaurant: results[1]}}>
+                                <Link to={"/restaurant-results/2"} state={{ restaurant: results[1] }}>
                                     {unvisitedText(results[1].name, results[1].imageUrl)}
                                 </Link>
-                                <Link to={"/restaurant-results/3"} state={{restaurant: results[2]}}>
+                                <Link to={"/restaurant-results/3"} state={{ restaurant: results[2] }}>
                                     {unvisitedText(results[2].name, results[2].imageUrl)}
                                 </Link>
                             </div>
@@ -145,13 +144,13 @@ const RestaurantResults = (props: RestaurantResultProps) => {
                         <h2>Unexplored</h2>
                         <h5>Expand the horizons of your palette!</h5>
                         <div>
-                            <Link to={"/restaurant-results/1"} state={{restaurant: results[0]}}>
+                            <Link to={"/restaurant-results/1"} state={{ restaurant: results[0] }}>
                                 {unvisitedText(results[0].name, results[0].imageUrl)}
                             </Link>
-                            <Link to={"/restaurant-results/2"} state={{restaurant: results[1]}}>
+                            <Link to={"/restaurant-results/2"} state={{ restaurant: results[1] }}>
                                 {unvisitedText(results[1].name, results[1].imageUrl)}
                             </Link>
-                            <Link to={"/restaurant-results/3"} state={{restaurant: results[2]}}>
+                            <Link to={"/restaurant-results/3"} state={{ restaurant: results[2] }}>
                                 {unvisitedText(results[2].name, results[2].imageUrl)}
                             </Link>
                         </div>
@@ -183,13 +182,17 @@ const RestaurantResults = (props: RestaurantResultProps) => {
         return places;
     }
 
-    function filterPlacesUsingDistance(places: Place[]) {
+    function filterPlacesUsingDistance(places: Place[], foundUser: User) {
         // [Lat, Long].
-        const userLocation = user.address;
+        console.log("here:", foundUser);
+        if (user.address === undefined) {
+            return places;
+        }
+        const userLocation = foundUser.address;
         const userLatLong = {latitude: userLocation[0], longitude: userLocation[1]};
         let closePlaces : Place[] = [];
         places.forEach((place: Place) => {
-            const restaurantLatLong = {latitude: place.address[0], longitude: place.address[1]};
+            const restaurantLatLong = { latitude: place.address[0], longitude: place.address[1] };
             const distance = getDistance(userLatLong, restaurantLatLong);
             const miles = convertDistance(distance, 'mi');
             if (miles <= location.state.distance) {
@@ -200,16 +203,16 @@ const RestaurantResults = (props: RestaurantResultProps) => {
     }
 
     function filterPlacesUsingCuisine(places: Place[]) {
-        let cuisineFilteredPlaces : Place[] = [];
+        let cuisineFilteredPlaces: Place[] = [];
         places.forEach((place: Place) => {
-            if (location.state.cuisines.includes(place.cuisine) || (location.state.cuisines.toLowerCase() === "other" && !cuisines.includes(place.cuisine))) {
+            if (location.state.cuisines.includes(place.cuisine) || (location.state.cuisines.includes("Other") && !cuisines.includes(place.cuisine))) {
                 cuisineFilteredPlaces.push(place);
             }
         });
         return cuisineFilteredPlaces;
     }
 
-    function filterPlacesUsingDishes(places: Place[]) {
+    function filterPlacesUsingDishes(places: Place[],) {
         let dishFilteredPlaces : Place[] = [];;
         places.forEach((place: Place) => {
             const overlappedDishes = location.state.dishes.filter((dish: string) => place.dishes.includes(dish));
@@ -226,43 +229,47 @@ const RestaurantResults = (props: RestaurantResultProps) => {
             return;
         }
 
+        const email = currentUser.email;
+
         api.get('users').then((response) => {
             if (response.data) {
                 let foundUser = response.data.data.find((user: User) => user.email === email);
                 if (foundUser !== null) {
                     setUser(foundUser);
                 }
+
+                let foundRestaurantResultsVisited: Place[] = getVisitedPlaces();
+                let foundRestaurantResultsUnvisited: Place[] = getUnvisitedPlaces();
+
+                let filteredRestaurantsVisited: Place[] = [];
+                let filteredRestaurantsUnvisited: Place[] = [];
+
+                if (location.state !== null && location.state.cuisines !== undefined && location.state.distance !== undefined) {
+                    filteredRestaurantsVisited = filterPlacesUsingDistance(foundRestaurantResultsVisited, foundUser);
+                    filteredRestaurantsUnvisited = filterPlacesUsingDistance(foundRestaurantResultsUnvisited, foundUser);
+
+                    filteredRestaurantsVisited = filterPlacesUsingCuisine(filteredRestaurantsVisited);
+                    filteredRestaurantsUnvisited = filterPlacesUsingCuisine(filteredRestaurantsUnvisited);
+
+                    buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
+                } else if (location.state !== null && location.state.dishes !== undefined && location.state.distance !== undefined) {
+                    filteredRestaurantsVisited = filterPlacesUsingDistance(foundRestaurantResultsVisited, foundUser);
+                    filteredRestaurantsUnvisited = filterPlacesUsingDistance(foundRestaurantResultsUnvisited, foundUser);
+
+                    filteredRestaurantsVisited = filterPlacesUsingDishes(filteredRestaurantsVisited,);
+                    filteredRestaurantsUnvisited = filterPlacesUsingDishes(filteredRestaurantsUnvisited);
+
+                    buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
+                } else if (location.state !== null && location.state.surprise_me !== undefined) {
+                    // If the array is less than 3, set filtered to that array, otherwise get a random slice or 3.
+                    filteredRestaurantsVisited = foundRestaurantResultsVisited.length >= 3 ? foundRestaurantResultsVisited.sort(() => Math.random() - Math.random()).slice(0, 3) : foundRestaurantResultsVisited;
+                    filteredRestaurantsUnvisited = foundRestaurantResultsUnvisited.length >= 3 ? foundRestaurantResultsUnvisited.sort(() => Math.random() - Math.random()).slice(0, 3) : foundRestaurantResultsUnvisited;
+                    buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
+                }
             }
         });
 
-        let foundRestaurantResultsVisited: Place[] = getVisitedPlaces();
-        let foundRestaurantResultsUnvisited: Place[] = getUnvisitedPlaces();
 
-        let filteredRestaurantsVisited: Place[] = [];
-        let filteredRestaurantsUnvisited: Place[] = [];
-
-        if (location.state !== null && location.state.cuisines !== undefined && location.state.distance !== undefined) {
-            filteredRestaurantsVisited = filterPlacesUsingDistance(foundRestaurantResultsVisited);
-            filteredRestaurantsUnvisited = filterPlacesUsingDistance(foundRestaurantResultsUnvisited);
-
-            filteredRestaurantsVisited = filterPlacesUsingCuisine(filteredRestaurantsVisited);
-            filteredRestaurantsUnvisited = filterPlacesUsingCuisine(filteredRestaurantsUnvisited);
-
-            buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
-        } else if (location.state !== null && location.state.dishes !== undefined && location.state.distance !== undefined) {
-            filteredRestaurantsVisited = filterPlacesUsingDistance(foundRestaurantResultsVisited);
-            filteredRestaurantsUnvisited = filterPlacesUsingDistance(foundRestaurantResultsUnvisited);
-
-            filteredRestaurantsVisited = filterPlacesUsingDishes(filteredRestaurantsVisited);
-            filteredRestaurantsUnvisited = filterPlacesUsingDishes(filteredRestaurantsUnvisited);
-
-            buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
-        } else if (location.state !== null && location.state.surprise_me !== undefined) {
-            // If the array is less than 3, set filtered to that array, otherwise get a random slice or 3.
-            filteredRestaurantsVisited = foundRestaurantResultsVisited.length >= 3 ? foundRestaurantResultsVisited.sort(() => Math.random() - Math.random()).slice(0, 3) : foundRestaurantResultsVisited;
-            filteredRestaurantsUnvisited = foundRestaurantResultsUnvisited.length >= 3 ? foundRestaurantResultsUnvisited.sort(() => Math.random() - Math.random()).slice(0, 3) : foundRestaurantResultsUnvisited;
-            buildResults(filteredRestaurantsVisited, filteredRestaurantsUnvisited);
-        }
         // eslint-disable-next-line
     }, []);
 
