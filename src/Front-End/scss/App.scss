@@ -1143,6 +1143,11 @@ body {
                     text-align: center;
                     min-width: 20vw;
                     min-height: auto;
+                    padding: 2em;
+
+                    div {
+                        margin: 2em;
+                    }
                 }
 
                 #not-visited-restaurant-recommendation-block {
@@ -1156,6 +1161,7 @@ body {
                     text-align: center;
                     min-width: 42.5vw;
                     height: auto;
+                    padding: 2em;
 
                     div {
                         flex-direction: row;
@@ -1182,6 +1188,7 @@ body {
                     text-align: center;
                     min-width: 60vw;
                     height: auto;
+                    padding: 2em;
 
                     div {
                         flex-direction: row;
