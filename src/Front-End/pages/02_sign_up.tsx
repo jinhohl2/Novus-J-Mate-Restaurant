@@ -1,12 +1,6 @@
 import React from 'react';
 import '../scss/App.scss';
 import { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faMicrosoft,
-    faGoogle,
-    faFacebook,
-} from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
@@ -172,19 +166,6 @@ function SignUpView() {
                             </fieldset>
                         </div>
 
-                        <h5>Or with a provider</h5>
-
-                        <div id="provider-sign-up">
-                            <button id="microsoft-sign-up" >
-                                <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
-                            </button>
-                            <button id="google-sign-up">
-                                <FontAwesomeIcon icon={faGoogle} /> Google
-                            </button>
-                            <button id="facebook-sign-up">
-                                <FontAwesomeIcon icon={faFacebook} /> Facebook
-                            </button>
-                        </div>
                     </div>
 
 

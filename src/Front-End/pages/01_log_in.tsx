@@ -1,18 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import '../scss/App.scss';
 import { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faMicrosoft,
-    faGoogle,
-    faFacebook,
-} from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
 import { FirebaseError } from 'firebase/app';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth'
+import {UserContext} from "../../App";
 
 function LogInView() {
+
+    // @ts-ignore
+    const {state, dispatch} = useContext(UserContext);
+
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<String>("");
@@ -37,6 +35,7 @@ function LogInView() {
             .then(() => {
                 setError("");
                 setLoading(true);
+                dispatch({type: "USER", payload: true})
                 navigate("/dashboard");
                 setLoading(false);
             })
@@ -98,18 +97,6 @@ function LogInView() {
                             </form>
                         </div>
 
-                        <h5>Or with a provider</h5>
-                        <div id="provider-log-in">
-                            <button id="microsoft-log-in">
-                                <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
-                            </button>
-                            <button id="google-log-in">
-                                <FontAwesomeIcon icon={faGoogle} /> Google
-                            </button>
-                            <button id="facebook-log-in">
-                                <FontAwesomeIcon icon={faFacebook} /> Facebook
-                            </button>
-                        </div>
                     </div>
 
 
