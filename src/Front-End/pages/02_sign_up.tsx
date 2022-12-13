@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import '../scss/App.scss';
 import { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faMicrosoft,
-    faGoogle,
-    faFacebook,
-} from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthProvider, useAuth } from '../../User-Auth/AuthContext';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { FirebaseError } from 'firebase/app';
+import {UserContext} from "../../App";
+
 
 function SignUpView() {
+
+    // @ts-ignore
+    const {state, dispatch} = useContext(UserContext);
+
     const [email, setEmail] = useState<string>("");
     const [lng, setLng] = useState<string>("");
     const [lat, setLat] = useState<string>("");
@@ -85,6 +85,7 @@ function SignUpView() {
                 var userId = res.data.data._id
                 signUp(email, password)
                     .then(() => {
+                        dispatch({type: "USER", payload: true})
                         navigate("/dashboard");
                         setLoading(false);
                     })
@@ -172,19 +173,6 @@ function SignUpView() {
                             </fieldset>
                         </div>
 
-                        <h5>Or with a provider</h5>
-
-                        <div id="provider-sign-up">
-                            <button id="microsoft-sign-up" >
-                                <FontAwesomeIcon icon={faMicrosoft} /> Microsoft
-                            </button>
-                            <button id="google-sign-up">
-                                <FontAwesomeIcon icon={faGoogle} /> Google
-                            </button>
-                            <button id="facebook-sign-up">
-                                <FontAwesomeIcon icon={faFacebook} /> Facebook
-                            </button>
-                        </div>
                     </div>
 
 
