@@ -38,11 +38,11 @@ def main(argv):
     placeNames = []
     placeAdds = []
     reviewIDs = []
+    usersVisited = []
     start_date = datetime.strptime('1/1/2022 12:00 AM', '%m/%d/%Y %I:%M %p')
     end_date = datetime.strptime('12/12/2022 12:00 AM', '%m/%d/%Y %I:%M %p')
     diffTime = end_date-start_date
     intDiffTime = (diffTime.days * 24 * 60 * 60) + diffTime.seconds
-
 
     for line in placesLines:
         placeArr = line.split(",")
@@ -88,18 +88,6 @@ def main(argv):
         #userAdds.append(d['data']['address'])
 
     for placeID in placeIDs:
-        conn.request("GET","/api/places/" +placeID)
-        placeRes = conn.getresponse()
-        placeData = placeRes.read()
-        pd = json.loads(placeData)
-        
-        assignedPlaceName = str(pd['data']['name'])
-        assignedPlaceAdd = pd['data']['address']
-        assignedPlaceDate = str(pd['data']['dateCreated'])
-        assignedUsersVisited = pd['data']['usersVisited']
-        assignedUsersVisited = [str(x).replace('[','').replace(']','').replace("'",'').replace('"','') for x in assignedUsersVisited]
-        
-
         numUsersVisited = randint(70,140)
         for user in range(0, numUsersVisited):
             userID = choice(userIDs)
@@ -133,14 +121,7 @@ def main(argv):
             assignedPlacesVisited = ud['data']['placesVisited']
             assignedPlacesVisited = [str(x).replace('[','').replace(']','').replace("'",'').replace('"','') for x in assignedPlacesVisited]
 
-            assignedPlacesVisited.append(placeID)
-
-            print("placeID:")
-            print(type(placeID))
-            print(placeID)            
-            if userID not in assignedUsersVisited:
-                assignedUsersVisited.append(userID)
-
+            assignedPlacesVisited.append(placeID)      
             userParams = urllib.parse.urlencode({'_id': userID, 'email': assignedUserEmail, 'Fname': assignedUserFname, 
                                                 'Lname': assignedUserLname, 'address': assignedUserAdd, 
                                                 'placesVisited': assignedPlacesVisited, 
@@ -151,24 +132,28 @@ def main(argv):
             r1 = conn.getresponse()
             dat1 = r1.read()
             d1 = json.loads(dat1)
-        placeParams = urllib.parse.urlencode({'_id': placeID, 'name': assignedPlaceName, 'address': assignedPlaceAdd,
-                                              'usersVisited': assignedUsersVisited, 
-                                              'dateCreated': assignedPlaceDate}, True)
-        conn.request("PUT", "/api/places/"+placeID, placeParams, headers)
-        r2 = conn.getresponse()
-        dat2 = r2.read()
-        d2 = json.loads(dat2)     
-        print(d2)
-    
-                                  
-        
-
     for line in reviewsLines:
-        break
+        placeIndex = randint(0,len(placeIDs) - 1)
+        placeID = placeIDs[placeIndex]
+        placeName = placeNames[placeIndex]
+        userIndex = randint(0,len(userIDs))
+        while placeID not in usersVisited[userIndex]:
+            userIndex = randint(0,len(userIDs))
+        userID = userIDs[userIndex]
         reviewArr = line.split(";")
         rating = round(float(reviewArr[0].strip()), 1)
         description = reviewArr[1].strip()
+        
+        params = urllib.parse.urlencode({'restaurant': placeID, 'restaurantName': placeName, 'authorID': userID, 'rating': rating, 'description': description}, True)
+        conn.request("POST", "/api/reviews", params, headers)
+        response = conn.getresponse()
+        data = response.read()
+        d = json.loads(data)        
+    
+                                  
     conn.close()
+    exit(1)
+
 
 
 if __name__ == "__main__":

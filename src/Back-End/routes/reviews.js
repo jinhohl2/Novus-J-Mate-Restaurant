@@ -60,9 +60,9 @@ module.exports = function (router) {
                 data: []
             });
         }
-        if(!("author" in req.body) || req.body.author == undefined) {
+        if(!("authorID" in req.body) || req.body.authorID == undefined) {
             return res.status(400).send({
-                message: 'Author is Required to Create a New Review',
+                message: 'Author ID is Required to Create a New Review',
                 data: []
             });
         }
@@ -86,7 +86,7 @@ module.exports = function (router) {
         }
 
         review.rating = req.body.rating;
-        User.findById(req.body.author)
+        User.findById(req.body.authorID)
         .then((foundUser)=>{
             if(!foundUser) {
                 return res.status(404).send({
@@ -111,7 +111,7 @@ module.exports = function (router) {
                 }
                 if(foundUser.placesVisited.indexOf(foundPlace.id) === -1) foundUser.placesVisited.push(foundPlace.id);
                 if(foundPlace.usersVisited.indexOf(foundUser.id) === -1) foundPlace.usersVisited.push(foundUser.id);
-                review.author = req.body.author;
+                review.authorID = req.body.authorID;
                 review.restaurant = req.body.restaurant;            
                 review.restaurantName = req.body.restaurantName;
                 review.save()

@@ -47,9 +47,9 @@ module.exports = function (router) {
                 data: []
             });
         }
-        if(!("author" in req.body) || req.body.author == undefined) {
+        if(!("authorID" in req.body) || req.body.authorID == undefined) {
             return res.status(400).send({
-                message: 'Author is Required',
+                message: 'Author ID is Required',
                 data: []
             });
         }
@@ -69,7 +69,7 @@ module.exports = function (router) {
         Review.findById(req.params.id)
         .then((tbUpdated)=>{
             if(tbUpdated) {
-                User.findById(tbUpdated.author)
+                User.findById(tbUpdated.authorID)
                 .then((foundUser)=>{
                     Place.findById(tbUpdated.restaurant)
                     .then((foundPlace)=>{
@@ -93,7 +93,7 @@ module.exports = function (router) {
                         foundUser.save();
 
                         const review = {};
-                        review.author = req.body.author;
+                        review.authorID = req.body.authorID;
                         review.restaurant = req.body.restaurant;
                         review.restaurantName = req.body.restaurantName;
                         review.rating = req.body.rating;
@@ -105,11 +105,11 @@ module.exports = function (router) {
                             review.description = "";
                         }
 
-                        user.findById(review.author)
+                        user.findById(review.authorID)
                         .then((newUser)=>{
                             if(!newUser) {
                                 return res.status(404).send({
-                                    message: 'Author is not an Existing User',
+                                    message: 'authorID is not an Existing User',
                                     data: []
                                 });
                             }
@@ -215,7 +215,7 @@ module.exports = function (router) {
         .then((foundReview)=>{
             if(foundReview) {
 
-                User.findById(foundReview.author)
+                User.findById(foundReview.authorID)
                 .then((foundUser)=>{
                     Place.findById(foundReview.restaurant)
                     .then((foundPlace)=>{

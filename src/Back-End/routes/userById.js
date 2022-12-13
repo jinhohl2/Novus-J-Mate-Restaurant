@@ -118,10 +118,7 @@ module.exports = function (router) {
                             
                             if("placesVisited" in req.body && req.body.placesVisited!= undefined) {
                                 user.placesVisited = req.body.placesVisited;
-            
                                 var check = []
-                                console.log(typeof(req.body.placesVisited));
-                                console.log(req.body.placesVisited);
                                 user.placesVisited.forEach((t)=> {
                                     check.push(Place.findById(t).exec());
                                 })
