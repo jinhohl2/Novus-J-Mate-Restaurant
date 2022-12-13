@@ -22,7 +22,7 @@ const RestaurantResults = (props: RestaurantResultProps) => {
     const [resultsStringUnvisited, setResultsStringUnvisited] = useLocalStorage('resultsUnvisited', JSON.stringify([]));
     const [user, setUser] = useState<User>({_id: "none", email: "none", Fname: "none",  Lname: "none",
                                             address: [], placesVisited: [], reviews: [],
-                                            uniqueVisits: [], dateCreated: new Date()});
+                                            uniqueVisits: [], lastClick: new Date(0), dateCreated: new Date()});
     const resultsJSONVisited = getStoredResultsVisited();
     const resultsJSONUnvisited = getStoredResultsUnvisited();
     const location = useLocation();

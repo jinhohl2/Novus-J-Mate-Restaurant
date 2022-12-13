@@ -100,8 +100,7 @@ module.exports = function (router) {
                 else {
                     user.uniqueVisits = new Array(12).fill(0);
                 }
-                if(("lastClickOnFilitering" in req.body) && (req.body.lastClickOnFilitering != undefined)) user.lastClickOnFilitering = req.body.lastClickOnFiltering
-                if(("lastClickOnSurprise" in req.body) && (req.body.lastClickOnSurprise != undefined)) user.lastClickOnSurprise = req.body.lastClickOnSurprise
+                if(("lastClick" in req.body) && (req.body.lastClick != undefined)) user.lastClick = req.body.lastClick
                 console.log(user);
                 if("placesVisited" in req.body && req.body.placesVisited!= undefined) {
                     user.placesVisited = req.body.placesVisited;
